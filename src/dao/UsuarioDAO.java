@@ -12,17 +12,10 @@ import modelo.UsuarioVIP;
 
 public class UsuarioDAO {
 
-	private ArrayList<Usuario> usuarios;
-	private String caminhoArquivo;
-	private static UsuarioDAO usuarioDAO;
+	private static String caminhoArquivo = "dados/usuarios.txt";
 
-	public UsuarioDAO() {
-		String diretorioAtual = System.getProperty("user.dir");
-		this.caminhoArquivo = diretorioAtual + "/dados/usuarios.txt";
-		usuarios = new ArrayList<Usuario>();
-	}
-
-	public void carregar() {
+	public static ArrayList<Usuario> carregar() {
+		ArrayList<Usuario> usuarios = new ArrayList<>();
 	
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))){	
             String linha;
@@ -45,10 +38,13 @@ public class UsuarioDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+		return usuarios;
 		
 	}
 
-    public void adicionar(Usuario usuario) {
+    public static void adicionar(Usuario usuario) {
+    	ArrayList<Usuario> usuarios = carregar();
+    	
         if (!usuarios.contains(usuario)) {
 	        usuarios.add(usuario);
 	
@@ -68,11 +64,16 @@ public class UsuarioDAO {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        return ;
         }
+        
+        throw new RuntimeException("Erro ao cadastrar usuário: usuário já existe");
         
     }
 	
-    public void remover(Usuario usuario) {		
+    public static void remover(Usuario usuario) {	
+    	ArrayList<Usuario> usuarios = carregar();
+    	
         if(usuarios.contains(usuario)) {
         	usuarios.remove(usuario);
         	
@@ -97,39 +98,15 @@ public class UsuarioDAO {
         }
     }
     
-    public void autenticar(String login, String senha){
-        for(Usuario usuario : usuarios){
-            if(usuario.equals(new Usuario(login, senha))){
-              return ;
+    public static Usuario autenticar(String login, String senha){
+    	ArrayList<Usuario> usuarios = carregar();
+    	for(Usuario usuario : usuarios){
+            if(usuario.getId().equals(login) && usuario.getSenha().equals(senha)){
+              return usuario;
             }
         }
         throw new NoSuchElementException("Argumentos de login inválidos");
-        
     }
-
-    
-	public ArrayList<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(ArrayList<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public String getCaminhoArquivo() {
-		return caminhoArquivo;
-	}
-
-	public void setCaminhoArquivo(String caminhoArquivo) {
-		this.caminhoArquivo = caminhoArquivo;
-	}
-    public static UsuarioDAO getInstance(){
-        if(usuarioDAO == null){
-            usuarioDAO = new UsuarioDAO();
-        }
-        return usuarioDAO;
-    }
-    
-    
+ 
 
 }

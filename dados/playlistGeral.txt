@@ -1,0 +1,6 @@
+playlistDeRubens,C:\Users\wisla\eclipse-wsl\Player/dados/playlists/playlist_RM777_playlistDeRubens.txt
+playlistDeRubens,C:\Users\wisla\eclipse-wsl\Player/dados/playlists/playlist_RM777_playlistDeRubens.txt
+playlistDeRubens,C:\Users\wisla\eclipse-wsl\Player/dados/playlists/playlist_RM777_playlistDeRubens.txt
+playlistDeRubens,C:\Users\wisla\eclipse-wsl\Player2/dados/playlists/playlist_RM777_playlistDeRubens.txt
+playlistDeRubens,C:\Users\wisla\eclipse-wsl\Player2/dados/playlists/playlist_RM777_playlistDeRubens.txt
+playlistDeRubens,C:\Users\wisla\eclipse-wsl\Player2/dados/playlists/playlist_RM777_playlistDeRubens.txt

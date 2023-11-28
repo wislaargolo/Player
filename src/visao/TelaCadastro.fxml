@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visao.TelaCadastroController">
+   <children>
+      <PasswordField fx:id="fSenha" layoutX="317.0" layoutY="281.0" prefHeight="39.0" prefWidth="192.0" promptText="Senha" />
+      <TextField fx:id="fLogin" layoutX="317.0" layoutY="211.0" prefHeight="39.0" prefWidth="192.0" promptText="Login" />
+      <TextField fx:id="fNome" layoutX="317.0" layoutY="145.0" prefHeight="39.0" prefWidth="192.0" promptText="Nome" />
+      <Button fx:id="btCadastro" layoutX="374.0" layoutY="427.0" mnemonicParsing="false" onAction="#btCadastroAcao" prefHeight="31.0" prefWidth="78.0" text="Cadastrar" />
+      <ChoiceBox fx:id="tipoUsuario" layoutX="320.0" layoutY="344.0" prefHeight="39.0" prefWidth="186.0" />
+      <Button fx:id="btVoltar" layoutX="39.0" layoutY="33.0" mnemonicParsing="false" onAction="#btVoltarAcao" text="Voltar" />
+   </children>
+</AnchorPane>

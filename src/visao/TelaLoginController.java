@@ -1,8 +1,7 @@
 package visao;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
+import javafx.scene.control.Hyperlink;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
@@ -13,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import modelo.Usuario;
+import modelo.UsuarioVIP;
 
 public class TelaLoginController implements Initializable{
 
@@ -25,11 +26,13 @@ public class TelaLoginController implements Initializable{
     @FXML
     private Button btLogin;
     
-    private UsuarioDAO usuarios;
+    @FXML
+    private Hyperlink cadastro;
+    
+    private Usuario usuarioAtual;
     
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usuarios = UsuarioDAO.getInstance();
-        usuarios.carregar();
+        UsuarioDAO.carregar();
     }
 
     @FXML
@@ -37,17 +40,27 @@ public class TelaLoginController implements Initializable{
     	String login = fLogin.getText();
         String senha = fSenha.getText();
         
-        System.out.println(login);
-        
         try {
-        	usuarios.autenticar(login, senha);
+        	usuarioAtual = UsuarioDAO.autenticar(login, senha);
+        	
+        	if(usuarioAtual instanceof UsuarioVIP) {
+            	GerenciadorCenas.mudarCena("/visao/TelaPrincipalVIP.fxml");
+            } else {
+            	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
+            }
+        	
         } catch (NoSuchElementException e) {
-      	  Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setHeaderText(e.getMessage());
-            alerta.setTitle("Erro");
-            alerta.show();
+        	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
         }
+
     }
+    
+    @FXML
+    private void hyperAcao() {
+    	GerenciadorCenas.mudarCena("/visao/TelaCadastro.fxml");
+    }
+    
+    
     
     
    

@@ -7,7 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import modelo.Musica;
@@ -16,15 +18,12 @@ import modelo.UsuarioVIP;
 
 
 public class PlaylistDAO  {
-	private String caminhoArquivo;
-	private ArrayList<Playlist> playlists;
+	private static String caminhoArquivo = "dados/playlistGeral.txt";
 
-	public PlaylistDAO(String caminhoArquivo) {
-		this.caminhoArquivo = caminhoArquivo;
-		playlists = new ArrayList<>();
-	}
+	private PlaylistDAO() {}
 
-	public void carregar(UsuarioVIP usuario) {
+	public static ArrayList<Playlist> carregar(UsuarioVIP usuario) {
+		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 		ArrayList<String> nomes = new ArrayList<>();
 		ArrayList<String> caminhos = new ArrayList<>();
 		// Le o arquivo com todas as playlists
@@ -46,14 +45,26 @@ public class PlaylistDAO  {
 		for (int i = 0; i < nomes.size(); i++) {
 			try (BufferedReader br = new BufferedReader(new FileReader(caminhos.get(i)))) {
 	            String linha;
-
+	            Stream<String> partes = null;
 	            while ((linha = br.readLine()) != null) {
-	                Stream<String> partes = Arrays.stream(linha.split(","));
+	            	partes = Arrays.stream(linha.split(","));
 		            partes.forEach(playlistAtual::add);
+		           
 	            }
+	            
+	     
 	            if (playlistAtual.get(0).equals(usuario.getNome()) && playlistAtual.get(1).equals(usuario.getId())) {
-	            	for (int j = 3; j < playlistAtual.size(); j += 2) {
-	                    musicas.add(new Musica(playlistAtual.get(j), playlistAtual.get(j+1)));
+	            	for (int j = 3; j < playlistAtual.size() - 1; j += 2) {
+	            		   for(Musica m : musicas) {
+		                    	System.out.println(m.getNome());
+		                    }
+	            		   Musica aux = new Musica(playlistAtual.get(j), playlistAtual.get(j+1));
+	            		   if(!musicas.contains(aux))
+	            			   musicas.add(aux);
+	                    for(Musica m : musicas) {
+	                    	System.out.println(m.getNome());
+	                    }
+	            		
 	            	}
 	            	Playlist playTemp;
 	            	playTemp = new Playlist(playlistAtual.get(2), musicas);
@@ -63,10 +74,12 @@ public class PlaylistDAO  {
 	            e.printStackTrace();
 	        }
 		}
+		return playlists;
 		
 	}
 	
-	public void adicionar(Playlist playlist, UsuarioVIP usuario) {
+	public static void adicionar(Playlist playlist, UsuarioVIP usuario) {
+		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		if (!playlists.contains(playlist) ) {
 			playlists.add(playlist);
 			
@@ -110,7 +123,8 @@ public class PlaylistDAO  {
 		
 	}
 	
-	public void remover(Playlist playlist, UsuarioVIP usuario) {
+	public static void remover(Playlist playlist, UsuarioVIP usuario) {
+		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		if(playlists.contains(playlist)) {
 			playlists.remove(playlist);
 			
@@ -158,7 +172,8 @@ public class PlaylistDAO  {
         }
 	}
 	
-	public void atualizar(Playlist playlist, UsuarioVIP usuario, String novoNome) {
+	public static void atualizar(Playlist playlist, UsuarioVIP usuario, String novoNome) {
+		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		if(playlists.contains(playlist)) {
 			
 			String nomeAtual = playlist.getNome(); 
@@ -225,7 +240,7 @@ public class PlaylistDAO  {
         }
 	}
 	
-	public void removerMusica(Musica musica, Playlist playlist, UsuarioVIP usuario) {
+	public static void removerMusica(Musica musica, Playlist playlist, UsuarioVIP usuario) {
 		
 		playlist.removerMusica(musica);
 		
@@ -253,7 +268,8 @@ public class PlaylistDAO  {
 		
 	}
 	
-	public void removerMusica(Musica musica, UsuarioVIP usuario) {
+	public static void removerMusica(Musica musica, UsuarioVIP usuario) {
+		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		 for (Iterator<Playlist> playlistIterator = playlists.iterator(); playlistIterator.hasNext();) {
 		        Playlist p = playlistIterator.next();
 		        for (Iterator<Musica> musicIterator = p.getMusicas().iterator(); musicIterator.hasNext();) {
@@ -266,7 +282,7 @@ public class PlaylistDAO  {
 		  }
 	}
 	
-	public void adicionarMusica(Musica musica, Playlist playlist, UsuarioVIP usuario) {
+	public static void adicionarMusica(Musica musica, Playlist playlist, UsuarioVIP usuario) {
 		playlist.adicionarMusica(musica);
 		
 		String diretorioAtual = System.getProperty("user.dir");
@@ -282,14 +298,6 @@ public class PlaylistDAO  {
             }
 		
 	}
-	
 
-	public ArrayList<Playlist> getPlaylists() {
-		return playlists;
-	}
-
-	public void setPlaylists(ArrayList<Playlist> playlists) {
-		this.playlists = playlists;
-	}
 	
 }

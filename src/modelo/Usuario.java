@@ -55,8 +55,7 @@ public class Usuario {
 	    
 	    Usuario usuario = (Usuario) obj;
 
-	    return id.equals(usuario.id) && 
-	           senha.equals(usuario.senha);
+	    return id.equals(usuario.id);
 	}
 
 
