@@ -10,6 +10,7 @@ import dao.UsuarioDAO;
 import excecoes.ExcecaoPersonalizada;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
@@ -45,7 +46,7 @@ public class TelaPrincipalController implements Initializable {
     private Button btParar;
     
     @FXML
-    private Button btAdicionarMusica, btRemoverMusica;
+    private Button btAdicionarMusica;
     
     @FXML
     private ListView<Musica> listaMusicas;
@@ -60,8 +61,15 @@ public class TelaPrincipalController implements Initializable {
 	
 	@FXML
 	public void iconeAcao() {
-		ContextMenu menu = criarMenu();
-        configurarClique(icone, menu);
+		ContextMenu menu = menuUsuario();
+		configuraClique(icone,menu);
+		
+	}
+	
+	@FXML
+	public void listaMusicasAcao() {
+		ContextMenu menu = menuMusica();
+		configuraClique(listaMusicas, menu);
 		
 	}
 
@@ -74,7 +82,7 @@ public class TelaPrincipalController implements Initializable {
 	    }
 	}
 	
-    private ContextMenu criarMenu() {
+    private ContextMenu menuUsuario() {
         ContextMenu menu = new ContextMenu();
 
         MenuItem opcao1 = new MenuItem("Conta");
@@ -96,14 +104,34 @@ public class TelaPrincipalController implements Initializable {
 
         return menu;
     }
+    
+    private ContextMenu menuMusica() {
+        ContextMenu menu = new ContextMenu();
 
-    private void configurarClique(ImageView icone, ContextMenu menu) {
-        icone.setOnMouseClicked(event -> {
+        MenuItem opcao1 = new MenuItem("Adicionar");
+        opcao1.setOnAction(event -> {
+            adicionarMusica();
+        });
+
+        MenuItem opcao2 = new MenuItem("Remover");
+        opcao2.setOnAction(event -> {
+            removerMusica();
+        });
+        
+
+        menu.getItems().addAll(opcao1, opcao2);
+
+        return menu;
+    }
+
+    private void configuraClique(Node objeto, ContextMenu menu) {
+       objeto.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                menu.show(icone, event.getScreenX(), event.getScreenY());
+                menu.show(objeto, event.getScreenX(), event.getScreenY());
             }
         });
     }
+    
     
     private File escolherArquivo() {
     	FileChooser buscaArquivo = new FileChooser();
@@ -114,8 +142,7 @@ public class TelaPrincipalController implements Initializable {
     	return buscaArquivo.showOpenDialog(null);
     }
     
-    @FXML
-    public void btAdicionarAcao() {
+    private void adicionarMusica() {
   
         File arquivo = escolherArquivo();
 
@@ -130,9 +157,21 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
-    @FXML
-    public void btRemoverAcao() {
-  
+    private void removerMusica() {
+    	Musica musicaSelecionada = listaMusicas.getSelectionModel().getSelectedItem();
+
+        if (musicaSelecionada != null) {
+            try {
+                MusicaDAO.remover(TelaLoginController.getUsuarioAtual(), musicaSelecionada);
+                listaMusicas.getItems().remove(musicaSelecionada);
+            } catch (ExcecaoPersonalizada e) {
+                Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
+            } catch (Exception e) {
+                Alertas.showAlert("Erro", "Erro ao remover a música.", e.getMessage(), Alert.AlertType.ERROR);
+            }
+        } else {
+            Alertas.showAlert("Atenção", "Nenhuma música selecionada.", "", Alert.AlertType.INFORMATION);
+        }
         
     }
 
