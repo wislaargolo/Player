@@ -98,15 +98,7 @@ public class UsuarioDAO {
         }
     }
     
-    public static Usuario autenticar(String login, String senha){
-    	ArrayList<Usuario> usuarios = carregar();
-    	for(Usuario usuario : usuarios){
-            if(usuario.getId().equals(login) && usuario.getSenha().equals(senha)){
-              return usuario;
-            }
-        }
-        throw new NoSuchElementException("Argumentos de login inválidos");
-    }
+
  
 
 }

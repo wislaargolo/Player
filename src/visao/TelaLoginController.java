@@ -3,6 +3,7 @@ package visao;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
@@ -30,9 +31,19 @@ public class TelaLoginController implements Initializable{
     private Hyperlink cadastro;
     
     private Usuario usuarioAtual;
+    private ArrayList<Usuario> usuarios;
     
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        UsuarioDAO.carregar();
+        usuarios = UsuarioDAO.carregar();
+    }
+    
+    private Usuario autenticar(String login, String senha) {
+    	for(Usuario usuario : usuarios){
+            if(usuario.getId().equals(login) && usuario.getSenha().equals(senha)){
+              return usuario;
+            }
+        }
+        throw new NoSuchElementException("Argumentos de login inválidos");
     }
 
     @FXML
@@ -41,7 +52,7 @@ public class TelaLoginController implements Initializable{
         String senha = fSenha.getText();
         
         try {
-        	usuarioAtual = UsuarioDAO.autenticar(login, senha);
+        	usuarioAtual = autenticar(login, senha);
         	
         	if(usuarioAtual instanceof UsuarioVIP) {
             	GerenciadorCenas.mudarCena("/visao/TelaPrincipalVIP.fxml");
