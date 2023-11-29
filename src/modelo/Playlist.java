@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Playlist {
 	
@@ -41,25 +42,42 @@ public class Playlist {
 		this.musicas = musicas;
 	}
 	
+//	@Override
+//    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+//
+//        if (obj == null || getClass() != obj.getClass()) {
+//            return false;
+//        }
+//
+//        Playlist playlist = (Playlist) obj;
+//        
+//        for(Musica musica : musicas) {
+//        	for(Musica outra : playlist.musicas) {
+//        		if(musica.equals(outra)) return false;
+//        	}
+//        }
+//
+//        return nome.equals(playlist.nome);
+//    }
+	
+	
 	@Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        Playlist playlist = (Playlist) obj;
+    public boolean equals(Object o) {
+        if (this == o) return true;
         
-        for(Musica musica : musicas) {
-        	for(Musica outra : playlist.musicas) {
-        		if(musica.equals(outra)) return false;
-        	}
+        if (o == null || getClass() != o.getClass()) return false;
+        
+        Playlist playlist = (Playlist) o;
+        
+        if (Objects.equals(nome, playlist.nome)) {
+        	return true;
         }
-
-        return nome.equals(playlist.nome);
+        
+        return Objects.equals(nome, playlist.nome) &&
+                Objects.equals(musicas, playlist.musicas);
     }
 	
 	@Override
