@@ -47,4 +47,9 @@ public class Musica {
                caminhoArquivo.equals(musica.caminhoArquivo);
     }
 	
+	@Override
+    public String toString() {
+        return nome;
+    }
+	
 }

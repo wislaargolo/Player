@@ -45,15 +45,15 @@ public class TelaPrincipalController implements Initializable {
     private Button btParar;
     
     @FXML
-    private Button btAdicionarMusica;
+    private Button btAdicionarMusica, btRemoverMusica;
     
     @FXML
-    private ListView<String> listaMusicas;
+    private ListView<Musica> listaMusicas;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	for (Musica musica : MusicaDAO.carregar(TelaLoginController.getUsuarioAtual())) {
-            listaMusicas.getItems().add(musica.getNome());
+            listaMusicas.getItems().add(musica);
         }
 
 	}
@@ -122,12 +122,18 @@ public class TelaPrincipalController implements Initializable {
         try {
             Musica novaMusica = new Musica(arquivo.getName(),arquivo.getAbsolutePath());
             MusicaDAO.adicionar(TelaLoginController.getUsuarioAtual(), novaMusica);
-            listaMusicas.getItems().add(novaMusica.getNome());
+            listaMusicas.getItems().add(novaMusica);
         } catch (ExcecaoPersonalizada e) {
         	Alertas.showAlert("Atenção", e.getMessage(), "", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
         	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
         }
+    }
+    
+    @FXML
+    public void btRemoverAcao() {
+  
+        
     }
 
 }
