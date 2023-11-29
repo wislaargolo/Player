@@ -43,10 +43,13 @@ public class TelaPrincipalController implements Initializable {
     private Button btMutar, btParar;
     
     @FXML
-    private Button btRemDiretorio;
+    private Button btAdicionarMusica;
     
     @FXML
-    private Button btAddDiretorio;
+    private Button btRemoverDiretorio;
+    
+    @FXML
+    private Button btAdicionarDiretorio;
 
     @FXML
     private ListView<Musica> listaMusicas;
@@ -56,19 +59,15 @@ public class TelaPrincipalController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	DiretorioDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
     	atualizarMusicas();
+    	
+		ContextMenu menu = menuMusica();
+		listaMusicas.setContextMenu(menu);
 	}
 	
 	@FXML
 	public void iconeAcao() {
 		ContextMenu menu = menuUsuario();
 		configuraClique(icone,menu);
-		
-	}
-	
-	@FXML
-	public void listaMusicasAcao() {
-		ContextMenu menu = menuMusica();
-		configuraClique(listaMusicas, menu);
 		
 	}
 	
@@ -144,27 +143,25 @@ public class TelaPrincipalController implements Initializable {
     }
     
     private ContextMenu menuMusica() {
-        ContextMenu menu = new ContextMenu();
+    	ContextMenu menu = new ContextMenu();
+    	
+    	MenuItem removerItem = new MenuItem("Remover");
+    	menu.getItems().add(removerItem);
 
-        MenuItem opcao1 = new MenuItem("Adicionar");
-        opcao1.setOnAction(event -> {
-            adicionarMusica();
-        });
-
-        MenuItem opcao2 = new MenuItem("Remover");
-        opcao2.setOnAction(event -> {
-            removerMusica();
-        });
+    	removerItem.setOnAction(event -> {
+    	    Musica musicaSelecionada = listaMusicas.getSelectionModel().getSelectedItem();
+    	    if (musicaSelecionada != null) {
+    	    	removerMusica(musicaSelecionada);
+    	    }
+    	});
         
-
-        menu.getItems().addAll(opcao1, opcao2);
 
         return menu;
     }
 
     private void configuraClique(Node objeto, ContextMenu menu) {
        objeto.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY) {
+            if (event.getButton() == MouseButton.SECONDARY) {
                 menu.show(objeto, event.getScreenX(), event.getScreenY());
             }
         });
@@ -185,8 +182,8 @@ public class TelaPrincipalController implements Initializable {
     	return buscaArquivo.showOpenDialog(null);
     }
     
-    
-    private void adicionarMusica() {
+    @FXML
+    private void adicionarMusicaAcao() {
   
         File arquivo = escolherArquivo();
         
@@ -197,15 +194,12 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
-    private void removerMusica() {
-    	Musica musicaSelecionada = listaMusicas.getSelectionModel().getSelectedItem();
+    private void removerMusica(Musica musicaSelecionada) {
+    	Musica musicaSelecionada1 = listaMusicas.getSelectionModel().getSelectedItem();
 
-        if (musicaSelecionada != null) {
-        	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada);
-            listaMusicas.getItems().remove(musicaSelecionada);
-        } else {
-            Alertas.showAlert("Atenção", "Nenhuma música selecionada.", "", Alert.AlertType.INFORMATION);
-        }
+    	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada1);
+        listaMusicas.getItems().remove(musicaSelecionada1);
+
         
     }
 

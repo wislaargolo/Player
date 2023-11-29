@@ -10,6 +10,6 @@ public class Alertas {
 		alert.setTitle(title);
 		alert.setHeaderText(header);
 		alert.setContentText(content);
-		alert.showAndWait();
+		alert.show();
 	}
 }

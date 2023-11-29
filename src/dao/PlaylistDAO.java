@@ -18,7 +18,7 @@ import modelo.Usuario;
 import modelo.UsuarioVIP;
 
 public class PlaylistDAO {
-	private static String caminhoArquivo = "dados/playlistGeral.txt";
+	private static String caminhoArquivo = "dados/playlists/playlistsGeral.txt";
 
 	private PlaylistDAO() {
 	}

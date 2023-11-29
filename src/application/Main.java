@@ -26,30 +26,30 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //launch(args);
-	
-		UsuarioVIP usuario = new UsuarioVIP("RM777", "Rubens", "rrmm");
-		MusicaDAO.carregar(usuario);
-		DiretorioDAO.carregar(usuario);
-		
-		Musica musicaTeste = new Musica("tudo deve ser", "/dados/musicas/musicasss");
-		Musica musicaT2 = new Musica("Como tudo lalal ala", "/dados/musicas/musicasss");
-		
-		MusicaDAO.adicionar(usuario, musicaTeste);
-		MusicaDAO.adicionar(usuario, musicaT2);
-		
-		ArrayList<Musica> musicasss = new ArrayList<>();
-		musicasss.add(musicaTeste);
-		musicasss.add(musicaT2);
-		
-		Playlist playlist = new Playlist("playlistDeRubens", musicasss);
-		PlaylistDAO.carregar(usuario);
-		PlaylistDAO.adicionar(playlist, usuario);
-		
-		for(Playlist m : PlaylistDAO.carregar(usuario)) {
-			for(Musica mus : m.getMusicas())
-				System.out.println("teste" + mus.getNome());
-		}
+        launch(args);
+//	
+//		UsuarioVIP usuario = new UsuarioVIP("RM777", "Rubens", "rrmm");
+//		MusicaDAO.carregar(usuario);
+//		DiretorioDAO.carregar(usuario);
+//		
+//		Musica musicaTeste = new Musica("tudo deve ser", "/dados/musicas/musicasss");
+//		Musica musicaT2 = new Musica("Como tudo lalal ala", "/dados/musicas/musicasss");
+//		
+//		MusicaDAO.adicionar(usuario, musicaTeste);
+//		MusicaDAO.adicionar(usuario, musicaT2);
+//		
+//		ArrayList<Musica> musicasss = new ArrayList<>();
+//		musicasss.add(musicaTeste);
+//		musicasss.add(musicaT2);
+//		
+//		Playlist playlist = new Playlist("playlistDeRubens", musicasss);
+//		PlaylistDAO.carregar(usuario);
+//		PlaylistDAO.adicionar(playlist, usuario);
+//		
+//		for(Playlist m : PlaylistDAO.carregar(usuario)) {
+//			for(Musica mus : m.getMusicas())
+//				System.out.println("teste" + mus.getNome());
+//		}
 //		
 //		MusicaDAO.remover(usuario,musicaTeste);
 		

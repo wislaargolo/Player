@@ -24,6 +24,17 @@ public class GerenciadorCenas {
         }
     }
     
+    public static void abrirNovaJanela(String arquivoFXML) {
+        try {
+            Parent layout = FXMLLoader.load(GerenciadorCenas.class.getResource(arquivoFXML));
+            Stage novaJanela = new Stage();
+            novaJanela.setScene(new Scene(layout));
+            novaJanela.show(); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
 }
 
