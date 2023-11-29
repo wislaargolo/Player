@@ -32,7 +32,7 @@ public class Main extends Application {
 		MusicaDAO.carregar(usuario);
 		DiretorioDAO.carregar(usuario);
 		
-		Musica musicaTeste = new Musica("Como tudo deve ser", "/dados/musicas/musicasss");
+		Musica musicaTeste = new Musica("tudo deve ser", "/dados/musicas/musicasss");
 		Musica musicaT2 = new Musica("Como tudo lalal ala", "/dados/musicas/musicasss");
 		
 		MusicaDAO.adicionar(usuario, musicaTeste);
@@ -50,8 +50,8 @@ public class Main extends Application {
 			for(Musica mus : m.getMusicas())
 				System.out.println("teste" + mus.getNome());
 		}
-		
-		MusicaDAO.remover(usuario,musicaTeste);
+//		
+//		MusicaDAO.remover(usuario,musicaTeste);
 		
 
 //		for(Musica m : playlist.getMusicas()) {

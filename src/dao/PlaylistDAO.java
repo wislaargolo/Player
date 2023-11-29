@@ -97,6 +97,15 @@ public class PlaylistDAO {
 
 	public static void adicionar(Playlist playlist, UsuarioVIP usuario) {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
+		
+		boolean teste = playlists.contains(playlist);
+		
+		if (teste) {
+			System.out.println("foi");
+		}else {
+			System.out.println("não foi");
+		}
+		
 		if (!playlists.contains(playlist)) {
 			playlists.add(playlist);
 
