@@ -125,6 +125,7 @@ public class PlaylistDAO  {
 	
 	public static void remover(Playlist playlist, UsuarioVIP usuario) {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
+		
 		if(playlists.contains(playlist)) {
 			playlists.remove(playlist);
 			

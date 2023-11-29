@@ -31,14 +31,12 @@ public class TelaLoginController implements Initializable{
     private Hyperlink cadastro;
     
     private static Usuario usuarioAtual;
-    private ArrayList<Usuario> usuarios;
     
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usuarios = UsuarioDAO.carregar();
     }
     
     private Usuario autenticar(String login, String senha) {
-    	for(Usuario usuario : usuarios){
+    	for(Usuario usuario : UsuarioDAO.carregar()){
             if(usuario.getId().equals(login) && usuario.getSenha().equals(senha)){
               return usuario;
             }
@@ -55,9 +53,11 @@ public class TelaLoginController implements Initializable{
         	usuarioAtual = autenticar(login, senha);
         	
         	if(usuarioAtual instanceof UsuarioVIP) {
-            	GerenciadorCenas.mudarCena("/visao/TelaPrincipalVIP.fxml");
+            	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
+            	System.out.println("Aaaa");
             } else {
             	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
+            	System.out.println("ooo");
             }
         	
         } catch (NoSuchElementException e) {

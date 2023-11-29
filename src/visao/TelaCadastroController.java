@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
 
-public class TelaCadastroController implements Initializable{
+public class TelaCadastroController implements Initializable {
 	@FXML
     private TextField fLogin, fNome;
 	
