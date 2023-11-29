@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import dao.MusicaDAO;
 import dao.UsuarioDAO;
+import excecoes.ExcecaoPersonalizada;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -64,6 +65,15 @@ public class TelaPrincipalController implements Initializable {
 		
 	}
 
+	private void excluirUsuario() {
+	    try {
+	        UsuarioDAO.remover(TelaLoginController.getUsuarioAtual());
+	        GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
+	    } catch(ExcecaoPersonalizada e) {
+	        Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
+	    }
+	}
+	
     private ContextMenu criarMenu() {
         ContextMenu menu = new ContextMenu();
 
@@ -79,8 +89,7 @@ public class TelaPrincipalController implements Initializable {
         
         MenuItem opcao3 = new MenuItem("Excluir Conta");
         opcao3.setOnAction(event -> {
-        	UsuarioDAO.remover(TelaLoginController.getUsuarioAtual());
-            GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
+        	excluirUsuario();
         });
 
         menu.getItems().addAll(opcao1, opcao2, opcao3);
@@ -96,21 +105,25 @@ public class TelaPrincipalController implements Initializable {
         });
     }
     
-    @FXML
-    public void btAdicionarAcao() {
-    	FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Selecionar Música");
-        fileChooser.getExtensionFilters().add(
+    private File escolherArquivo() {
+    	FileChooser buscaArquivo = new FileChooser();
+    	buscaArquivo.setTitle("Selecionar Música");
+    	buscaArquivo.getExtensionFilters().add(
             new FileChooser.ExtensionFilter("Arquivos MP3", "*.mp3")
         );
-
-        File selectedFile = fileChooser.showOpenDialog(null);
+    	return buscaArquivo.showOpenDialog(null);
+    }
+    
+    @FXML
+    public void btAdicionarAcao() {
+  
+        File arquivo = escolherArquivo();
 
         try {
-            Musica novaMusica = new Musica(selectedFile.getName(),selectedFile.getAbsolutePath());
+            Musica novaMusica = new Musica(arquivo.getName(),arquivo.getAbsolutePath());
             MusicaDAO.adicionar(TelaLoginController.getUsuarioAtual(), novaMusica);
             listaMusicas.getItems().add(novaMusica.getNome());
-        } catch (RuntimeException e) {
+        } catch (ExcecaoPersonalizada e) {
         	Alertas.showAlert("Atenção", e.getMessage(), "", Alert.AlertType.INFORMATION);
         } catch (Exception e) {
         	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
