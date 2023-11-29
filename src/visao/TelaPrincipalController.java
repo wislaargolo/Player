@@ -10,7 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 
-public class TelaPrincipalVIPController implements Initializable {
+public class TelaPrincipalController implements Initializable {
 	
 	@FXML
 	private ImageView icone;
