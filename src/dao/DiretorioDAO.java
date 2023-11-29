@@ -15,16 +15,30 @@ public class DiretorioDAO {
 	public static String caminhoUsuario(Usuario usuario) {
 		return "dados/diretorios/diretorios_" + usuario.getId() + ".txt";
 	}
+	
+	private static void verificarCaminho(String caminhoArquivo) {
+		File arquivo = new File(caminhoArquivo);
+
+        if (!arquivo.exists()) {
+            try {
+				arquivo.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+	}
 
 	public static ArrayList<String> carregar(Usuario usuario) {
 		String caminhoArquivo = caminhoUsuario(usuario);
 		ArrayList<String> diretorios = new ArrayList<>();
 		
+		verificarCaminho(caminhoArquivo);
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
 
             while ((linha = br.readLine()) != null) {
-            	diretorios.add(linha);
             	File diretorio = new File(linha);
             	if(diretorio.isDirectory()) {
 	            	diretorios.add(linha);
@@ -39,12 +53,13 @@ public class DiretorioDAO {
 
 	}
 	
-	private static void carregarMusicas(Usuario usuario, File diretorio) {
+	public static void carregarMusicas(Usuario usuario, File diretorio) {
         File[] listaArquivos = diretorio.listFiles();
         if (listaArquivos != null) {
             for (File arquivo : listaArquivos) {
                 if (arquivo.isFile() && arquivo.getName().toLowerCase().endsWith(".mp3")) {
-                    MusicaDAO.adicionar(usuario, new Musica(arquivo.getName(), arquivo.getAbsolutePath()));
+                	Musica nova = new Musica(arquivo.getName(), arquivo.getAbsolutePath());
+                    MusicaDAO.adicionar(usuario, nova);
                 }
             }
         }

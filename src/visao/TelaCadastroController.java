@@ -27,7 +27,7 @@ public class TelaCadastroController implements Initializable {
     
     @FXML
     private ChoiceBox<String> tipoUsuario;
-    
+  
  
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tipoUsuario.getItems().addAll("Comum", "VIP");
@@ -72,6 +72,7 @@ public class TelaCadastroController implements Initializable {
     private void btVoltarAcao() {
     	GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
     }
+    
     
 
     

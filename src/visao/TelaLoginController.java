@@ -2,21 +2,18 @@ package visao;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.NoSuchElementException;
-import java.util.ResourceBundle;
 
 import dao.UsuarioDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
 
-public class TelaLoginController implements Initializable{
+public class TelaLoginController {
 
 	@FXML
     private TextField fLogin;
@@ -30,9 +27,13 @@ public class TelaLoginController implements Initializable{
     @FXML
     private Hyperlink cadastro;
     
-    private static Usuario usuarioAtual;
+    private Usuario usuarioAtual;
     
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    private static TelaLoginController instance = new TelaLoginController();
+    
+    
+    public TelaLoginController() {
+    	usuarioAtual = new Usuario("","","");
     }
     
     private Usuario autenticar(String login, String senha) {
@@ -50,10 +51,11 @@ public class TelaLoginController implements Initializable{
         String senha = fSenha.getText();
         
         try {
-        	usuarioAtual = autenticar(login, senha);
+        	Usuario usuarioAtual = autenticar(login, senha);
+        	instance.setUsuarioAtual(usuarioAtual);
         	
         	if(usuarioAtual instanceof UsuarioVIP) {
-            	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
+            	GerenciadorCenas.mudarCena("/visao/TelaPrincipalVIP.fxml");
             } else {
             	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
             }
@@ -69,9 +71,18 @@ public class TelaLoginController implements Initializable{
     	GerenciadorCenas.mudarCena("/visao/TelaCadastro.fxml");
     }
     
-    public static Usuario getUsuarioAtual() {
+    public Usuario getUsuarioAtual() {
         return usuarioAtual;
     }
+    
+    public void setUsuarioAtual(Usuario usuario) {
+        this.usuarioAtual = usuario;
+    }
+
+	public static TelaLoginController getInstance() {
+		// TODO Auto-generated method stub
+		return instance;
+	}
     
     
     

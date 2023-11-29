@@ -1,12 +1,12 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import excecoes.ExcecaoPersonalizada;
 import modelo.Musica;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
@@ -16,10 +16,26 @@ public class MusicaDAO {
 	public static String caminhoUsuario(Usuario usuario) {
 		return "dados/musicas/musicas_" + usuario.getId() + ".txt";
 	}
+	
+	private static void verificarCaminho(String caminhoArquivo) {
+		File arquivo = new File(caminhoArquivo);
+
+        if (!arquivo.exists()) {
+            try {
+				arquivo.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+	}
 
 	public static ArrayList<Musica> carregar(Usuario usuario) {
 		String caminhoArquivo = caminhoUsuario(usuario);
 		ArrayList<Musica> musicas = new ArrayList<Musica>();
+		
+		verificarCaminho(caminhoArquivo);
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
 
@@ -50,10 +66,9 @@ public class MusicaDAO {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
-	        return ;
         }
-		 throw new ExcecaoPersonalizada("Erro ao adicionar música: música já existe");
 	}
+	
 	public static void remover(Usuario usuario, Musica musica) {
 		String caminhoArquivo = caminhoUsuario(usuario);
 		ArrayList<Musica> musicas = carregar(usuario);
@@ -78,10 +93,7 @@ public class MusicaDAO {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-        	return ;
         }
-		
-		throw new ExcecaoPersonalizada("Erro ao remover música: música não existe");
 		
 	}
 	
