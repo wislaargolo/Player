@@ -49,7 +49,9 @@ public class MusicaDAO {
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        return ;
         }
+		throw new RuntimeException("Música já existe!");
 	}
 	public static void remover(Usuario usuario, Musica musica) {
 		String caminhoArquivo = caminhoUsuario(usuario);

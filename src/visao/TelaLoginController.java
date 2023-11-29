@@ -54,10 +54,8 @@ public class TelaLoginController implements Initializable{
         	
         	if(usuarioAtual instanceof UsuarioVIP) {
             	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
-            	System.out.println("Aaaa");
             } else {
             	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
-            	System.out.println("ooo");
             }
         	
         } catch (NoSuchElementException e) {

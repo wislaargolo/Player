@@ -59,7 +59,7 @@ public class TelaCadastroController implements Initializable {
         try {
         	UsuarioDAO.adicionar(aux);
         	Alertas.showAlert("Cadastro", null, "Usuário cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
         	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
         } catch (Exception e) {
         	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
