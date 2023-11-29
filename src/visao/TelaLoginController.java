@@ -30,7 +30,7 @@ public class TelaLoginController implements Initializable{
     @FXML
     private Hyperlink cadastro;
     
-    private Usuario usuarioAtual;
+    private static Usuario usuarioAtual;
     private ArrayList<Usuario> usuarios;
     
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,6 +69,10 @@ public class TelaLoginController implements Initializable{
     @FXML
     private void hyperAcao() {
     	GerenciadorCenas.mudarCena("/visao/TelaCadastro.fxml");
+    }
+    
+    public static Usuario getUsuarioAtual() {
+        return usuarioAtual;
     }
     
     

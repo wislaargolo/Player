@@ -3,6 +3,7 @@ package visao;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dao.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ContextMenu;
@@ -40,8 +41,14 @@ public class TelaPrincipalController implements Initializable {
         opcao2.setOnAction(event -> {
             GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
         });
+        
+        MenuItem opcao3 = new MenuItem("Excluir Conta");
+        opcao3.setOnAction(event -> {
+        	UsuarioDAO.remover(TelaLoginController.getUsuarioAtual());
+            GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
+        });
 
-        menu.getItems().addAll(opcao1, opcao2);
+        menu.getItems().addAll(opcao1, opcao2, opcao3);
 
         return menu;
     }

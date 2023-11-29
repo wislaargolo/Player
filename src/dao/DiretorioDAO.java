@@ -12,7 +12,7 @@ import modelo.Usuario;
 
 public class DiretorioDAO {
 	
-	private static String caminhoUsuario(Usuario usuario) {
+	public static String caminhoUsuario(Usuario usuario) {
 		return "dados/diretorios/diretorios_" + usuario.getId() + ".txt";
 	}
 

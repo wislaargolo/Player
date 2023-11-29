@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -76,6 +77,18 @@ public class UsuarioDAO {
     	
         if(usuarios.contains(usuario)) {
         	usuarios.remove(usuario);
+        	
+        	try {
+        		File arquivoMusicas = new File(MusicaDAO.caminhoUsuario(usuario));
+        		File arquivoDiretorios = new File(DiretorioDAO.caminhoUsuario(usuario));
+        		
+        		arquivoMusicas.delete();
+        		arquivoDiretorios.delete();
+        		
+            } catch(Exception e) {
+                
+                e.printStackTrace();
+            }     
         	
         	try (FileWriter fw = new FileWriter(caminhoArquivo, false)){
         		

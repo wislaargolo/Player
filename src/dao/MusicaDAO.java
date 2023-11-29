@@ -12,7 +12,7 @@ import modelo.UsuarioVIP;
 
 public class MusicaDAO {
 	
-	private static String caminhoUsuario(Usuario usuario) {
+	public static String caminhoUsuario(Usuario usuario) {
 		return "dados/musicas/musicas_" + usuario.getId() + ".txt";
 	}
 
