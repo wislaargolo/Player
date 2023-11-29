@@ -9,31 +9,17 @@ import java.util.ArrayList;
 
 import modelo.Musica;
 import modelo.Usuario;
+import util.DAOUtil;
 
 public class DiretorioDAO {
 	
-	public static String caminhoUsuario(Usuario usuario) {
-		return "dados/diretorios/diretorios_" + usuario.getId() + ".txt";
-	}
+	private static String tipo = "diretorios";
 	
-	private static void verificarCaminho(String caminhoArquivo) {
-		File arquivo = new File(caminhoArquivo);
-
-        if (!arquivo.exists()) {
-            try {
-				arquivo.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }
-	}
-
 	public static ArrayList<String> carregar(Usuario usuario) {
-		String caminhoArquivo = caminhoUsuario(usuario);
+		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<String> diretorios = new ArrayList<>();
 		
-		verificarCaminho(caminhoArquivo);
+		DAOUtil.verificarCaminho(caminhoArquivo);
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
             String linha;
@@ -77,7 +63,7 @@ public class DiretorioDAO {
 	}
 
 	public static void adicionar(Usuario usuario, String caminhoDiretorio) {
-		String caminhoArquivo = caminhoUsuario(usuario);
+		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<String> diretorios = carregar(usuario);
 		
 	    if (!diretorios.contains(caminhoDiretorio)) {
@@ -99,7 +85,7 @@ public class DiretorioDAO {
 	}
 	
 	public static void remover(String caminhoDiretorio, Usuario usuario) {
-		String caminhoArquivo = caminhoUsuario(usuario);
+		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<String> diretorios = carregar(usuario);
 		
 		if (diretorios.contains(caminhoDiretorio)) {

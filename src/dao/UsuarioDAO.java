@@ -10,28 +10,16 @@ import java.util.ArrayList;
 import excecoes.ExcecaoPersonalizada;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
+import util.DAOUtil;
 
 public class UsuarioDAO {
 
 	private static String caminhoArquivo = "dados/usuarios.txt";
-	
-	private static void verificarCaminho(String caminhoArquivo) {
-		File arquivo = new File(caminhoArquivo);
-
-        if (!arquivo.exists()) {
-            try {
-				arquivo.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }
-	}
 
 	public static ArrayList<Usuario> carregar() {
 		ArrayList<Usuario> usuarios = new ArrayList<>();
 		
-		verificarCaminho(caminhoArquivo);
+		DAOUtil.verificarCaminho(caminhoArquivo);
 	
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))){	
             String linha;
@@ -89,8 +77,8 @@ public class UsuarioDAO {
 	
     private static void removerArquivos(Usuario usuario) {
     	try {
-    		File arquivoMusicas = new File(MusicaDAO.caminhoUsuario(usuario));
-    		File arquivoDiretorios = new File(DiretorioDAO.caminhoUsuario(usuario));
+    		File arquivoMusicas = new File(DAOUtil.getCaminhoUsuario(usuario, "musicas"));
+    		File arquivoDiretorios = new File(DAOUtil.getCaminhoUsuario(usuario, "diretorios"));
     		
     		arquivoMusicas.delete();
     		arquivoDiretorios.delete();
@@ -134,6 +122,7 @@ public class UsuarioDAO {
         }
         throw new ExcecaoPersonalizada("Erro ao remover usuário: usuário não existe existe");
     }
+
     
  
 

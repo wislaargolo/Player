@@ -27,6 +27,7 @@ import modelo.Musica;
 import modelo.Playlist;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
+import util.GerenciadorCenas;
 
 public class TelaPrincipalController implements Initializable {
 	
@@ -63,41 +64,7 @@ public class TelaPrincipalController implements Initializable {
 		ContextMenu menu = menuMusica();
 		listaMusicas.setContextMenu(menu);
 	}
-	
-	@FXML
-	public void iconeAcao() {
-		ContextMenu menu = menuUsuario();
-		configuraClique(icone,menu);
-		
-	}
-	
-	@FXML
-	public void adicionarDiretorioAcao() {
-        File diretorio = escolherDiretorio();
-  
-        if(diretorio != null) {
-	        try {
-	           DiretorioDAO.adicionar(TelaLoginController.getInstance().getUsuarioAtual(), diretorio.getAbsolutePath());
-	           atualizarMusicas();
-	        } catch (ExcecaoPersonalizada e) {
-	            Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
-	        } catch (Exception e) {
-	            Alertas.showAlert("Erro", "Erro ao remover a música.", e.getMessage(), Alert.AlertType.ERROR);
-	        } 
-        }
-	}
-	
-	@FXML
-	public void removerDiretorioAcao() {
-        File diretorio = escolherDiretorio();
-        
-       if(diretorio != null) {
-  
-    	   DiretorioDAO.remover(diretorio.getAbsolutePath(), TelaLoginController.getInstance().getUsuarioAtual());
-           atualizarMusicas();
-       }
-	}
-	
+    
 	protected void atualizarMusicas() {
 		ArrayList<Musica> musicasCarregadas = MusicaDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
 		 listaMusicas.getItems().removeIf(musica -> !musicasCarregadas.contains(musica));
@@ -108,15 +75,12 @@ public class TelaPrincipalController implements Initializable {
 	        }
 	    }
 	}
-
-
-	private void excluirUsuario() {
-	    try {
-	        UsuarioDAO.remover(TelaLoginController.getInstance().getUsuarioAtual());
-	        GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
-	    } catch(ExcecaoPersonalizada e) {
-	        Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
-	    }
+	
+	@FXML
+	public void iconeAcao() {
+		ContextMenu menu = menuUsuario();
+		configuraClique(icone,menu);
+		
 	}
 	
     private ContextMenu menuUsuario() {
@@ -154,9 +118,17 @@ public class TelaPrincipalController implements Initializable {
     	    	removerMusica(musicaSelecionada);
     	    }
     	});
-        
 
         return menu;
+    }
+    
+    private void removerMusica(Musica musicaSelecionada) {
+    	Musica musicaSelecionada1 = listaMusicas.getSelectionModel().getSelectedItem();
+
+    	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada1);
+        listaMusicas.getItems().remove(musicaSelecionada1);
+
+        
     }
 
     private void configuraClique(Node objeto, ContextMenu menu) {
@@ -167,6 +139,43 @@ public class TelaPrincipalController implements Initializable {
         });
     }
     
+	
+	@FXML
+	public void adicionarDiretorioAcao() {
+        File diretorio = escolherDiretorio();
+  
+        if(diretorio != null) {
+	        try {
+	           DiretorioDAO.adicionar(TelaLoginController.getInstance().getUsuarioAtual(), diretorio.getAbsolutePath());
+	           atualizarMusicas();
+	        } catch (ExcecaoPersonalizada e) {
+	            Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
+	        } catch (Exception e) {
+	            Alertas.showAlert("Erro", "Erro ao remover a música.", e.getMessage(), Alert.AlertType.ERROR);
+	        } 
+        }
+	}
+	
+	@FXML
+	public void removerDiretorioAcao() {
+        File diretorio = escolherDiretorio();
+        
+       if(diretorio != null) {
+  
+    	   DiretorioDAO.remover(diretorio.getAbsolutePath(), TelaLoginController.getInstance().getUsuarioAtual());
+           atualizarMusicas();
+       }
+	}
+
+	private void excluirUsuario() {
+	    try {
+	        UsuarioDAO.remover(TelaLoginController.getInstance().getUsuarioAtual());
+	        GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
+	    } catch(ExcecaoPersonalizada e) {
+	        Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
+	    }
+	}
+	
     private File escolherDiretorio() {
     	DirectoryChooser buscaDiretorio = new DirectoryChooser();
     	buscaDiretorio.setTitle("Selecionar Diretório");
@@ -194,14 +203,6 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
-    private void removerMusica(Musica musicaSelecionada) {
-    	Musica musicaSelecionada1 = listaMusicas.getSelectionModel().getSelectedItem();
-
-    	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada1);
-        listaMusicas.getItems().remove(musicaSelecionada1);
-
-        
-    }
 
 }
 

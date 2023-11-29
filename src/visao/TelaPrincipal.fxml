@@ -19,5 +19,7 @@
       <Button fx:id="btAdicionarDiretorio" layoutX="40.0" layoutY="185.0" mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="41.0" prefWidth="116.0" text="Adicionar diretorio" />
       <Button fx:id="btRemoverDiretorio" layoutX="42.0" layoutY="251.0" mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="49.0" prefWidth="112.0" text="Remover diretorio" />
       <Button fx:id="btAdicionarMusica" layoutX="443.0" layoutY="79.0" mnemonicParsing="false" onAction="#adicionarMusicaAcao" prefHeight="41.0" prefWidth="70.0" text="Musica" />
+      <ListView fx:id="listaPlaylist" layoutX="552.0" layoutY="200.0" prefHeight="255.0" prefWidth="170.0" />
+      <Button fx:id="btAdicionarPlaylist" layoutX="655.0" layoutY="159.0" mnemonicParsing="false" onAction="#adicionarMusicaAcao" prefHeight="41.0" prefWidth="64.0" text="Playlist" />
    </children>
 </AnchorPane>

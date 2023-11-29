@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
+import util.GerenciadorCenas;
 
 public class TelaLoginController {
 

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import modelo.Musica;
 import modelo.Playlist;
 import modelo.UsuarioVIP;
-import visao.GerenciadorCenas;
+import util.GerenciadorCenas;
 
 
 public class Main extends Application {
