@@ -1,5 +1,4 @@
-/application/
 /dao/
-/excecoes/
-/modelo/
 /visao/
+/modelo/
+/application/

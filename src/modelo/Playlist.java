@@ -52,9 +52,19 @@ public class Playlist {
         }
 
         Playlist playlist = (Playlist) obj;
+        
+        for(Musica musica : musicas) {
+        	for(Musica outra : playlist.musicas) {
+        		if(musica.equals(outra)) return false;
+        	}
+        }
 
-        return nome.equals(playlist.nome) &&
-               musicas.equals(playlist.musicas);
+        return nome.equals(playlist.nome);
+    }
+	
+	@Override
+    public String toString() {
+        return nome;
     }
 	
 

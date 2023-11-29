@@ -1,9 +1,3 @@
 Rubens,RM777
 playlistDeRubens
 Como tudo lalal ala,/dados/musicas/musicasss
-Rubens,RM777
-playlistDeRubens,Como tudo lalal ala
-/dados/musicas/musicasss,Rubens
-RM777,playlistDeRubens
-playlistDeRubens,Como tudo deve ser
-/dados/musicas/musicasss,Como tudo lalal ala

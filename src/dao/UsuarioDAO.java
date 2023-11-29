@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 
 import excecoes.ExcecaoPersonalizada;
 import modelo.Usuario;
@@ -15,9 +14,24 @@ import modelo.UsuarioVIP;
 public class UsuarioDAO {
 
 	private static String caminhoArquivo = "dados/usuarios.txt";
+	
+	private static void verificarCaminho(String caminhoArquivo) {
+		File arquivo = new File(caminhoArquivo);
+
+        if (!arquivo.exists()) {
+            try {
+				arquivo.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+	}
 
 	public static ArrayList<Usuario> carregar() {
 		ArrayList<Usuario> usuarios = new ArrayList<>();
+		
+		verificarCaminho(caminhoArquivo);
 	
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))){	
             String linha;
@@ -73,23 +87,30 @@ public class UsuarioDAO {
         
     }
 	
+    private static void removerArquivos(Usuario usuario) {
+    	try {
+    		File arquivoMusicas = new File(MusicaDAO.caminhoUsuario(usuario));
+    		File arquivoDiretorios = new File(DiretorioDAO.caminhoUsuario(usuario));
+    		
+    		arquivoMusicas.delete();
+    		arquivoDiretorios.delete();
+    		
+        } catch(Exception e) {
+            
+            e.printStackTrace();
+        }     
+    	
+    	if(usuario instanceof UsuarioVIP) {
+    		PlaylistDAO.removerTodasPlaylists((UsuarioVIP) usuario);
+    	}
+    }
     public static void remover(Usuario usuario) {	
     	ArrayList<Usuario> usuarios = carregar();
     	
         if(usuarios.contains(usuario)) {
         	usuarios.remove(usuario);
         	
-        	try {
-        		File arquivoMusicas = new File(MusicaDAO.caminhoUsuario(usuario));
-        		File arquivoDiretorios = new File(DiretorioDAO.caminhoUsuario(usuario));
-        		
-        		arquivoMusicas.delete();
-        		arquivoDiretorios.delete();
-        		
-            } catch(Exception e) {
-                
-                e.printStackTrace();
-            }     
+        	removerArquivos(usuario);
         	
         	try (FileWriter fw = new FileWriter(caminhoArquivo, false)){
         		
