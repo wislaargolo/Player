@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import excecoes.ExcecaoPersonalizada;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
 
@@ -68,7 +69,7 @@ public class UsuarioDAO {
 	        return ;
         }
         
-        throw new RuntimeException("Erro ao cadastrar usuário: usuário já existe");
+        throw new ExcecaoPersonalizada("Erro ao cadastrar usuário: usuário já existe");
         
     }
 	
@@ -108,9 +109,12 @@ public class UsuarioDAO {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+        	return ;
         }
+        throw new ExcecaoPersonalizada("Erro ao remover usuário: usuário não existe existe");
     }
     
+ 
 
  
 

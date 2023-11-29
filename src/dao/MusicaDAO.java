@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import excecoes.ExcecaoPersonalizada;
 import modelo.Musica;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
@@ -51,7 +52,7 @@ public class MusicaDAO {
 	        }
 	        return ;
         }
-		throw new RuntimeException("Música já existe!");
+		 throw new ExcecaoPersonalizada("Erro ao adicionar música: música já existe");
 	}
 	public static void remover(Usuario usuario, Musica musica) {
 		String caminhoArquivo = caminhoUsuario(usuario);
@@ -77,7 +78,10 @@ public class MusicaDAO {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+        	return ;
         }
+		
+		throw new ExcecaoPersonalizada("Erro ao remover música: música não existe");
 		
 	}
 	
