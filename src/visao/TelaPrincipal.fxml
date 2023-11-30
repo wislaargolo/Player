@@ -14,33 +14,40 @@
 
 <BorderPane style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
    <left>
-      <VBox alignment="TOP_CENTER" maxHeight="425.0" maxWidth="468.0" prefHeight="421.0" prefWidth="156.0" spacing="20.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="421.0" prefWidth="126.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="20.0" prefWidth="0.0" style="-fx-background-color: E5E5E5;">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/pasta.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-            <Button mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="58.0" prefWidth="66.0" style="-fx-background-color: #E5E5E5;">
-               <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/icons8-excluir-pasta-50.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
+            <Pane layoutX="-30.0" layoutY="18.0" prefHeight="178.0" prefWidth="117.0" style="-fx-background-color: #BAC3D6; -fx-background-radius: 30; -fx-border-color: 2D4B8B; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
+            <VBox alignment="CENTER" layoutY="28.0" maxHeight="425.0" maxWidth="468.0" prefHeight="160.0" prefWidth="88.0" spacing="20.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.Button?&gt;&lt;?import javafx.scene.image.Image?&gt;&lt;?import javafx.scene.image.ImageView?&gt;&lt;?import javafx.scene.layout.VBox?&gt;&lt;VBox alignment=&quot;CENTER&quot; layoutY=&quot;28.0&quot; maxHeight=&quot;425.0&quot; maxWidth=&quot;468.0&quot; prefHeight=&quot;160.0&quot; prefWidth=&quot;88.0&quot; spacing=&quot;20.0&quot; style=&quot;-fx-background-color: #BAC3D6;&quot; xmlns=&quot;http://javafx.com/javafx/21&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;children&gt;      &lt;Button mnemonicParsing=&quot;false&quot; onAction=&quot;#adicionarDiretorioAcao&quot; prefHeight=&quot;20.0&quot; prefWidth=&quot;0.0&quot; style=&quot;-fx-background-color: #BAC3D6;&quot;&gt;         &lt;graphic&gt;            &lt;ImageView fitHeight=&quot;45.0&quot; fitWidth=&quot;55.0&quot; pickOnBounds=&quot;true&quot; preserveRatio=&quot;true&quot;&gt;               &lt;image&gt;                  &lt;Image url=&quot;@../../dados/imagens/adicionar.png&quot; /&gt;               &lt;/image&gt;            &lt;/ImageView&gt;         &lt;/graphic&gt;      &lt;/Button&gt;      &lt;Button mnemonicParsing=&quot;false&quot; onAction=&quot;#removerDiretorioAcao&quot; prefHeight=&quot;58.0&quot; prefWidth=&quot;58.0&quot; style=&quot;-fx-background-color: #BAC3D6;&quot;&gt;         &lt;graphic&gt;            &lt;ImageView fitHeight=&quot;45.0&quot; fitWidth=&quot;55.0&quot; pickOnBounds=&quot;true&quot; preserveRatio=&quot;true&quot;&gt;               &lt;image&gt;                  &lt;Image url=&quot;@../../dados/imagens/remover.png&quot; /&gt;               &lt;/image&gt;            &lt;/ImageView&gt;         &lt;/graphic&gt;      &lt;/Button&gt;   &lt;/children&gt;&lt;/VBox&gt;;">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="20.0" prefWidth="0.0" style="-fx-background-color: #BAC3D6;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/adicionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="58.0" prefWidth="58.0" style="-fx-background-color: #BAC3D6;">
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/remover.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </Pane>
    </left>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="86.0" prefWidth="1051.0" spacing="5.0" style="-fx-background-color: #14213D;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1051.0" spacing="5.0" style="-fx-background-color: #14213D;" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btAnterior" mnemonicParsing="false" prefHeight="4.0" prefWidth="1.0" style="-fx-background-color: #14213D;">
                <graphic>
-                  <ImageView fitHeight="37.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dados/imagens/anterior.png" />
                      </image>
@@ -49,7 +56,7 @@
             </Button>
             <Button fx:id="btPause" mnemonicParsing="false" prefHeight="4.0" prefWidth="12.0" style="-fx-background-color: #14213D;">
                <graphic>
-                  <ImageView fitHeight="37.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dados/imagens/pause.png" />
                      </image>
@@ -58,7 +65,7 @@
             </Button>
             <Button fx:id="btPlay" mnemonicParsing="false" onAction="#tocarMusicasGerais" prefHeight="15.0" prefWidth="0.0" style="-fx-background-color: #14213D; -fx-border-color: #14213D;" stylesheets="@botao.css">
                <graphic>
-                  <ImageView fitHeight="37.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dados/imagens/play.png" />
                      </image>
@@ -67,7 +74,7 @@
             </Button>
             <Button fx:id="btProximo" maxHeight="45.0" maxWidth="53.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="53.0" style="-fx-background-color: #14213D;">
                <graphic>
-                  <ImageView fitHeight="37.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dados/imagens/posterior.png" />
                      </image>
@@ -77,7 +84,7 @@
             <ProgressBar fx:id="progressoMusica" prefHeight="18.0" prefWidth="421.0" progress="0.0" style="-fx-background-color: #E5E5E5;" />
             <Button fx:id="btParar" mnemonicParsing="false" onAction="#parar" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
                <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dados/imagens/icons8-parar-50.png" />
                      </image>
@@ -86,7 +93,7 @@
             </Button>
             <Button fx:id="btMutar" mnemonicParsing="false" prefHeight="45.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
                <graphic>
-                  <ImageView fitHeight="34.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dados/imagens/mudo.png" />
                      </image>
@@ -112,9 +119,9 @@
       </HBox>
    </top>
    <center>
-      <HBox alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="751.0" spacing="40.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER_RIGHT">
+      <HBox alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="40.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="421.0" prefWidth="322.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="421.0" prefWidth="333.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -127,13 +134,14 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../dados/imagens/icons8-mais-48.png" />
+                                    <Image url="@../../dados/imagens/icons8-adicionar-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaMusicas" prefHeight="337.0" prefWidth="322.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
+                  <ListView fx:id="listaMusicas" prefHeight="306.0" prefWidth="381.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
+                  <Pane prefHeight="53.0" prefWidth="374.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="421.0" prefWidth="196.0">
@@ -149,14 +157,15 @@
                            <graphic>
                               <ImageView fitHeight="38.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../dados/imagens/icons8-mais-48.png" />
+                                    <Image url="@../../dados/imagens/icons8-adicionar-50.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaPlaylists" prefHeight="344.0" prefWidth="196.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
+                  <ListView fx:id="listaPlaylists" prefHeight="333.0" prefWidth="218.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
+                  <Pane prefHeight="53.0" prefWidth="196.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>
          </children>
