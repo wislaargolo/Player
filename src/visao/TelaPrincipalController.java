@@ -1,11 +1,11 @@
 package visao;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import auxiliar.BotoesMusica;
 import dao.DiretorioDAO;
 import dao.MusicaDAO;
 import dao.PlaylistDAO;
@@ -25,10 +25,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javazoom.jl.decoder.Bitstream;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
-import javazoom.jl.player.advanced.PlaybackListener;
 import modelo.Musica;
 import modelo.Playlist;
 import modelo.Usuario;
@@ -309,53 +305,87 @@ public class TelaPrincipalController implements Initializable {
         return listaMusicas.getItems();
     }
 	
-	private AdvancedPlayer player;
-    private boolean emReproducao = false;
+	BotoesMusica botoesMusica = new BotoesMusica();
+	int indexMusicaGeral = 0;
+	int indexMusicaPlaylist = 0;
 
     @FXML
-    public void tocar() {
-        Musica musica = new Musica("olivia", "C:\\Users\\wisla\\eclipse-wsl\\Player\\dados\\musicas\\Just_The_Two_Of_Us_Karaoke_Acoustic_-_Bill_Withers_Slow_Version___HQ_Audio_128_kbps.mp3");
-        playy(musica);
+    public void tocarMusicasGerais() {
+    	for (; indexMusicaGeral < getListaMusicaItems().size(); indexMusicaGeral++) {
+    		botoesMusica.comcarMusica(getListaMusicaItems().get(indexMusicaGeral));
+    		if (indexMusicaGeral != getListaMusicaItems().size() -1) {
+    			indexMusicaGeral = 0;
+    		}
+    	}  	
+    }
+    
+    @FXML
+    public void passarMusicaGeral() {
+    	if (indexMusicaGeral == getListaMusicaItems().size() -1) {
+    		botoesMusica.stopMusic();
+        	indexMusicaGeral = 0;
+        	tocarMusicasGerais();
+    	} else {
+    		botoesMusica.stopMusic();
+        	indexMusicaGeral++;
+        	tocarMusicasGerais();
+    	}
+    }
+    
+    @FXML
+    public void voltarMusicaGeral() {
+    	if (indexMusicaGeral == 0) {
+    		botoesMusica.stopMusic();
+        	indexMusicaGeral = getListaMusicaItems().size() -1;
+        	tocarMusicasGerais();
+    	} else {
+    		botoesMusica.stopMusic();
+        	indexMusicaGeral--;
+        	tocarMusicasGerais();
+    	}
+    }
+    
+    @FXML
+    public void tocarMusicasPlaylist() {
+    	int qtdDeItens = playlistAtual.getMusicas().size();
+    	for (; indexMusicaPlaylist < qtdDeItens; indexMusicaPlaylist++) {
+    		botoesMusica.comcarMusica(playlistAtual.getMusicas().get(indexMusicaPlaylist));
+    		if (indexMusicaPlaylist != qtdDeItens -1) {
+    			indexMusicaPlaylist = 0;
+    		}
+    	}
+    }
+    
+    @FXML
+    public void passarMusicaPlaylist() {
+    	if (indexMusicaPlaylist == playlistAtual.getMusicas().size() -1) {
+    		botoesMusica.stopMusic();
+    		indexMusicaPlaylist = 0;
+    		tocarMusicasPlaylist();
+    	}else {
+    		botoesMusica.stopMusic();
+    		indexMusicaPlaylist++;
+    		tocarMusicasPlaylist();
+    	}
+    }
+    
+    @FXML
+    public void voltarMusicaPlaylist() {
+    	if (indexMusicaPlaylist == 0) {
+    		botoesMusica.stopMusic();
+    		indexMusicaPlaylist = playlistAtual.getMusicas().size() -1;
+    		tocarMusicasPlaylist();
+    	}else {
+    		botoesMusica.stopMusic();
+    		indexMusicaPlaylist--;
+    		tocarMusicasPlaylist();
+    	}
     }
 
     @FXML
-    public void playy(Musica musica) {
-        if (!emReproducao) {
-            //Musica musica = new Musica("olivia", "C:\\Users\\wisla\\eclipse-wsl\\Player\\dados\\musicas\\Just_The_Two_Of_Us_Karaoke_Acoustic_-_Bill_Withers_Slow_Version___HQ_Audio_128_kbps.mp3");
-            try {
-                FileInputStream fileInputStream = new FileInputStream(musica.getCaminhoArquivo());
-                Bitstream bitstream = new Bitstream(fileInputStream);
-                int duration = bitstream.readFrame().max_number_of_frames((int) fileInputStream.getChannel().size());
-                fileInputStream.close();
-
-                FileInputStream fileInputStreamForPlayer = new FileInputStream(musica.getCaminhoArquivo());
-                player = new AdvancedPlayer(fileInputStreamForPlayer);
-                player.setPlayBackListener(new PlaybackListener() {
-                    @Override
-                    public void playbackFinished(PlaybackEvent evt) {
-                        System.out.println("Reprodução concluída.");
-                        stopMusic();
-                    }
-                });
-                new Thread(() -> {
-                    try {
-                        player.play(0, duration);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }).start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    } 
-    @FXML
-    public void stopMusic() {
-        // Você pode adicionar lógica adicional aqui, se necessário
-        // Por exemplo, pausar a música em vez de parar completamente
-        player.close();
+    public void parar() {
+    	botoesMusica.stopMusic();
     }
-
 
 }
 
