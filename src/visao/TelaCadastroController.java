@@ -16,6 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
+import util.Alertas;
 import util.GerenciadorCenas;
 
 public class TelaCadastroController implements Initializable {
@@ -64,7 +65,7 @@ public class TelaCadastroController implements Initializable {
         try {
         	UsuarioDAO.adicionar(aux);
         	Alertas.showAlert("Cadastro", null, "Usuário cadastrado com sucesso!", Alert.AlertType.INFORMATION);
-        	//((Stage) btCadastro.getScene().getWindow()).close();
+        	((Stage) btCadastro.getScene().getWindow()).close();
         } catch (ExcecaoPersonalizada e) {
         	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
         } catch (Exception e) {
@@ -73,10 +74,6 @@ public class TelaCadastroController implements Initializable {
         
     }
     
-    @FXML
-    private void btVoltarAcao() {
-    	GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
-    }
     
     
 

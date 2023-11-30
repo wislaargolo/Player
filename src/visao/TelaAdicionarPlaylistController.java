@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import modelo.Playlist;
 import modelo.UsuarioVIP;
+import util.Alertas;
 
 public class TelaAdicionarPlaylistController {
 	

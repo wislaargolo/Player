@@ -14,6 +14,7 @@ import javafx.scene.control.ProgressBar;
 import modelo.Musica;
 import modelo.Playlist;
 import modelo.UsuarioVIP;
+import util.GerenciadorCenas;
 
 public class TelaPlaylistController implements Initializable {
 	
@@ -36,7 +37,13 @@ public class TelaPlaylistController implements Initializable {
     private Button btParar;
     
     @FXML
-    private Button btVoltar;
+    private Button btAdicionarMusica;
+    
+    @FXML
+    private Button btRemoverMusica;
+    
+    @FXML
+    private Button btVoltar; 
     
 	@FXML
     private ProgressBar progressoMusica;
@@ -48,6 +55,7 @@ public class TelaPlaylistController implements Initializable {
 	private ListView<Musica> listaMusicasPlaylist;
 	
 	private Playlist playlistAtual = TelaPrincipalController.getInstance().getPlaylistAtual();
+	private UsuarioVIP usuarioAtual = (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -61,6 +69,29 @@ public class TelaPlaylistController implements Initializable {
 	private void atualizarMusicasPlaylist() {
 		ArrayList<Musica> musicasCarregadas = playlistAtual.getMusicas();
 		listaMusicasPlaylist.getItems().setAll(musicasCarregadas); 
+	}
+	
+	@FXML
+	private void btAdicionarMusicaAcao() {
+		Musica musicaSelecionada = listaMusicas.getSelectionModel().getSelectedItem();
+        if (musicaSelecionada != null && !listaMusicasPlaylist.getItems().contains(musicaSelecionada)) {
+            listaMusicasPlaylist.getItems().add(musicaSelecionada);
+            PlaylistDAO.adicionarMusica(musicaSelecionada, playlistAtual, usuarioAtual);
+        }
+	}
+	
+	@FXML
+	private void btRemoverMusicaAcao() {
+		Musica musicaSelecionada = listaMusicasPlaylist.getSelectionModel().getSelectedItem();
+        if (musicaSelecionada != null) {
+            listaMusicasPlaylist.getItems().remove(musicaSelecionada);
+            PlaylistDAO.removerMusica(musicaSelecionada, usuarioAtual);
+        }
+	}
+	
+	@FXML
+	private void btVoltarAcao() {
+		GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
 	}
 
 }

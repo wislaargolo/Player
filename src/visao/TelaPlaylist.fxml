@@ -14,8 +14,10 @@
       <Button fx:id="btMutar" layoutX="254.0" layoutY="534.0" mnemonicParsing="false" text="Mutar" />
       <Button fx:id="btParar" layoutX="700.0" layoutY="534.0" mnemonicParsing="false" text="Parar" />
       <ProgressBar fx:id="progressoMusica" layoutX="328.0" layoutY="538.0" prefHeight="18.0" prefWidth="334.0" progress="0.0" />
-      <ListView fx:id="listaMusicas" layoutX="109.0" layoutY="84.0" prefHeight="334.0" prefWidth="261.0" />
-      <ListView fx:id="listaMusicasPlaylist" layoutX="430.0" layoutY="84.0" prefHeight="334.0" prefWidth="242.0" />
-      <Button fx:id="btVoltar" layoutX="49.0" layoutY="31.0" mnemonicParsing="false" text="Voltar" />
+      <ListView fx:id="listaMusicas" layoutX="79.0" layoutY="84.0" prefHeight="334.0" prefWidth="261.0" />
+      <ListView fx:id="listaMusicasPlaylist" layoutX="374.0" layoutY="84.0" prefHeight="334.0" prefWidth="242.0" />
+      <Button fx:id="btVoltar" layoutX="49.0" layoutY="31.0" mnemonicParsing="false" onAction="#btVoltarAcao" text="Voltar" />
+      <Button layoutX="637.0" layoutY="155.0" mnemonicParsing="false" onAction="#btAdicionarMusicaAcao" text="Adicionar Musica" />
+      <Button layoutX="637.0" layoutY="194.0" mnemonicParsing="false" onAction="#btRemoverMusicaAcao" text="Remover Musica" />
    </children>
 </AnchorPane>

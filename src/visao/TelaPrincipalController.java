@@ -1,6 +1,7 @@
 package visao;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -24,10 +25,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.PlaybackListener;
 import modelo.Musica;
 import modelo.Playlist;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
+import util.Alertas;
 import util.GerenciadorCenas;
 
 public class TelaPrincipalController implements Initializable {
@@ -112,7 +118,7 @@ public class TelaPrincipalController implements Initializable {
 		listaMusicas.getItems().setAll(musicasCarregadas);
 	}
 	
-	void atualizarPlaylists() {
+	public void atualizarPlaylists() {
 		ArrayList<Playlist> playlistsCarregadas = PlaylistDAO.carregar((UsuarioVIP) usuarioAtual);
 		listaPlaylists.getItems().setAll(playlistsCarregadas);
 	}
@@ -222,7 +228,7 @@ public class TelaPrincipalController implements Initializable {
     
 	
 	@FXML
-	public void adicionarDiretorioAcao() {
+	private void adicionarDiretorioAcao() {
         File diretorio = escolherDiretorio();
   
         if(diretorio != null) {
@@ -277,9 +283,12 @@ public class TelaPrincipalController implements Initializable {
         File arquivo = escolherArquivo();
         
         if(arquivo != null) {
+        	
         	Musica novaMusica = new Musica(arquivo.getName(),arquivo.getAbsolutePath());
             MusicaDAO.adicionar(TelaLoginController.getInstance().getUsuarioAtual(), novaMusica);
-            listaMusicas.getItems().add(novaMusica);
+            if(!listaMusicas.getItems().contains(novaMusica)) {
+            	listaMusicas.getItems().add(novaMusica);
+            }
         }
     }
     
@@ -300,6 +309,52 @@ public class TelaPrincipalController implements Initializable {
         return listaMusicas.getItems();
     }
 	
+	private AdvancedPlayer player;
+    private boolean emReproducao = false;
+
+    @FXML
+    public void tocar() {
+        Musica musica = new Musica("olivia", "C:\\Users\\wisla\\eclipse-wsl\\Player\\dados\\musicas\\Just_The_Two_Of_Us_Karaoke_Acoustic_-_Bill_Withers_Slow_Version___HQ_Audio_128_kbps.mp3");
+        playy(musica);
+    }
+
+    @FXML
+    public void playy(Musica musica) {
+        if (!emReproducao) {
+            //Musica musica = new Musica("olivia", "C:\\Users\\wisla\\eclipse-wsl\\Player\\dados\\musicas\\Just_The_Two_Of_Us_Karaoke_Acoustic_-_Bill_Withers_Slow_Version___HQ_Audio_128_kbps.mp3");
+            try {
+                FileInputStream fileInputStream = new FileInputStream(musica.getCaminhoArquivo());
+                Bitstream bitstream = new Bitstream(fileInputStream);
+                int duration = bitstream.readFrame().max_number_of_frames((int) fileInputStream.getChannel().size());
+                fileInputStream.close();
+
+                FileInputStream fileInputStreamForPlayer = new FileInputStream(musica.getCaminhoArquivo());
+                player = new AdvancedPlayer(fileInputStreamForPlayer);
+                player.setPlayBackListener(new PlaybackListener() {
+                    @Override
+                    public void playbackFinished(PlaybackEvent evt) {
+                        System.out.println("Reprodução concluída.");
+                        stopMusic();
+                    }
+                });
+                new Thread(() -> {
+                    try {
+                        player.play(0, duration);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    } 
+    @FXML
+    public void stopMusic() {
+        // Você pode adicionar lógica adicional aqui, se necessário
+        // Por exemplo, pausar a música em vez de parar completamente
+        player.close();
+    }
 
 
 }
