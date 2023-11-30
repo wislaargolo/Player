@@ -10,6 +10,7 @@ import dao.MusicaDAO;
 import dao.PlaylistDAO;
 import dao.UsuarioDAO;
 import excecoes.ExcecaoPersonalizada;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -38,42 +39,82 @@ public class TelaPrincipalController implements Initializable {
     private ProgressBar progressoMusica;
 
     @FXML
-    private Button btAnterior, btPlay, btProximo;
-
-    @FXML
-    private Button btMutar, btParar;
-    
-    @FXML
-    private Button btAdicionarMusica;
-    
-    @FXML
-    private Button btRemoverDiretorio;
-    
-    @FXML
-    private Button btAdicionarDiretorio;
-
-    @FXML
     private ListView<Musica> listaMusicas;
+    
+    @FXML
+    private Button btPlaylist;
+    
+    @FXML
+    private Button btPlay;
+    
+    @FXML
+    private Button btAnterior;
+    
+    @FXML
+    private Button btProximo;
+    
+    @FXML
+    private Button btPause;
+    
+    @FXML
+    private Button btMutar;
+    
+    @FXML
+    private Button btParar;
+    
+    @FXML
+    private ListView<Playlist> listaPlaylists;
+    
+    private static TelaPrincipalController instance = new TelaPrincipalController();
+    
+    private Usuario usuarioAtual = TelaLoginController.getInstance().getUsuarioAtual();
+    
+    private Playlist playlistAtual;
     
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	DiretorioDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
+    	DiretorioDAO.carregar(usuarioAtual);
     	atualizarMusicas();
     	
 		ContextMenu menu = menuMusica();
 		listaMusicas.setContextMenu(menu);
+		
+		 if (usuarioAtual instanceof UsuarioVIP) {
+			btPlaylist.setVisible(true);
+		    listaPlaylists.setVisible(true);
+		    menu = menuPlaylist();
+			listaPlaylists.setContextMenu(menu);
+			
+			instance.listaPlaylists = listaPlaylists;
+			
+			atualizarPlaylists();
+			
+			listaPlaylists.setOnMouseClicked(event -> {
+	            if (event.getClickCount() == 2 && !listaPlaylists.getSelectionModel().isEmpty()) {
+	                Playlist playlistSelecionada = listaPlaylists.getSelectionModel().getSelectedItem();
+	                instance.playlistAtual = playlistSelecionada;
+	                GerenciadorCenas.mudarCena("/visao/TelaPlaylist.fxml");
+	            }
+	        });
+			
+	    } else {
+	    	listaPlaylists.setVisible(false);
+	    	btPlaylist.setVisible(false);
+	    }
+		 
+		 instance.listaMusicas = listaMusicas;
+		 
 	}
     
-	protected void atualizarMusicas() {
+	private void atualizarMusicas() {
 		ArrayList<Musica> musicasCarregadas = MusicaDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
-		 listaMusicas.getItems().removeIf(musica -> !musicasCarregadas.contains(musica));
-		
-	    for (Musica musica : musicasCarregadas) {
-	        if (!listaMusicas.getItems().contains(musica)) {
-	        	listaMusicas.getItems().add(musica);
-	        }
-	    }
+		listaMusicas.getItems().setAll(musicasCarregadas);
+	}
+	
+	void atualizarPlaylists() {
+		ArrayList<Playlist> playlistsCarregadas = PlaylistDAO.carregar((UsuarioVIP) usuarioAtual);
+		listaPlaylists.getItems().setAll(playlistsCarregadas);
 	}
 	
 	@FXML
@@ -106,7 +147,7 @@ public class TelaPrincipalController implements Initializable {
         return menu;
     }
     
-    private ContextMenu menuMusica() {
+    protected ContextMenu menuMusica() {
     	ContextMenu menu = new ContextMenu();
     	
     	MenuItem removerItem = new MenuItem("Remover");
@@ -118,16 +159,56 @@ public class TelaPrincipalController implements Initializable {
     	    	removerMusica(musicaSelecionada);
     	    }
     	});
+        
 
         return menu;
     }
     
+    private ContextMenu menuPlaylist() {
+    	ContextMenu menu = new ContextMenu();
+    	
+    	MenuItem removerItem = new MenuItem("Remover");
+    	menu.getItems().add(removerItem);
+    	
+    	removerItem.setOnAction(event -> {
+    	    Playlist playlistSelcionada = listaPlaylists.getSelectionModel().getSelectedItem();
+    	    if (playlistSelcionada != null) {
+    	    	removerPlaylist(playlistSelcionada);
+    	    }
+    	});
+    	
+    	MenuItem editarItem = new MenuItem("Editar");
+    	menu.getItems().add(editarItem);
+
+    	editarItem.setOnAction(event -> {
+    	    Playlist playlistSelcionada = listaPlaylists.getSelectionModel().getSelectedItem();
+    	    if (playlistSelcionada != null) {
+    	    	editarPlaylist(playlistSelcionada);
+    	    }
+    	});
+        
+
+        return menu;
+    }
+    
+    
     private void removerMusica(Musica musicaSelecionada) {
-    	Musica musicaSelecionada1 = listaMusicas.getSelectionModel().getSelectedItem();
+    	MusicaDAO.remover(usuarioAtual, musicaSelecionada);
+        listaMusicas.getItems().remove(musicaSelecionada);
 
-    	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada1);
-        listaMusicas.getItems().remove(musicaSelecionada1);
-
+        
+    }
+    
+    private void removerPlaylist(Playlist playlistSelecionada) {
+    	PlaylistDAO.remover(playlistSelecionada, (UsuarioVIP) usuarioAtual);
+        listaPlaylists.getItems().remove(playlistSelecionada);
+        
+    }
+    
+    private void editarPlaylist(Playlist playlistSelecionada) 
+    {
+    	instance.playlistAtual = playlistSelecionada;
+    	GerenciadorCenas.abrirNovaJanela("/visao/TelaEditarPlaylist.fxml");
         
     }
 
@@ -161,7 +242,6 @@ public class TelaPrincipalController implements Initializable {
         File diretorio = escolherDiretorio();
         
        if(diretorio != null) {
-  
     	   DiretorioDAO.remover(diretorio.getAbsolutePath(), TelaLoginController.getInstance().getUsuarioAtual());
            atualizarMusicas();
        }
@@ -203,6 +283,24 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
+    @FXML
+    private void adicionarPlaylistAcao() {
+    	GerenciadorCenas.abrirNovaJanela("/visao/TelaAdicionarPlaylist.fxml");
+    }
+    
+	public static TelaPrincipalController getInstance() {
+		return instance;
+	}
+	
+	public Playlist getPlaylistAtual() {
+		return playlistAtual;
+	}
+	
+	public ObservableList<Musica> getListaMusicaItems() {
+        return listaMusicas.getItems();
+    }
+	
+
 
 }
 

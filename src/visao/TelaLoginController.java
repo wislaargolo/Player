@@ -56,7 +56,7 @@ public class TelaLoginController {
         	instance.setUsuarioAtual(usuarioAtual);
         	
         	if(usuarioAtual instanceof UsuarioVIP) {
-            	GerenciadorCenas.mudarCena("/visao/TelaPrincipalVIP.fxml");
+            	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
             } else {
             	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
             }

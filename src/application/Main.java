@@ -27,7 +27,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-//	
+	
 //		UsuarioVIP usuario = new UsuarioVIP("RM777", "Rubens", "rrmm");
 //		MusicaDAO.carregar(usuario);
 //		DiretorioDAO.carregar(usuario);
@@ -42,13 +42,14 @@ public class Main extends Application {
 //		musicasss.add(musicaTeste);
 //		musicasss.add(musicaT2);
 //		
-//		Playlist playlist = new Playlist("playlistDeRubens", musicasss);
+//		Playlist playlist = new Playlist("play", musicasss);
 //		PlaylistDAO.carregar(usuario);
+//		PlaylistDAO.adicionar(playlist, usuario);
 //		PlaylistDAO.adicionar(playlist, usuario);
 //		
 //		for(Playlist m : PlaylistDAO.carregar(usuario)) {
-//			for(Musica mus : m.getMusicas())
-//				System.out.println("teste" + mus.getNome());
+//			
+//				System.out.println("teste" + m.getNome());
 //		}
 //		
 //		MusicaDAO.remover(usuario,musicaTeste);

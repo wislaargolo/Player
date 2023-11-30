@@ -17,6 +17,11 @@ public class Playlist {
 		this.musicas = musicas;
 	}
 	
+	public Playlist(String nome) {
+		this.nome = nome;
+		this.musicas = new ArrayList<>();
+	}
+	
 	public void adicionarMusica(Musica musica) {
 		musicas.add(musica);
 	}

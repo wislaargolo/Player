@@ -16,6 +16,7 @@ import modelo.Musica;
 import modelo.Playlist;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
+import util.DAOUtil;
 
 public class PlaylistDAO {
 	private static String caminhoArquivo = "dados/playlists/playlistsGeral.txt";
@@ -23,25 +24,13 @@ public class PlaylistDAO {
 	private PlaylistDAO() {
 	}
 	
-	private static void verificarCaminho(String caminhoArquivo) {
-		File arquivo = new File(caminhoArquivo);
-
-        if (!arquivo.exists()) {
-            try {
-				arquivo.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }
-	}
 
 	public static ArrayList<Playlist> carregar(UsuarioVIP usuario) {
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 		ArrayList<String> nomes = new ArrayList<>();
 		ArrayList<String> caminhos = new ArrayList<>();
 		
-		verificarCaminho(caminhoArquivo);
+		DAOUtil.verificarCaminho(caminhoArquivo);
 		
 		// Le o arquivo com todas as playlists
 		try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
@@ -57,9 +46,10 @@ public class PlaylistDAO {
 		}
 
 		// abre arquivo por arquivo e testa se pertence ao úsuario
-		ArrayList<String> playlistAtual = new ArrayList<>();
-		ArrayList<Musica> musicas = new ArrayList<>();
+		
 		for (int i = 0; i < nomes.size(); i++) {
+			ArrayList<String> playlistAtual = new ArrayList<>();
+			ArrayList<Musica> musicas = new ArrayList<>();
 			try (BufferedReader br = new BufferedReader(new FileReader(caminhos.get(i)))) {
 				String linha;
 				Stream<String> partes = null;
