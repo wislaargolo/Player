@@ -1,4 +1,4 @@
-package visao;
+package controle;
 
 import dao.PlaylistDAO;
 import javafx.event.ActionEvent;

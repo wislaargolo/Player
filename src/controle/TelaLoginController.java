@@ -1,17 +1,15 @@
-package visao;
-
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
+package controle;
 
 import java.util.NoSuchElementException;
 
 import dao.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modelo.Usuario;
-import modelo.UsuarioVIP;
 import util.Alertas;
 import util.GerenciadorCenas;
 
@@ -48,7 +46,7 @@ public class TelaLoginController {
     }
 
     @FXML
-    private void btLoginAction() {
+    private void btLoginAcao() {
     	String login = fLogin.getText();
         String senha = fSenha.getText();
         
@@ -56,7 +54,7 @@ public class TelaLoginController {
         	Usuario usuarioAtual = autenticar(login, senha);
         	instance.setUsuarioAtual(usuarioAtual);
         	
-        	GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
+        	GerenciadorCenas.mudarCena("../visao/TelaPrincipal.fxml");
         	
         } catch (NoSuchElementException e) {
         	Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
@@ -66,7 +64,8 @@ public class TelaLoginController {
     
     @FXML
     private void hyperAcao() {
-    	GerenciadorCenas.abrirNovaJanela("/visao/TelaCadastro.fxml");
+    	GerenciadorCenas.abrirNovaJanela("../visao/TelaCadastro.fxml");
+
     }
     
     public Usuario getUsuarioAtual() {

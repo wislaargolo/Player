@@ -3,8 +3,10 @@ package util;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class GerenciadorCenas {
@@ -17,7 +19,11 @@ public class GerenciadorCenas {
     public static void mudarCena(String arquivoFXML) {
         try {
             Parent novaCena = FXMLLoader.load(GerenciadorCenas.class.getResource(arquivoFXML));
-            palcoPrincipal.setScene(new Scene(novaCena));
+            
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            Scene cena = new Scene(novaCena, screenBounds.getWidth()*0.7, screenBounds.getHeight()*0.9);
+            
+            palcoPrincipal.setScene(cena);
             palcoPrincipal.show();
         } catch (IOException e) {
             e.printStackTrace();   

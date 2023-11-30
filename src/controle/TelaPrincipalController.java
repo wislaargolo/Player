@@ -1,4 +1,4 @@
-package visao;
+package controle;
 
 import java.io.File;
 import java.net.URL;
@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
@@ -36,6 +37,9 @@ public class TelaPrincipalController implements Initializable {
 	
 	@FXML
 	private ImageView icone;
+	
+	@FXML
+	private Label tituloPlaylist;
 	
 	@FXML
     private ProgressBar progressoMusica;
@@ -84,6 +88,7 @@ public class TelaPrincipalController implements Initializable {
 		
 		 if (usuarioAtual instanceof UsuarioVIP) {
 			btPlaylist.setVisible(true);
+			tituloPlaylist.setVisible(true);
 		    listaPlaylists.setVisible(true);
 		    menu = menuPlaylist();
 			listaPlaylists.setContextMenu(menu);
@@ -96,13 +101,14 @@ public class TelaPrincipalController implements Initializable {
 	            if (event.getClickCount() == 2 && !listaPlaylists.getSelectionModel().isEmpty()) {
 	                Playlist playlistSelecionada = listaPlaylists.getSelectionModel().getSelectedItem();
 	                instance.playlistAtual = playlistSelecionada;
-	                GerenciadorCenas.mudarCena("/visao/TelaPlaylist.fxml");
+	                GerenciadorCenas.mudarCena("../visao/TelaPlaylist.fxml");
 	            }
 	        });
 			
 	    } else {
 	    	listaPlaylists.setVisible(false);
 	    	btPlaylist.setVisible(false);
+	    	tituloPlaylist.setVisible(false);
 	    }
 		 
 		 instance.listaMusicas = listaMusicas;
@@ -136,7 +142,7 @@ public class TelaPrincipalController implements Initializable {
 
         MenuItem opcao2 = new MenuItem("Sair");
         opcao2.setOnAction(event -> {
-            GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
+            GerenciadorCenas.mudarCena("../visao/TelaLogin.fxml");
         });
         
         MenuItem opcao3 = new MenuItem("Excluir Conta");

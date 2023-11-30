@@ -6,3 +6,5 @@ wisla123,123,123,VIP
 novousuario,12345,12345,VIP
 wiwi,123456,1,VIP
 wisla123,123,12,COMUM
+wislateste,wiwi12,12,COMUM
+rwe,erw,erwe,VIP

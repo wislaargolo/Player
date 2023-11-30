@@ -1,4 +1,4 @@
-package visao;
+package controle;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class TelaPlaylistController implements Initializable {
 	
 	@FXML
 	private void btVoltarAcao() {
-		GerenciadorCenas.mudarCena("/visao/TelaPrincipal.fxml");
+		GerenciadorCenas.mudarCena("../visao/TelaPrincipal.fxml");
 	}
 
 }

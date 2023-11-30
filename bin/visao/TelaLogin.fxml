@@ -4,13 +4,66 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visao.TelaLoginController">
-   <children>
-      <Button fx:id="btLogin" layoutX="377.0" layoutY="352.0" onAction="#btLoginAction" prefHeight="31.0" prefWidth="78.0" text="Entrar" />
-      <PasswordField fx:id="fSenha" layoutX="320.0" layoutY="273.0" prefHeight="39.0" prefWidth="192.0" promptText="Senha" />
-      <TextField fx:id="fLogin" layoutX="321.0" layoutY="208.0" prefHeight="39.0" prefWidth="190.0" promptText="Login" />
-      <Hyperlink fx:id="cadastro" layoutX="330.0" layoutY="432.0" onAction="#hyperAcao" text="Não possui conta? Cadastre-se" />
-   </children>
-</AnchorPane>
+<BorderPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaLoginController">
+   <top>
+      <Pane prefHeight="63.0" prefWidth="1107.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <Pane prefHeight="600.0" prefWidth="107.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="600.0" prefWidth="93.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Pane prefHeight="84.0" prefWidth="1107.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="504.0" prefWidth="558.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" layoutX="-1.0" layoutY="-6.0" prefHeight="516.0" prefWidth="561.0" spacing="25.0" style="-fx-background-color: #14213D;" stylesheets="@login.css">
+                
+                            <HBox alignment="CENTER" />
+            
+                            <HBox alignment="CENTER" />
+               <ImageView fitHeight="131.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" smooth="true">
+                  <image>
+                     <Image url="@../../dados/imagens/logo.png" />
+                  </image>
+               </ImageView>
+            
+                            <HBox alignment="CENTER" />
+                 <TextField fx:id="fLogin" maxWidth="300" prefHeight="50.0" prefWidth="300.0" promptText="Login" style="-fx-background-color: #14213D; -fx-border-color: #FFFFFF; fx: #FFFFFF;" stylesheets="@login.css">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </TextField>
+                 <PasswordField fx:id="fSenha" maxWidth="300.0" prefHeight="50.0" prefWidth="300.0" promptText="Senha" style="-fx-background-color: #14213D; -fx-background-radius: 20; -fx-border-color: #FFFFFF;" stylesheets="@login.css">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </PasswordField>
+                 <Button fx:id="btLogin" maxWidth="300.0" onAction="#btLoginAcao" prefHeight="39.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #FFFFFF;" text="Entrar" textFill="#14213d">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Button>
+            
+                            <Hyperlink fx:id="cadastro" onAction="#hyperAcao" text="Não possui conta? Cadastre-se" textFill="WHITE">
+                  <font>
+                     <Font size="13.0" />
+                  </font>
+               </Hyperlink>
+            
+                        </VBox>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

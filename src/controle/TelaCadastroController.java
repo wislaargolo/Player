@@ -1,4 +1,4 @@
-package visao;
+package controle;
 
 import java.net.URL;
 import java.util.ResourceBundle;

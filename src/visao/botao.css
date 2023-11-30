@@ -1,0 +1,8 @@
+.botao-animado {
+    -fx-padding: 10px; 
+    -fx-transition: all 0.3s ease;
+}
+
+.botao-animado:hover {
+    -fx-padding: 15px; /* Padding maior */
+}

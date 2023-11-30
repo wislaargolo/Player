@@ -3,8 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visao.TelaEditarPlaylistController">
-    <TextField fx:id="novoNome" alignment="TOP_LEFT" prefHeight="25.0" prefWidth="377.0" promptText="Novo nome" />
-    <Button onAction="#salvarAcao" text="Salvar" />
+<VBox alignment="CENTER" prefHeight="200.0" prefWidth="350.0" spacing="30.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaEditarPlaylistController">
+    <TextField fx:id="novoNome" maxWidth="-Infinity" prefHeight="40.0" prefWidth="260.0" promptText="Novo nome">
+      <font>
+         <Font size="13.0" />
+      </font></TextField>
+    <Button maxWidth="100" onAction="#salvarAcao" text="Salvar">
+      <font>
+         <Font size="13.0" />
+      </font></Button>
 </VBox>
