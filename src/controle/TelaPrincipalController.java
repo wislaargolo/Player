@@ -74,9 +74,6 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private ListView<Playlist> listaPlaylists;
     
-    @FXML
-    private BorderPane telaPrincipal;
-    
     private static TelaPrincipalController instance = new TelaPrincipalController();
     
     private Playlist playlistAtual;

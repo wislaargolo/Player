@@ -1,5 +1,5 @@
-oi,wisla12,12,COMUM
-wisla,wisla14,12,COMUM
+oi,wisla12,12,VIP
+wisla,wisla14,12,VIP
 Rubens,rubens,123,VIP
-oi,oi123,123,COMUM
-wisla,teste,123,VIP
+oi,oi123,123,VIP
+oi,teste,123,VIP

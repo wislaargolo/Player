@@ -58,9 +58,6 @@ public class Usuario {
     	String outro = usuario.id.toLowerCase();
     	String atual = id.toLowerCase();
     	
-    	System.out.println(usuario.id);
-    	System.out.println(id);
-
 	    return atual.equals(outro);
 	}
 
