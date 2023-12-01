@@ -1,2 +1,1 @@
-345,C:\Users\wisla\eclipse-wsl\Player/dados/playlists/playlist_WISLA56_345.txt
-32543,C:\Users\wisla\eclipse-wsl\Player/dados/playlists/playlist_WISLA56_32543.txt
+playTeste,C:\Users\ruben\Documents\graduacao\LP2\Player/dados/playlists/playlist_rubens_playTeste.txt

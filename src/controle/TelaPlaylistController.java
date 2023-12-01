@@ -1,10 +1,14 @@
 package controle;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import dao.PlaylistDAO;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,8 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Musica;
 import modelo.UsuarioVIP;
 import util.GerenciadorCenas;
@@ -62,6 +67,15 @@ public class TelaPlaylistController implements Initializable {
 	
     @FXML
     private BorderPane telaPlaylist;
+    
+    
+    private Timer timer;
+	private TimerTask task;
+	private boolean running = false;
+	private Media media;
+	private MediaPlayer mediaPlayer;
+	private int indexMusicaPlaylist;
+    private boolean controlePrimeiraMusica;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -71,6 +85,16 @@ public class TelaPlaylistController implements Initializable {
         nomePlaylist.setText(TelaPrincipalController.getInstance().getPlaylistAtual().getNome());
         
         atualizarMusicasPlaylist();
+        
+        if ( getListaMusicaPlaylist() != null && !getListaMusicaPlaylist().isEmpty()) {
+			 File file = new File(getListaMusicaPlaylist().get(0).getCaminhoArquivo());
+			 Media media = new Media(file.toURI().toString());
+			 mediaPlayer = new MediaPlayer(media);
+			 indexMusicaPlaylist = 0;
+			 controlePrimeiraMusica = true;
+		 }else {
+			 controlePrimeiraMusica = false;
+		 }
 		
 	}
 	
@@ -104,5 +128,133 @@ public class TelaPlaylistController implements Initializable {
 		GerenciadorCenas.mudarCena("../visao/TelaPrincipal.fxml");
 	}
 	
+	
+	public ObservableList<Musica> getListaMusicaPlaylist() {
+        return listaMusicasPlaylist.getItems();
+    }
+	
+	public void playMedia() {
+		
+		beginTimer();
+		mediaPlayer.play();
+	}
+	
+	@FXML
+	public void playMediaPlaylist() {
+		if (controlePrimeiraMusica) {
+			playMedia();
+		}else {
+			File file = new File(getListaMusicaPlaylist().get(0).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			indexMusicaPlaylist = 0;
+			controlePrimeiraMusica = true;
+			playMedia();
+		}
+	}
+	
+	public void stopMediaPlaylist() {
+		mediaPlayer.stop();
+		if(running) cancelTimer();
+		
+		File file = new File(getListaMusicaPlaylist().get(0).getCaminhoArquivo());
+		Media media = new Media(file.toURI().toString());
+		mediaPlayer = new MediaPlayer(media);
+		indexMusicaPlaylist = 0;
+	}
+	
+	@FXML
+	public void pauseMedia() {
+		cancelTimer();
+		mediaPlayer.pause();
+	}
+	
+	@FXML
+	public void nextMediaPlaylist() {
+		if(indexMusicaPlaylist < getListaMusicaPlaylist().size() - 1) {			
+			indexMusicaPlaylist++;
+			mediaPlayer.stop();
+			if(running) cancelTimer();
+			
+			File file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			
+			playMedia();
+		}
+		else {
+			indexMusicaPlaylist = 0;
+			mediaPlayer.stop();
+			
+			File file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			
+			playMedia();
+		}
+	}
+	
+	@FXML
+	public void previousMediaPlaylist() {
+		if (indexMusicaPlaylist == 0) {
+			indexMusicaPlaylist = getListaMusicaPlaylist().size() - 1;
+			mediaPlayer.stop();
+			if(running) cancelTimer();
+			
+			File file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			
+			playMedia();
+		}else {
+			indexMusicaPlaylist--;
+			mediaPlayer.stop();
+			if(running) cancelTimer();
+			
+			File file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			
+			playMedia();
+		}
+	}
+	
+	public void muteMedia() {
+	    if (mediaPlayer != null) {
+	        mediaPlayer.setMute(!mediaPlayer.isMute()); // Inverte o estado de mudo (mute)
+	    }
+	}
+
+	
+	public void beginTimer() {
+		
+		timer = new Timer();
+		task = new TimerTask() {
+			
+			public void run() {
+				
+				running = true;
+				double current = mediaPlayer.getCurrentTime().toSeconds();
+				double end = media.getDuration().toSeconds();
+				progressoMusica.setProgress(current/end);
+				System.out.println(current/end);
+				
+				if(current/end >= 1) {
+//					cancelTimer();
+					System.out.println("terminooooooooooooooo");
+					System.out.println(current/end);
+					//nextMediaPlaylist();
+					Platform.runLater(() -> nextMediaPlaylist());
+				}
+			}
+		};
+		
+		timer.scheduleAtFixedRate(task, 0, 1000);
+	}
+	
+	public void cancelTimer() {
+		running = false;
+		timer.cancel();
+	}
 
 }

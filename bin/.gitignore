@@ -1,6 +1,8 @@
-/visao/
-/controle/
 /application/
-/util/
-/modelo/
+/auxiliar/
+/controle/
 /dao/
+/excecoes/
+/modelo/
+/util/
+/visao/
