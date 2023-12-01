@@ -50,7 +50,7 @@
                      <Font size="13.0" />
                   </font>
                </PasswordField>
-                 <Button fx:id="btLogin" maxWidth="300.0" onAction="#btLoginAcao" prefHeight="39.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #FFFFFF;" text="Entrar" textFill="#14213d">
+                 <Button fx:id="btLogin" maxWidth="300.0" onAction="#btLoginAcao" prefHeight="39.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: FCA311;" text="Entrar" textFill="#14213d">
                   <font>
                      <Font size="13.0" />
                   </font>

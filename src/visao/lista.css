@@ -4,9 +4,9 @@
 }
 
 .list-cell:hover {
-    -fx-background-color: #CCCCCC; 
+    -fx-background-color: #FCA311; 
 }
 .list-cell:selected {
-    -fx-background-color: #CCCCCC; 
+    -fx-background-color: #FCA311; 
 }
 

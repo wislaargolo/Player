@@ -1,7 +1,5 @@
 package modelo;
 
-import dao.PlaylistDAO;
-
 public class UsuarioVIP extends Usuario {
 
 
