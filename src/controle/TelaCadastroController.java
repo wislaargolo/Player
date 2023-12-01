@@ -17,7 +17,6 @@ import javafx.scene.control.TextField;
 import modelo.Usuario;
 import modelo.UsuarioVIP;
 import util.Alertas;
-import util.GerenciadorCenas;
 
 public class TelaCadastroController implements Initializable {
 	@FXML

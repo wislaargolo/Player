@@ -9,7 +9,6 @@ import auxiliar.BotoesMusica;
 import dao.DiretorioDAO;
 import dao.MusicaDAO;
 import dao.PlaylistDAO;
-import dao.UsuarioDAO;
 import excecoes.ExcecaoPersonalizada;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +23,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import modelo.Musica;
@@ -71,22 +71,23 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private ListView<Playlist> listaPlaylists;
     
-    private static TelaPrincipalController instance = new TelaPrincipalController();
+    @FXML
+    private BorderPane telaPrincipal;
     
-    private Usuario usuarioAtual = TelaLoginController.getInstance().getUsuarioAtual();
+    private static TelaPrincipalController instance = new TelaPrincipalController();
     
     private Playlist playlistAtual;
     
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	DiretorioDAO.carregar(usuarioAtual);
+    	DiretorioDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
     	atualizarMusicas();
     	
 		ContextMenu menu = menuMusica();
 		listaMusicas.setContextMenu(menu);
 		
-		 if (usuarioAtual instanceof UsuarioVIP) {
+		 if (TelaLoginController.getInstance().getUsuarioAtual() instanceof UsuarioVIP) {
 			btPlaylist.setVisible(true);
 			tituloPlaylist.setVisible(true);
 		    listaPlaylists.setVisible(true);
@@ -121,23 +122,23 @@ public class TelaPrincipalController implements Initializable {
 	}
 	
 	public void atualizarPlaylists() {
-		ArrayList<Playlist> playlistsCarregadas = PlaylistDAO.carregar((UsuarioVIP) usuarioAtual);
+		ArrayList<Playlist> playlistsCarregadas = PlaylistDAO.carregar((UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
 		listaPlaylists.getItems().setAll(playlistsCarregadas);
 	}
 	
 	@FXML
-	public void iconeAcao() {
+	private void iconeAcao() {
 		ContextMenu menu = menuUsuario();
 		configuraClique(icone,menu);
 		
 	}
 	
-    private ContextMenu menuUsuario() {
+    protected ContextMenu menuUsuario() {
         ContextMenu menu = new ContextMenu();
 
         MenuItem opcao1 = new MenuItem("Conta");
         opcao1.setOnAction(event -> {
-            // adicionar tela de infos da conta
+        	GerenciadorCenas.mudarCena("../visao/TelaConta.fxml");
         });
 
         MenuItem opcao2 = new MenuItem("Sair");
@@ -145,12 +146,7 @@ public class TelaPrincipalController implements Initializable {
             GerenciadorCenas.mudarCena("../visao/TelaLogin.fxml");
         });
         
-        MenuItem opcao3 = new MenuItem("Excluir Conta");
-        opcao3.setOnAction(event -> {
-        	excluirUsuario();
-        });
-
-        menu.getItems().addAll(opcao1, opcao2, opcao3);
+        menu.getItems().addAll(opcao1, opcao2);
 
         return menu;
     }
@@ -201,14 +197,14 @@ public class TelaPrincipalController implements Initializable {
     
     
     private void removerMusica(Musica musicaSelecionada) {
-    	MusicaDAO.remover(usuarioAtual, musicaSelecionada);
+    	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada);
         listaMusicas.getItems().remove(musicaSelecionada);
 
         
     }
     
     private void removerPlaylist(Playlist playlistSelecionada) {
-    	PlaylistDAO.remover(playlistSelecionada, (UsuarioVIP) usuarioAtual);
+    	PlaylistDAO.remover(playlistSelecionada, (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
         listaPlaylists.getItems().remove(playlistSelecionada);
         
     }
@@ -220,7 +216,7 @@ public class TelaPrincipalController implements Initializable {
         
     }
 
-    private void configuraClique(Node objeto, ContextMenu menu) {
+    protected void configuraClique(Node objeto, ContextMenu menu) {
        objeto.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) {
                 menu.show(objeto, event.getScreenX(), event.getScreenY());
@@ -253,15 +249,6 @@ public class TelaPrincipalController implements Initializable {
     	   DiretorioDAO.remover(diretorio.getAbsolutePath(), TelaLoginController.getInstance().getUsuarioAtual());
            atualizarMusicas();
        }
-	}
-
-	private void excluirUsuario() {
-	    try {
-	        UsuarioDAO.remover(TelaLoginController.getInstance().getUsuarioAtual());
-	        GerenciadorCenas.mudarCena("/visao/TelaLogin.fxml");
-	    } catch(ExcecaoPersonalizada e) {
-	        Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
-	    }
 	}
 	
     private File escolherDiretorio() {

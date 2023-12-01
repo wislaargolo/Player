@@ -18,12 +18,18 @@ public class GerenciadorCenas {
 
     public static void mudarCena(String arquivoFXML) {
         try {
-            Parent novaCena = FXMLLoader.load(GerenciadorCenas.class.getResource(arquivoFXML));
-            
-            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-            Scene cena = new Scene(novaCena, screenBounds.getWidth()*0.7, screenBounds.getHeight()*0.9);
-            
-            palcoPrincipal.setScene(cena);
+        	
+        	Scene cenaAtual = GerenciadorCenas.palcoPrincipal.getScene();
+        	Parent novaCena = FXMLLoader.load(GerenciadorCenas.class.getResource(arquivoFXML));
+        	Rectangle2D limitesTela = Screen.getPrimary().getVisualBounds();
+        	 
+            if (cenaAtual != null) {
+            	cenaAtual.setRoot(novaCena);
+            } else {
+                cenaAtual = new Scene(novaCena, limitesTela.getWidth()*0.8, limitesTela.getHeight()*0.9);
+                GerenciadorCenas.palcoPrincipal.setScene(cenaAtual);
+            }
+ 
             palcoPrincipal.show();
         } catch (IOException e) {
             e.printStackTrace();   
@@ -40,6 +46,10 @@ public class GerenciadorCenas {
             e.printStackTrace();
         }
     }
+
+	public static final Stage getPalcoPrincipal() {
+		return palcoPrincipal;
+	}
     
 
 }

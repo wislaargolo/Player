@@ -49,8 +49,10 @@ public class UsuarioDAO {
     public static void adicionar(Usuario usuario) {
     	ArrayList<Usuario> usuarios = carregar();
     	
+    	
         if (!usuarios.contains(usuario)) {
 	        usuarios.add(usuario);
+	        //System.out.println("Dentro: " + usuario.getId());
 	
 	        try (FileWriter fw = new FileWriter(caminhoArquivo, true)){
 	            String conteudo = usuario.getNome() + "," + usuario.getId() + "," 

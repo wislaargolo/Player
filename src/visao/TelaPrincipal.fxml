@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
    <left>
-      <Pane prefHeight="421.0" prefWidth="126.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="459.0" prefWidth="174.0" BorderPane.alignment="CENTER">
          <children>
             <Pane layoutX="-30.0" layoutY="18.0" prefHeight="178.0" prefWidth="117.0" style="-fx-background-color: #BAC3D6; -fx-background-radius: 30; -fx-border-color: 2D4B8B; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
-            <VBox alignment="CENTER" layoutY="28.0" maxHeight="425.0" maxWidth="468.0" prefHeight="160.0" prefWidth="88.0" spacing="20.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.Button?&gt;&lt;?import javafx.scene.image.Image?&gt;&lt;?import javafx.scene.image.ImageView?&gt;&lt;?import javafx.scene.layout.VBox?&gt;&lt;VBox alignment=&quot;CENTER&quot; layoutY=&quot;28.0&quot; maxHeight=&quot;425.0&quot; maxWidth=&quot;468.0&quot; prefHeight=&quot;160.0&quot; prefWidth=&quot;88.0&quot; spacing=&quot;20.0&quot; style=&quot;-fx-background-color: #BAC3D6;&quot; xmlns=&quot;http://javafx.com/javafx/21&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;children&gt;      &lt;Button mnemonicParsing=&quot;false&quot; onAction=&quot;#adicionarDiretorioAcao&quot; prefHeight=&quot;20.0&quot; prefWidth=&quot;0.0&quot; style=&quot;-fx-background-color: #BAC3D6;&quot;&gt;         &lt;graphic&gt;            &lt;ImageView fitHeight=&quot;45.0&quot; fitWidth=&quot;55.0&quot; pickOnBounds=&quot;true&quot; preserveRatio=&quot;true&quot;&gt;               &lt;image&gt;                  &lt;Image url=&quot;@../../dados/imagens/adicionar.png&quot; /&gt;               &lt;/image&gt;            &lt;/ImageView&gt;         &lt;/graphic&gt;      &lt;/Button&gt;      &lt;Button mnemonicParsing=&quot;false&quot; onAction=&quot;#removerDiretorioAcao&quot; prefHeight=&quot;58.0&quot; prefWidth=&quot;58.0&quot; style=&quot;-fx-background-color: #BAC3D6;&quot;&gt;         &lt;graphic&gt;            &lt;ImageView fitHeight=&quot;45.0&quot; fitWidth=&quot;55.0&quot; pickOnBounds=&quot;true&quot; preserveRatio=&quot;true&quot;&gt;               &lt;image&gt;                  &lt;Image url=&quot;@../../dados/imagens/remover.png&quot; /&gt;               &lt;/image&gt;            &lt;/ImageView&gt;         &lt;/graphic&gt;      &lt;/Button&gt;   &lt;/children&gt;&lt;/VBox&gt;;">
+            <VBox alignment="CENTER" layoutY="28.0" maxHeight="425.0" maxWidth="468.0" prefHeight="160.0" prefWidth="88.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="20.0" prefWidth="0.0" style="-fx-background-color: #BAC3D6;">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="47.0" prefWidth="47.0" style="-fx-background-color: #BAC3D6;">
                      <graphic>
                         <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -28,7 +28,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="58.0" prefWidth="58.0" style="-fx-background-color: #BAC3D6;">
+                  <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="46.0" prefWidth="45.0" style="-fx-background-color: #BAC3D6;">
                      <graphic>
                         <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -43,9 +43,9 @@
       </Pane>
    </left>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1051.0" spacing="5.0" style="-fx-background-color: #14213D;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="1051.0" spacing="10.0" style="-fx-background-color: #14213D;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btAnterior" mnemonicParsing="false" prefHeight="4.0" prefWidth="1.0" style="-fx-background-color: #14213D;">
+            <Button fx:id="btAnterior" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -54,7 +54,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btPause" mnemonicParsing="false" prefHeight="4.0" prefWidth="12.0" style="-fx-background-color: #14213D;">
+            <Button fx:id="btPause" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="31.0" prefWidth="32.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,7 +63,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btPlay" mnemonicParsing="false" onAction="#tocarMusicasGerais" prefHeight="15.0" prefWidth="0.0" style="-fx-background-color: #14213D; -fx-border-color: #14213D;" stylesheets="@botao.css">
+            <Button fx:id="btPlay" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#tocarMusicasGerais" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: #14213D; -fx-border-color: #14213D;" stylesheets="@botao.css">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -72,7 +72,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btProximo" maxHeight="45.0" maxWidth="53.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="53.0" style="-fx-background-color: #14213D;">
+            <Button fx:id="btProximo" maxHeight="30.0" maxWidth="53.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="12.0" prefWidth="28.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,7 +82,7 @@
                </graphic>
             </Button>
             <ProgressBar fx:id="progressoMusica" prefHeight="18.0" prefWidth="421.0" progress="0.0" style="-fx-background-color: #E5E5E5;" />
-            <Button fx:id="btParar" mnemonicParsing="false" onAction="#parar" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
+            <Button fx:id="btParar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#parar" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -91,7 +91,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btMutar" mnemonicParsing="false" prefHeight="45.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
+            <Button fx:id="btMutar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="30.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -119,20 +119,20 @@
       </HBox>
    </top>
    <center>
-      <HBox alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="40.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER_RIGHT">
+      <HBox alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="30.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="421.0" prefWidth="333.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="459.0" prefWidth="340.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="333.0">
                      <children>
-                        <Label prefHeight="67.0" prefWidth="243.0" text="            Músicas" textAlignment="RIGHT">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="94.0" prefWidth="243.0" text="Músicas" textAlignment="RIGHT">
                            <font>
                               <Font name="Gadugi Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#adicionarMusicaAcao" prefHeight="21.0" prefWidth="46.0" style="-fx-background-color: #E5E5E5;">
+                        <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adicionarMusicaAcao" prefHeight="26.0" prefWidth="23.0" style="-fx-background-color: #E5E5E5;">
                            <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../dados/imagens/icons8-adicionar-50.png" />
                                  </image>
@@ -140,20 +140,20 @@
                            </graphic></Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaMusicas" prefHeight="306.0" prefWidth="381.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
+                  <ListView fx:id="listaMusicas" prefHeight="293.0" prefWidth="366.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
                   <Pane prefHeight="53.0" prefWidth="374.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>
-            <VBox alignment="CENTER_RIGHT" prefHeight="421.0" prefWidth="196.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="459.0" prefWidth="195.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="88.0" prefWidth="333.0">
                      <children>
-                        <Label fx:id="tituloPlaylist" prefHeight="67.0" prefWidth="243.0" text="Playlists" textAlignment="RIGHT">
+                        <Label fx:id="tituloPlaylist" prefHeight="77.0" prefWidth="157.0" text="Playlists" textAlignment="RIGHT">
                            <font>
                               <Font name="Gadugi Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btPlaylist" mnemonicParsing="false" onAction="#adicionarPlaylistAcao" prefHeight="32.0" prefWidth="46.0" style="-fx-background-color: #E5E5E5;">
+                        <Button fx:id="btPlaylist" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adicionarPlaylistAcao" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: #E5E5E5;">
                            <graphic>
                               <ImageView fitHeight="38.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -164,7 +164,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaPlaylists" prefHeight="333.0" prefWidth="218.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
+                  <ListView fx:id="listaPlaylists" prefHeight="279.0" prefWidth="217.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
                   <Pane prefHeight="53.0" prefWidth="196.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>
