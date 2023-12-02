@@ -3,3 +3,4 @@ wisla,wisla14,12,VIP
 Rubens,rubens,123,VIP
 oi,oi123,123,VIP
 oi,teste,123,VIP
+co,co,12,COMUM

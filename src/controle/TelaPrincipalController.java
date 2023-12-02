@@ -26,6 +26,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
@@ -74,6 +75,12 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private ListView<Playlist> listaPlaylists;
     
+    @FXML
+    private BorderPane telaPrincipal;
+    
+    @FXML
+    private VBox musicas;
+    
     private static TelaPrincipalController instance = new TelaPrincipalController();
     
     private Playlist playlistAtual;
@@ -120,6 +127,7 @@ public class TelaPrincipalController implements Initializable {
 	    	listaPlaylists.setVisible(false);
 	    	btPlaylist.setVisible(false);
 	    	tituloPlaylist.setVisible(false);
+	    	telaPrincipal.setCenter(musicas);
 	    }
 		 
 		 instance.listaMusicas = listaMusicas;

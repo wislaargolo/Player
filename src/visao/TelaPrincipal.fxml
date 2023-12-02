@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
@@ -13,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
+<BorderPane fx:id="telaPrincipal" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
    <left>
       <VBox alignment="CENTER" prefWidth="71.0" spacing="35.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -43,63 +43,71 @@
       </VBox>
    </left>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="10.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="30.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Button fx:id="btAnterior" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#previousMediaGeral" prefHeight="27.0" prefWidth="24.0" style="-fx-background-color: #48597D;">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/anterior.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btPause" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="31.0" prefWidth="32.0" style="-fx-background-color: #48597D;">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/pause.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btPlay" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#playMediaGeral" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: #48597D;" stylesheets="@botao.css">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/play.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btProximo" maxHeight="23.0" maxWidth="50.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nextMediaGeral" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #48597D;">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/posterior.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <ButtonBar buttonMinWidth="8.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="172.0">
+               <buttons>
+                  <Button fx:id="btProximo" alignment="CENTER" maxHeight="15.0" maxWidth="20.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#nextMediaGeral" prefHeight="8.0" prefWidth="0.0" style="-fx-background-color: #48597D;">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/posterior.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btPause" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="31.0" prefWidth="32.0" style="-fx-background-color: #48597D; -fx-background-radius: 30;">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/pause.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btPlay" minHeight="-Infinity" minWidth="36.0" mnemonicParsing="false" onAction="#playMediaGeral" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: #48597D; -fx-background-radius: 30;" stylesheets="@botao.css">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/play.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btAnterior" minHeight="-Infinity" minWidth="20.0" mnemonicParsing="false" onAction="#previousMediaGeral" prefHeight="27.0" prefWidth="24.0" style="-fx-background-color: #48597D;">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/anterior.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </buttons>
+            </ButtonBar>
             <ProgressBar fx:id="progressoMusica" prefHeight="18.0" prefWidth="421.0" progress="0.0" style="-fx-background-color: #E5E5E5;" />
-            <Button fx:id="btParar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stopMediaGeral" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #14213D;">
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/icons8-parar-50.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btMutar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#muteMedia" prefHeight="32.0" prefWidth="30.0" style="-fx-background-color: #14213D;">
-               <graphic>
-                  <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../dados/imagens/mudo.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <ButtonBar buttonMinWidth="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="80.0">
+              <buttons>
+                  <Button fx:id="btParar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stopMediaGeral" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #14213D;">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/icons8-parar-50.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btMutar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#muteMedia" prefHeight="32.0" prefWidth="30.0" style="-fx-background-color: #14213D;">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dados/imagens/mudo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+              </buttons>
+            </ButtonBar>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -131,7 +139,7 @@
    <center>
       <HBox alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="30.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="459.0" prefWidth="340.0">
+            <VBox fx:id="musicas" alignment="CENTER_RIGHT" prefHeight="459.0" prefWidth="340.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="333.0">
                      <children>
@@ -155,7 +163,7 @@
                   <Pane prefHeight="53.0" prefWidth="374.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>
-            <VBox alignment="CENTER_RIGHT" prefHeight="459.0" prefWidth="195.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="497.0" prefWidth="301.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="195.0">
                      <children>
