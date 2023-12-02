@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaContaController">
    <center>
       <VBox alignment="CENTER" onDragDetected="#btRemoverContaAcao" prefHeight="500.0" prefWidth="600.0" spacing="30.0" style="-fx-background-color: #14213D;">
@@ -17,6 +16,11 @@
             <ImageView fitHeight="93.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../dados/imagens/usuario2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="iconVip" fitHeight="30.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dados/imagens/vip.png" />
                </image>
             </ImageView>
             <Label fx:id="nomeUsuario" textFill="#bac3d6">
@@ -45,7 +49,7 @@
                   </Button>
                   <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btSairAcao" prefHeight="46.0" prefWidth="30.0" style="-fx-background-color: #14213D;">
                      <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="34.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../dados/imagens/sair.png" />
                            </image>

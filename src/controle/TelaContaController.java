@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import modelo.UsuarioVIP;
 import util.Alertas;
 import util.GerenciadorCenas;
 
@@ -20,11 +22,17 @@ public class TelaContaController implements Initializable{
     @FXML
     private Label nomeUsuario;
     
+    @FXML
+    private ImageView iconVip;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		nomeUsuario.setText(TelaLoginController.getInstance().getUsuarioAtual().getNome());
 		loginUsuario.setText(TelaLoginController.getInstance().getUsuarioAtual().getId());
 		
+		if(!(TelaLoginController.getInstance().getUsuarioAtual() instanceof UsuarioVIP)) {
+			iconVip.setVisible(false);
+		} 
 	}
 
 

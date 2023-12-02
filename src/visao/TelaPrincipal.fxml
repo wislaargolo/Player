@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="telaPrincipal" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
    <left>
       <VBox alignment="CENTER" prefWidth="71.0" spacing="35.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -137,9 +137,9 @@
       </BorderPane>
    </top>
    <center>
-      <HBox alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="30.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER_RIGHT">
+      <HBox fx:id="hmusicas" alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="30.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="musicas" alignment="CENTER_RIGHT" prefHeight="459.0" prefWidth="340.0">
+            <VBox fx:id="musicas" alignment="CENTER_RIGHT" prefHeight="497.0" prefWidth="405.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="333.0">
                      <children>
@@ -159,11 +159,11 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaMusicas" prefHeight="293.0" prefWidth="320.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
+                  <ListView fx:id="listaMusicas" prefHeight="293.0" prefWidth="362.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
                   <Pane prefHeight="53.0" prefWidth="374.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>
-            <VBox alignment="CENTER_RIGHT" prefHeight="497.0" prefWidth="301.0">
+            <VBox fx:id="playlists" alignment="CENTER_RIGHT" prefHeight="401.0" prefWidth="175.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="80.0" prefWidth="195.0">
                      <children>
@@ -183,7 +183,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaPlaylists" prefHeight="293.0" prefWidth="195.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
+                  <ListView fx:id="listaPlaylists" prefHeight="293.0" prefWidth="95.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
                   <Pane prefHeight="53.0" prefWidth="196.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
                </children>
             </VBox>

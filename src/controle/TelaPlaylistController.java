@@ -63,7 +63,7 @@ public class TelaPlaylistController implements Initializable {
 	
 	@FXML
 	private ListView<Musica> listaMusicasPlaylist;
-	
+
 	
     @FXML
     private BorderPane telaPlaylist;

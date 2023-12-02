@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -26,6 +27,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -76,7 +79,10 @@ public class TelaPrincipalController implements Initializable {
     private ListView<Playlist> listaPlaylists;
     
     @FXML
-    private BorderPane telaPrincipal;
+    private HBox hmusicas;
+    
+    @FXML
+    private VBox playlists;
     
     @FXML
     private VBox musicas;
@@ -105,9 +111,6 @@ public class TelaPrincipalController implements Initializable {
 		listaMusicas.setContextMenu(menu);
 		
 		 if (TelaLoginController.getInstance().getUsuarioAtual() instanceof UsuarioVIP) {
-			btPlaylist.setVisible(true);
-			tituloPlaylist.setVisible(true);
-		    listaPlaylists.setVisible(true);
 		    menu = menuPlaylist();
 			listaPlaylists.setContextMenu(menu);
 			
@@ -124,10 +127,9 @@ public class TelaPrincipalController implements Initializable {
 	        });
 			
 	    } else {
-	    	listaPlaylists.setVisible(false);
-	    	btPlaylist.setVisible(false);
-	    	tituloPlaylist.setVisible(false);
-	    	telaPrincipal.setCenter(musicas);
+	    	playlists.setVisible(false); 
+            playlists.setManaged(false); 
+           
 	    }
 		 
 		 instance.listaMusicas = listaMusicas;
