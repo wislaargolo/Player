@@ -1,0 +1,12 @@
+.list-cell {
+    -fx-background-color: #E5E5E5; 
+    -fx-text-fill: black;
+}
+
+.list-cell:hover {
+    -fx-background-color: #FCA311; 
+}
+.list-cell:selected {
+    -fx-background-color: #FCA311; 
+}
+
