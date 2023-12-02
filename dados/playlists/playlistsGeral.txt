@@ -1,1 +1,2 @@
 playTeste,C:\Users\ruben\Documents\graduacao\LP2\Player/dados/playlists/playlist_rubens_playTeste.txt
+outroTeste,C:\Users\ruben\Documents\graduacao\LP2\Player/dados/playlists/playlist_rubens_outroTeste.txt

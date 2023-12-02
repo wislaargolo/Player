@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: #14213D;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaCadastroController">
+   <Label prefHeight="53.0" prefWidth="106.0" text="Cadastro" textFill="#e5e5e5">
+      <font>
+         <Font name="Gadugi Bold" size="24.0" />
+      </font>
+   </Label>
+   
+   <HBox alignment="CENTER">
+       <TextField fx:id="fNome" prefHeight="39.0" prefWidth="200.0" promptText="Nome" style="-fx-background-color: #14213D; -fx-border-color: white;" stylesheets="@login.css">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+   </HBox>
+
+   <HBox alignment="CENTER">
+       <TextField fx:id="fLogin" prefHeight="39.0" prefWidth="200.0" promptText="Login" style="-fx-background-color: #14213D; -fx-border-color: white;" stylesheets="@login.css">
+         <font>
+            <Font size="13.0" />
+         </font></TextField>
+   </HBox>
+
+   <HBox alignment="CENTER">
+       <PasswordField fx:id="fSenha" prefHeight="39.0" prefWidth="200.0" promptText="Senha" style="-fx-background-color: #14213D; -fx-border-color: white;" stylesheets="@login.css">
+         <font>
+            <Font size="13.0" />
+         </font></PasswordField>
+   
+      <HBox alignment="CENTER" />
+   </HBox>
+    <ChoiceBox fx:id="tipoUsuario" prefHeight="39.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: white;" stylesheets="@login.css" />
+   <AnchorPane prefHeight="29.0" prefWidth="600.0" />
+    <Button fx:id="btCadastro" onAction="#btCadastroAcao" prefHeight="37.0" prefWidth="116.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Cadastrar" textFill="#14213d">
+      <font>
+         <Font size="13.0" />
+      </font>
+   </Button>
+   
+</VBox>
