@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -21,6 +23,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import modelo.Musica;
 import modelo.UsuarioVIP;
+import util.Alertas;
 import util.GerenciadorCenas;
 
 public class TelaPlaylistController implements Initializable {
@@ -106,8 +109,14 @@ public class TelaPlaylistController implements Initializable {
 				if(!controlePrimeiraMusica) controlePrimeiraMusica = true;
 				playMedia();
 			}
-			 
+		
 		 });
+        
+		telaPlaylist.setOnMouseClicked(event -> {
+		    if (!listaMusicasPlaylist.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+		    	listaMusicasPlaylist.getSelectionModel().clearSelection();
+		    }
+		});
 		
 	}
 	
@@ -132,7 +141,11 @@ public class TelaPlaylistController implements Initializable {
 		Musica musicaSelecionada = listaMusicasPlaylist.getSelectionModel().getSelectedItem();
         if (musicaSelecionada != null) {
             listaMusicasPlaylist.getItems().remove(musicaSelecionada);
-            PlaylistDAO.removerMusica(musicaSelecionada, (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
+            try {
+				PlaylistDAO.removerMusica(musicaSelecionada, (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
+			} catch (IOException e) {
+				Alertas.showAlert("Erro", null, "Erro ao remover música: " + e.getMessage(), Alert.AlertType.ERROR);
+			}
         }
 	}
 	

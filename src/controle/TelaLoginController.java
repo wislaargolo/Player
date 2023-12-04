@@ -1,5 +1,6 @@
 package controle;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import dao.UsuarioDAO;
@@ -37,11 +38,15 @@ public class TelaLoginController {
     }
     
     private Usuario autenticar(String login, String senha) {
-    	for(Usuario usuario : UsuarioDAO.carregar()){
-            if(usuario.getId().equals(login) && usuario.getSenha().equals(senha)){
-              return usuario;
-            }
-        }
+    	try {
+			for(Usuario usuario : UsuarioDAO.carregar()){
+			    if(usuario.getId().equals(login) && usuario.getSenha().equals(senha)){
+			      return usuario;
+			    }
+			}
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao carregar usuários do sistema: " + e.getMessage(), Alert.AlertType.ERROR);
+		}
         throw new NoSuchElementException("Argumentos de login inválidos");
     }
 

@@ -6,3 +6,4 @@ oi,teste,123,VIP
 co,co,12,COMUM
 trdr4,o,1,COMUM
 oi,oi,oi,VIP
+o,oo,o,COMUM

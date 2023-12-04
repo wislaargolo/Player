@@ -16,7 +16,7 @@ public class UsuarioDAO {
 
 	private static String caminhoArquivo = "dados/usuarios.txt";
 
-	public static ArrayList<Usuario> carregar() {
+	public static ArrayList<Usuario> carregar() throws IOException {
 		ArrayList<Usuario> usuarios = new ArrayList<>();
 		
 		DAOUtil.verificarCaminho(caminhoArquivo);
@@ -40,13 +40,13 @@ public class UsuarioDAO {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
 		return usuarios;
 		
 	}
 
-    public static void adicionar(Usuario usuario) {
+    public static void adicionar(Usuario usuario) throws IOException {
     	ArrayList<Usuario> usuarios = carregar();
     	
     	
@@ -68,7 +68,7 @@ public class UsuarioDAO {
 	            fw.write(System.lineSeparator());
 	            
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	        	throw e;
 	        }
 	        return ;
         }
@@ -77,7 +77,7 @@ public class UsuarioDAO {
         
     }
 	
-    private static void removerArquivos(Usuario usuario) {
+    private static void removerArquivos(Usuario usuario) throws IOException {
     	try {
     		File arquivoMusicas = new File(DAOUtil.getCaminhoUsuario(usuario, "musicas"));
     		File arquivoDiretorios = new File(DAOUtil.getCaminhoUsuario(usuario, "diretorios"));
@@ -94,7 +94,7 @@ public class UsuarioDAO {
     		PlaylistDAO.removerTodasPlaylists((UsuarioVIP) usuario);
     	}
     }
-    public static void remover(Usuario usuario) {	
+    public static void remover(Usuario usuario) throws IOException {	
     	ArrayList<Usuario> usuarios = carregar();
     	
         if(usuarios.contains(usuario)) {
@@ -118,7 +118,7 @@ public class UsuarioDAO {
                 }
         		
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
         	return ;
         }

@@ -1,6 +1,8 @@
 package controle;
 
 
+import java.io.IOException;
+
 import dao.PlaylistDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,7 +26,11 @@ public class TelaAdicionarPlaylistController {
             return ;
         }
         
-		PlaylistDAO.adicionar(new Playlist(playlist),(UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
+		try {
+			PlaylistDAO.adicionar(new Playlist(playlist),(UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao adicionar playlist: "+ e.getMessage(), Alert.AlertType.ERROR);
+		}
 		
 		if (TelaPrincipalController.getInstance() != null) {
 			TelaPrincipalController.getInstance().atualizarPlaylists();

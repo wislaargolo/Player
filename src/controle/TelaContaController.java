@@ -1,5 +1,6 @@
 package controle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,6 +44,8 @@ public class TelaContaController implements Initializable{
 	        GerenciadorCenas.mudarCena("../visao/TelaLogin.fxml");
 	    } catch(ExcecaoPersonalizada e) {
 	        Alertas.showAlert("Erro", e.getMessage(), "", Alert.AlertType.ERROR);
+	    } catch (IOException e) {
+	    	Alertas.showAlert("Erro", "Erro ao remover usuário: "+  e.getMessage(), "", Alert.AlertType.ERROR);
 	    }
     }
     

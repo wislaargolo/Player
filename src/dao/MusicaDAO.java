@@ -15,7 +15,7 @@ public class MusicaDAO {
 	
 	private static String tipo = "musicas";
 
-	public static ArrayList<Musica> carregar(Usuario usuario) {
+	public static ArrayList<Musica> carregar(Usuario usuario) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<Musica> musicas = new ArrayList<Musica>();
 		
@@ -31,11 +31,11 @@ public class MusicaDAO {
                 musicas.add(new Musica(nome, caminho));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+        	throw e;
         }
 		return musicas;
 	}
-	public static void adicionar(Usuario usuario, Musica musica) {
+	public static void adicionar(Usuario usuario, Musica musica) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<Musica> musicas = carregar(usuario);
 		
@@ -49,12 +49,12 @@ public class MusicaDAO {
 	            fw.write(System.lineSeparator());
 	            
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	        	throw e;
 	        }
         }
 	}
 	
-	public static void remover(Usuario usuario, Musica musica) {
+	public static void remover(Usuario usuario, Musica musica) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<Musica> musicas = carregar(usuario);
 		if(musicas.contains(musica)) {
@@ -76,7 +76,7 @@ public class MusicaDAO {
         		}
         		
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
         }
 		

@@ -23,7 +23,7 @@ public class PlaylistDAO {
 	}
 	
 
-	public static ArrayList<Playlist> carregar(UsuarioVIP usuario) {
+	public static ArrayList<Playlist> carregar(UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 		ArrayList<String> nomes = new ArrayList<>();
 		ArrayList<String> caminhos = new ArrayList<>();
@@ -40,7 +40,7 @@ public class PlaylistDAO {
 				caminhos.add(partes[1]);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw e;
 		}
 
 		// abre arquivo por arquivo e testa se pertence ao úsuario
@@ -73,17 +73,14 @@ public class PlaylistDAO {
 				
 				
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
-		}
-		for(Playlist p : playlists) {
-			System.out.println("CARREGAR"  + p.getNome());
 		}
 		return playlists;
 
 	}
 
-	public static void adicionar(Playlist playlist, UsuarioVIP usuario) {
+	public static void adicionar(Playlist playlist, UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		
 		boolean teste = playlists.contains(playlist);
@@ -120,7 +117,7 @@ public class PlaylistDAO {
 				}
 
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 
 			// escrever no arquivo geral
@@ -131,13 +128,13 @@ public class PlaylistDAO {
 				fw.write(System.lineSeparator());
 
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 
 	}
 
-	public static void remover(Playlist playlist, UsuarioVIP usuario) {
+	public static void remover(Playlist playlist, UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 
 		if (playlists.contains(playlist)) {
@@ -153,7 +150,7 @@ public class PlaylistDAO {
 					arquivo.delete();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw e;
 			}
 
 			ArrayList<String> nomes = new ArrayList<>();
@@ -167,7 +164,7 @@ public class PlaylistDAO {
 					caminhos.add(partes[1]);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 
 			try (FileWriter fw = new FileWriter(caminhoArquivo, false)) {
@@ -182,12 +179,12 @@ public class PlaylistDAO {
 				}
 
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 
-	public static void atualizar(Playlist playlist, UsuarioVIP usuario, String novoNome) {
+	public static void atualizar(Playlist playlist, UsuarioVIP usuario, String novoNome) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		if (playlists.contains(playlist)) {
 
@@ -210,10 +207,10 @@ public class PlaylistDAO {
 
 			} catch (SecurityException e) {
 				System.err.println("Erro de segurança ao tentar renomear o arquivo.");
-				e.printStackTrace();
+				throw e;
 			} catch (Exception e) {
 				System.err.println("Ocorreu um erro inesperado durante a renomeação do arquivo.");
-				e.printStackTrace();
+				throw e;
 			}
 
 			ArrayList<String> nomes = new ArrayList<>();
@@ -227,7 +224,7 @@ public class PlaylistDAO {
 					caminhos.add(partes[1]);
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 
 			posicao = caminhos.indexOf(caminhoAtual);
@@ -244,13 +241,13 @@ public class PlaylistDAO {
 				}
 
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw e;
 			}
 
 		}
 	}
 	
-	public static void removerTodasPlaylists(UsuarioVIP usuario) {
+	public static void removerTodasPlaylists(UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		String diretorioAtual = System.getProperty("user.dir");
 		String caminho;
@@ -336,7 +333,7 @@ public class PlaylistDAO {
 
 	}
 
-	public static void removerMusica(Musica musica, UsuarioVIP usuario) {
+	public static void removerMusica(Musica musica, UsuarioVIP usuario) throws IOException {
 	    ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 
 	    Map<Playlist, Musica> paraRemover = new HashMap<>();

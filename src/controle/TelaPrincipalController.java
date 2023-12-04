@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -73,6 +74,9 @@ public class TelaPrincipalController implements Initializable {
     private VBox playlists;
     
     @FXML
+    private BorderPane telaPrincipal;
+    
+    @FXML
     private ListView<Playlist> listaPlaylists;
   
     
@@ -94,7 +98,13 @@ public class TelaPrincipalController implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	DiretorioDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
+    	try {
+			DiretorioDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Alertas.showAlert("Erro", null, e.getMessage(), Alert.AlertType.ERROR);
+		}
+    	
     	atualizarMusicas();
     	
 		ContextMenu menu = menuMusica();
@@ -114,13 +124,24 @@ public class TelaPrincipalController implements Initializable {
 	                Playlist playlistSelecionada = listaPlaylists.getSelectionModel().getSelectedItem();
 	                instance.playlistAtual = playlistSelecionada;
 	                GerenciadorCenas.mudarCena("../visao/TelaPlaylist.fxml");
+	                
 	            }
+	            
 	        });
 			
 	    } else {
 	    	playlists.setVisible(false);
 	    	playlists.setManaged(false);
 	    }
+		 
+		telaPrincipal.setOnMouseClicked(event -> {
+		    if (!listaMusicas.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+		        listaMusicas.getSelectionModel().clearSelection();
+		    }
+		    if (!listaPlaylists.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+		        listaPlaylists.getSelectionModel().clearSelection();
+		    }
+		});
 		 
 		 instance.listaMusicas = listaMusicas;
 		 
@@ -143,18 +164,30 @@ public class TelaPrincipalController implements Initializable {
 				if(!controlePrimeiraMusica) controlePrimeiraMusica = true;
 				playMedia();
 			}
-			 
+			
 		 });
 	}
     
 	private void atualizarMusicas() {
-		ArrayList<Musica> musicasCarregadas = MusicaDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
-		listaMusicas.getItems().setAll(musicasCarregadas);
+		ArrayList<Musica> musicasCarregadas;
+		try {
+			musicasCarregadas = MusicaDAO.carregar(TelaLoginController.getInstance().getUsuarioAtual());
+			listaMusicas.getItems().setAll(musicasCarregadas);
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao carregar músicas: " + e.getMessage(), Alert.AlertType.ERROR);
+		}
+
 	}
 	
 	public void atualizarPlaylists() {
-		ArrayList<Playlist> playlistsCarregadas = PlaylistDAO.carregar((UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
-		listaPlaylists.getItems().setAll(playlistsCarregadas);
+		ArrayList<Playlist> playlistsCarregadas;
+		try {
+			playlistsCarregadas = PlaylistDAO.carregar((UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
+			listaPlaylists.getItems().setAll(playlistsCarregadas);
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao carregar playlists: " + e.getMessage(), Alert.AlertType.ERROR);
+		}
+		
 	}
 	
 	@FXML
@@ -228,15 +261,22 @@ public class TelaPrincipalController implements Initializable {
     
     
     private void removerMusica(Musica musicaSelecionada) {
-    	MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada);
-        listaMusicas.getItems().remove(musicaSelecionada);
-
+    	try {
+			MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada);
+			listaMusicas.getItems().remove(musicaSelecionada);
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao remover música: " + e.getMessage(), Alert.AlertType.ERROR);
+		}
         
     }
     
     private void removerPlaylist(Playlist playlistSelecionada) {
-    	PlaylistDAO.remover(playlistSelecionada, (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
-        listaPlaylists.getItems().remove(playlistSelecionada);
+    	try {
+			PlaylistDAO.remover(playlistSelecionada, (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
+	        listaPlaylists.getItems().remove(playlistSelecionada);
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao remover playlist: " + e.getMessage(), Alert.AlertType.ERROR);
+		}
         
     }
     
@@ -276,7 +316,11 @@ public class TelaPrincipalController implements Initializable {
         File diretorio = escolherDiretorio();
         
        if(diretorio != null) {
-    	   DiretorioDAO.remover(diretorio.getAbsolutePath(), TelaLoginController.getInstance().getUsuarioAtual());
+    	   try {
+			DiretorioDAO.remover(diretorio.getAbsolutePath(), TelaLoginController.getInstance().getUsuarioAtual());
+		} catch (IOException e) {
+			Alertas.showAlert("Erro", null, "Erro ao remover diretório: " + e.getMessage(), Alert.AlertType.ERROR);
+		}
            atualizarMusicas();
        }
 	}
@@ -304,10 +348,16 @@ public class TelaPrincipalController implements Initializable {
         if(arquivo != null) {
         	
         	Musica novaMusica = new Musica(arquivo.getName(),arquivo.getAbsolutePath());
-            MusicaDAO.adicionar(TelaLoginController.getInstance().getUsuarioAtual(), novaMusica);
-            if(!listaMusicas.getItems().contains(novaMusica)) {
-            	listaMusicas.getItems().add(novaMusica);
-            }
+            try {
+				MusicaDAO.adicionar(TelaLoginController.getInstance().getUsuarioAtual(), novaMusica);
+				
+				if(!listaMusicas.getItems().contains(novaMusica)) {
+	            	listaMusicas.getItems().add(novaMusica);
+	            }
+				
+			} catch (IOException e) {
+				Alertas.showAlert("Erro", null, "Erro ao adicionar música: " + e.getMessage(), Alert.AlertType.ERROR);
+			}
         }
     }
     

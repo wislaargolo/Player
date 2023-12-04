@@ -1,5 +1,7 @@
 package controle;
 
+import java.io.IOException;
+
 import dao.PlaylistDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,7 +26,11 @@ public class TelaEditarPlaylistController {
     	UsuarioVIP usuario = (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual();
     
     	if (TelaPrincipalController.getInstance() != null) {
-    		PlaylistDAO.atualizar(TelaPrincipalController.getInstance().getPlaylistAtual(), usuario, nome);
+    		try {
+				PlaylistDAO.atualizar(TelaPrincipalController.getInstance().getPlaylistAtual(), usuario, nome);
+			} catch (IOException e) {
+				Alertas.showAlert("Erro", null, e.getMessage(), Alert.AlertType.ERROR);
+			}
 			TelaPrincipalController.getInstance().atualizarPlaylists();
 	    }
     }

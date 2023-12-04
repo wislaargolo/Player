@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
+<BorderPane fx:id="telaPrincipal" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: E5E5E5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controle.TelaPrincipalController">
    <left>
       <VBox alignment="CENTER" prefWidth="71.0" spacing="35.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>

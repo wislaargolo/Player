@@ -15,7 +15,7 @@ public class DiretorioDAO {
 	
 	private static String tipo = "diretorios";
 	
-	public static ArrayList<String> carregar(Usuario usuario) {
+	public static ArrayList<String> carregar(Usuario usuario) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<String> diretorios = new ArrayList<>();
 		
@@ -33,13 +33,13 @@ public class DiretorioDAO {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+        	throw e;
         }
 		return diretorios;
 
 	}
 	
-	public static void carregarMusicas(Usuario usuario, File diretorio) {
+	public static void carregarMusicas(Usuario usuario, File diretorio) throws IOException {
         File[] listaArquivos = diretorio.listFiles();
         if (listaArquivos != null) {
             for (File arquivo : listaArquivos) {
@@ -51,18 +51,18 @@ public class DiretorioDAO {
         }
 	}
 	
-	private static void removerMusicas(File diretorio, Usuario usuario) {
+	private static void removerMusicas(File diretorio, Usuario usuario) throws IOException {
         File[] listaArquivos = diretorio.listFiles();
         if (listaArquivos != null) {
             for (File arquivo : listaArquivos) {
                 if (arquivo.isFile() && arquivo.getName().toLowerCase().endsWith(".mp3")) {
-                    MusicaDAO.remover(usuario, new Musica(arquivo.getName(), arquivo.getAbsolutePath()));
+                	MusicaDAO.remover(usuario, new Musica(arquivo.getName(), arquivo.getAbsolutePath()));
                 }
             }
         }
 	}
 
-	public static void adicionar(Usuario usuario, String caminhoDiretorio) {
+	public static void adicionar(Usuario usuario, String caminhoDiretorio) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<String> diretorios = carregar(usuario);
 		
@@ -76,7 +76,7 @@ public class DiretorioDAO {
 	                fw.write(caminhoDiretorio);
 	                fw.write(System.lineSeparator());
 	            } catch (IOException e) {
-	                e.printStackTrace();
+	            	 throw e;
 	            }
 	        }
 	    }
@@ -84,7 +84,7 @@ public class DiretorioDAO {
 		
 	}
 	
-	public static void remover(String caminhoDiretorio, Usuario usuario) {
+	public static void remover(String caminhoDiretorio, Usuario usuario) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<String> diretorios = carregar(usuario);
 		
@@ -100,7 +100,7 @@ public class DiretorioDAO {
 						fw.write(System.lineSeparator());
 	                }
 	            } catch (IOException e) {
-	                e.printStackTrace();
+	            	throw e;
 	            }
 	        }
 	    }
