@@ -21,7 +21,7 @@
             <Insets />
          </BorderPane.margin>
          <children>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="30.0" prefWidth="38.0" style="-fx-background-color: #14213D;">
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="30.0" prefWidth="38.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -30,7 +30,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#adicionarDiretorioAcao" prefHeight="39.0" prefWidth="47.0" style="-fx-background-color: #14213D;">
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removerDiretorioAcao" prefHeight="39.0" prefWidth="47.0" style="-fx-background-color: #14213D;">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -85,7 +85,7 @@
                   </Button>
                </buttons>
             </ButtonBar>
-            <ProgressBar fx:id="progressoMusica" prefHeight="18.0" prefWidth="421.0" progress="0.0" style="-fx-background-color: #E5E5E5;" />
+            <ProgressBar fx:id="progressoMusica" prefHeight="18.0" prefWidth="458.0" progress="0.0" />
             <ButtonBar buttonMinWidth="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="80.0">
               <buttons>
                   <Button fx:id="btParar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stopMediaGeral" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #14213D;">
@@ -137,11 +137,11 @@
       </BorderPane>
    </top>
    <center>
-      <HBox fx:id="hmusicas" alignment="TOP_CENTER" cache="true" prefHeight="421.0" prefWidth="885.0" spacing="30.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER">
+      <HBox fx:id="hmusicas" alignment="TOP_CENTER" cache="true" spacing="10.0" style="-fx-background-color: #E5E5E5;" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="musicas" alignment="CENTER_RIGHT" prefHeight="497.0" prefWidth="405.0">
+            <VBox fx:id="musicas" alignment="CENTER_RIGHT" prefHeight="497.0" prefWidth="420.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="333.0">
+                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="333.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="94.0" prefWidth="243.0" text="Músicas" textAlignment="RIGHT">
                            <font>
@@ -159,15 +159,17 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaMusicas" prefHeight="293.0" prefWidth="362.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" />
-                  <Pane prefHeight="53.0" prefWidth="374.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
+                  <ListView fx:id="listaMusicas" prefHeight="480.0" prefWidth="500.0" style="-fx-background-color: #E5E5E5; -fx-border-color: #E5E5E5;" stylesheets="@lista.css" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></ListView>
                </children>
             </VBox>
-            <VBox fx:id="playlists" alignment="CENTER_RIGHT" prefHeight="401.0" prefWidth="175.0">
+            <VBox fx:id="playlists" alignment="CENTER_RIGHT" prefWidth="420.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="195.0">
+                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="195.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label fx:id="tituloPlaylist" prefHeight="94.0" prefWidth="157.0" text="Playlists" textAlignment="RIGHT">
+                        <Label prefHeight="94.0" prefWidth="157.0" text="Playlists" textAlignment="RIGHT">
                            <font>
                               <Font name="Gadugi Bold" size="24.0" />
                            </font>
@@ -183,8 +185,10 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="listaPlaylists" prefHeight="293.0" prefWidth="95.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" />
-                  <Pane prefHeight="53.0" prefWidth="196.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 30; -fx-border-color: 2D4B8B;" />
+                  <ListView fx:id="listaPlaylists" prefHeight="480.0" prefWidth="420.0" style="-fx-background-color: E5E5E5;" stylesheets="@lista.css" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></ListView>
                </children>
             </VBox>
          </children>

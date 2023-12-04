@@ -1,1 +1,2 @@
 oi,C:\Users\wisla\eclipse-wsl\Player/dados/playlists/playlist_oi123_oi.txt
+oi,C:\projetos\Player/dados/playlists/playlist_oi_oi.txt
