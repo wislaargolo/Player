@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -26,6 +27,9 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
@@ -75,7 +79,13 @@ public class TelaPrincipalController implements Initializable {
     private ListView<Playlist> listaPlaylists;
     
     @FXML
-    private BorderPane telaPrincipal;
+    private HBox hmusicas;
+    
+    @FXML
+    private VBox playlists;
+    
+    @FXML
+    private VBox musicas;
     
     private static TelaPrincipalController instance = new TelaPrincipalController();
     
@@ -86,7 +96,6 @@ public class TelaPrincipalController implements Initializable {
     private Timer timer;
 	private TimerTask task;
 	private boolean running = false;
-	private File file;
 	private Media media;
 	private MediaPlayer mediaPlayer;
 	private int indexMusicaGeral;
@@ -102,9 +111,6 @@ public class TelaPrincipalController implements Initializable {
 		listaMusicas.setContextMenu(menu);
 		
 		 if (TelaLoginController.getInstance().getUsuarioAtual() instanceof UsuarioVIP) {
-			btPlaylist.setVisible(true);
-			tituloPlaylist.setVisible(true);
-		    listaPlaylists.setVisible(true);
 		    menu = menuPlaylist();
 			listaPlaylists.setContextMenu(menu);
 			
@@ -121,16 +127,16 @@ public class TelaPrincipalController implements Initializable {
 	        });
 			
 	    } else {
-	    	listaPlaylists.setVisible(false);
-	    	btPlaylist.setVisible(false);
-	    	tituloPlaylist.setVisible(false);
+	    	playlists.setVisible(false); 
+            playlists.setManaged(false); 
+           
 	    }
 		 
 		 instance.listaMusicas = listaMusicas;
 		 
 		 if ( getListaMusicaItems() != null && !getListaMusicaItems().isEmpty()) {
-			 file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
-			 media = new Media(file.toURI().toString());
+			 File file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
+			 Media media = new Media(file.toURI().toString());
 			 mediaPlayer = new MediaPlayer(media);
 			 indexMusicaGeral = 0;
 			 controlePrimeiraMusica = true;
@@ -138,17 +144,6 @@ public class TelaPrincipalController implements Initializable {
 			 controlePrimeiraMusica = false;
 		 }
 		 
-		 listaMusicas.setOnMouseClicked(event -> {
-			if (event.getClickCount() == 2 && !listaMusicas.getSelectionModel().isEmpty() ) {
-				indexMusicaGeral = getListaMusicaItems().indexOf(listaMusicas.getSelectionModel().getSelectedItem());
-				file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
-				media = new Media(file.toURI().toString());
-				mediaPlayer = new MediaPlayer(media);
-				if(!controlePrimeiraMusica) controlePrimeiraMusica = true;
-				playMedia();
-			}
-			 
-		 });
 	}
     
 	private void atualizarMusicas() {
@@ -258,6 +253,7 @@ public class TelaPrincipalController implements Initializable {
             }
         });
     }
+    
 	
 	@FXML
 	private void adicionarDiretorioAcao() {
@@ -333,7 +329,9 @@ public class TelaPrincipalController implements Initializable {
     }
 	
 
+	@FXML
 	public void playMedia() {
+		
 		beginTimer();
 		mediaPlayer.play();
 	}
@@ -343,8 +341,8 @@ public class TelaPrincipalController implements Initializable {
 		if (controlePrimeiraMusica) {
 			playMedia();
 		}else {
-			file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
-			media = new Media(file.toURI().toString());
+			File file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
 			indexMusicaGeral = 0;
 			controlePrimeiraMusica = true;
@@ -356,8 +354,8 @@ public class TelaPrincipalController implements Initializable {
 		mediaPlayer.stop();
 		if(running) cancelTimer();
 		
-		file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
-		media = new Media(file.toURI().toString());
+		File file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
+		Media media = new Media(file.toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		indexMusicaGeral = 0;
 	}
@@ -375,8 +373,8 @@ public class TelaPrincipalController implements Initializable {
 			mediaPlayer.stop();
 			if(running) cancelTimer();
 			
-			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
-			media = new Media(file.toURI().toString());
+			File file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
 			
 			playMedia();
@@ -385,8 +383,8 @@ public class TelaPrincipalController implements Initializable {
 			indexMusicaGeral = 0;
 			mediaPlayer.stop();
 			
-			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
-			media = new Media(file.toURI().toString());
+			File file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
 			
 			playMedia();
@@ -400,8 +398,8 @@ public class TelaPrincipalController implements Initializable {
 			mediaPlayer.stop();
 			if(running) cancelTimer();
 			
-			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
-			media = new Media(file.toURI().toString());
+			File file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
 			
 			playMedia();
@@ -410,8 +408,8 @@ public class TelaPrincipalController implements Initializable {
 			mediaPlayer.stop();
 			if(running) cancelTimer();
 			
-			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
-			media = new Media(file.toURI().toString());
+			File file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
+			Media media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
 			
 			playMedia();
@@ -436,7 +434,13 @@ public class TelaPrincipalController implements Initializable {
 				double current = mediaPlayer.getCurrentTime().toSeconds();
 				double end = media.getDuration().toSeconds();
 				progressoMusica.setProgress(current/end);
+				System.out.println(current/end);
+				
 				if(current/end >= 1) {
+//					cancelTimer();
+					System.out.println("terminooooooooooooooo");
+					System.out.println(current/end);
+					//nextMediaGeral();
 					Platform.runLater(() -> nextMediaGeral());
 				}
 			}
@@ -452,4 +456,5 @@ public class TelaPrincipalController implements Initializable {
    
 
 }
+
 
