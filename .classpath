@@ -12,7 +12,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jlayer-1.0.1.4.jar"/>
-	<classpathentry kind="lib" path="lib/jlayer-1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
