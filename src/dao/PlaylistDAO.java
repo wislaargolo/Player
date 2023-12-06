@@ -184,68 +184,6 @@ public class PlaylistDAO {
 		}
 	}
 
-	public static void atualizar(Playlist playlist, UsuarioVIP usuario, String novoNome) throws IOException {
-		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
-		if (playlists.contains(playlist)) {
-
-			String diretorioAtual = System.getProperty("user.dir");
-			String caminhoAtual = diretorioAtual + "/dados/playlists/playlist_" + usuario.getId() + "_"
-					+ playlist.getNome() + ".txt";
-
-			int posicao = playlists.indexOf(playlist);
-			playlist.setNome(novoNome);
-			playlists.set(posicao, playlist);
-
-			String caminhoNovo = diretorioAtual + "/dados/playlists/playlist_" + usuario.getId() + "_"
-					+ playlist.getNome() + ".txt";
-
-			File arquivoAtual = new File(caminhoAtual);
-			File novoArquivo = new File(caminhoNovo);
-
-			try {
-				arquivoAtual.renameTo(novoArquivo);
-
-			} catch (SecurityException e) {
-				System.err.println("Erro de segurança ao tentar renomear o arquivo.");
-				throw e;
-			} catch (Exception e) {
-				System.err.println("Ocorreu um erro inesperado durante a renomeação do arquivo.");
-				throw e;
-			}
-
-			ArrayList<String> nomes = new ArrayList<>();
-			ArrayList<String> caminhos = new ArrayList<>();
-			try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
-				String linha;
-
-				while ((linha = br.readLine()) != null) {
-					String[] partes = linha.split(",");
-					nomes.add(partes[0]);
-					caminhos.add(partes[1]);
-				}
-			} catch (IOException e) {
-				throw e;
-			}
-
-			posicao = caminhos.indexOf(caminhoAtual);
-			nomes.set(posicao, playlist.getNome());
-			caminhos.set(posicao, caminhoNovo);
-
-			try (FileWriter fw = new FileWriter(caminhoArquivo, false)) {
-
-				for (int i = 0; i < nomes.size(); i++) {
-					String conteudo = nomes.get(i) + "," + caminhos.get(i);
-
-					fw.write(conteudo);
-					fw.write(System.lineSeparator());
-				}
-
-			} catch (IOException e) {
-				throw e;
-			}
-
-		}
-	}
 	
 	public static void removerTodasPlaylists(UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);

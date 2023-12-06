@@ -217,7 +217,7 @@ public class TelaPrincipalController implements Initializable {
         return menu;
     }
     
-    protected ContextMenu menuMusica() {
+    private ContextMenu menuMusica() {
     	ContextMenu menu = new ContextMenu();
     	
     	MenuItem removerItem = new MenuItem("Remover");
@@ -241,23 +241,12 @@ public class TelaPrincipalController implements Initializable {
     	menu.getItems().add(removerItem);
     	
     	removerItem.setOnAction(event -> {
-    	    Playlist playlistSelcionada = listaPlaylists.getSelectionModel().getSelectedItem();
-    	    if (playlistSelcionada != null) {
-    	    	removerPlaylist(playlistSelcionada);
+    	    Playlist playlistSelecionada = listaPlaylists.getSelectionModel().getSelectedItem();
+    	    if (playlistSelecionada != null) {
+    	    	removerPlaylist(playlistSelecionada);
     	    }
     	});
     	
-    	MenuItem editarItem = new MenuItem("Editar");
-    	menu.getItems().add(editarItem);
-
-    	editarItem.setOnAction(event -> {
-    	    Playlist playlistSelcionada = listaPlaylists.getSelectionModel().getSelectedItem();
-    	    if (playlistSelcionada != null) {
-    	    	editarPlaylist(playlistSelcionada);
-    	    }
-    	});
-        
-
         return menu;
     }
     
@@ -281,13 +270,7 @@ public class TelaPrincipalController implements Initializable {
 		}
         
     }
-    
-    private void editarPlaylist(Playlist playlistSelecionada) 
-    {
-    	instance.playlistAtual = playlistSelecionada;
-    	GerenciadorCenas.abrirNovaJanela("/visao/TelaEditarPlaylist.fxml");
-        
-    }
+   
 
     protected void configuraClique(Node objeto, ContextMenu menu) {
        objeto.setOnMouseClicked(event -> {
