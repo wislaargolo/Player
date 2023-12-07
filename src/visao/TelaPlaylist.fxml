@@ -103,7 +103,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="71.0" prefWidth="871.0" spacing="20.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
          <children>
-            <Label nodeOrientation="LEFT_TO_RIGHT" prefHeight="72.0" prefWidth="194.0" textFill="#14213d" wrapText="true" />
+            <Label fx:id="songLabel" nodeOrientation="LEFT_TO_RIGHT" prefHeight="72.0" prefWidth="194.0" textFill="WHITE" wrapText="true" />
             <VBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="10.0">
                <children>
                   <ButtonBar buttonMinWidth="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="163.0">
