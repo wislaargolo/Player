@@ -43,49 +43,54 @@
       </VBox>
    </left>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="800.0" spacing="30.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER_LEFT">
+      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="871.0" spacing="25.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
          <children>
-            <ButtonBar buttonMinWidth="8.0" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="172.0">
-               <buttons>
-                  <Button fx:id="btProximo" alignment="CENTER" maxHeight="15.0" maxWidth="20.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#nextMediaGeral" prefHeight="8.0" prefWidth="0.0" style="-fx-background-color: #48597D;">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../dados/imagens/posterior.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btPause" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="31.0" prefWidth="32.0" style="-fx-background-color: #48597D; -fx-background-radius: 30;">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../dados/imagens/pause.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btPlay" minHeight="-Infinity" minWidth="36.0" mnemonicParsing="false" onAction="#playMediaGeral" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: #48597D; -fx-background-radius: 30;" stylesheets="@botao.css">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../dados/imagens/play.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btAnterior" minHeight="-Infinity" minWidth="20.0" mnemonicParsing="false" onAction="#previousMediaGeral" prefHeight="27.0" prefWidth="24.0" style="-fx-background-color: #48597D;">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../dados/imagens/anterior.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </buttons>
-            </ButtonBar>
-            <ProgressBar fx:id="progressoMusica" prefHeight="18.0" prefWidth="458.0" progress="0.0" />
+            <Label fx:id="songLabel" nodeOrientation="LEFT_TO_RIGHT" prefHeight="72.0" prefWidth="179.0" textFill="WHITE" wrapText="true" />
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="10.0">
+               <children>
+                  <ButtonBar buttonMinWidth="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="163.0">
+                     <buttons>
+                        <Button fx:id="btAnterior" maxHeight="-Infinity" maxWidth="19.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#previousMediaGeral" prefHeight="25.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../dados/imagens/anterior.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btPlay" alignment="CENTER" minHeight="-Infinity" minWidth="36.0" mnemonicParsing="false" onAction="#playMediaGeral" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: #14213D; -fx-background-radius: 30;" stylesheets="@botao.css">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../dados/imagens/play.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btPause" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pauseMedia" prefHeight="31.0" prefWidth="32.0" style="-fx-background-color: #14213D; -fx-background-radius: 30;">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../dados/imagens/pause.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btProximo" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="19.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#nextMediaGeral" prefHeight="25.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../dados/imagens/posterior.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </buttons>
+                  </ButtonBar>
+                  <ProgressBar fx:id="progressoMusica" prefHeight="5.0" prefWidth="500.0" progress="0.0" />
+               </children>
+            </VBox>
             <ButtonBar buttonMinWidth="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="80.0">
               <buttons>
                   <Button fx:id="btParar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stopMediaGeral" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #14213D;">

@@ -67,6 +67,8 @@ public class TelaPlaylistController implements Initializable {
 	@FXML
 	private ListView<Musica> listaMusicasPlaylist;
 	
+	@FXML
+	private Label songLabel;
 	
     @FXML
     private BorderPane telaPlaylist;
@@ -109,6 +111,7 @@ public class TelaPlaylistController implements Initializable {
 				media = new Media(file.toURI().toString());
 				mediaPlayer = new MediaPlayer(media);
 				if(!controlePrimeiraMusica) controlePrimeiraMusica = true;
+				songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 				playMedia();
 			}
 		
@@ -169,6 +172,7 @@ public class TelaPlaylistController implements Initializable {
 	@FXML
 	public void playMediaPlaylist() {
 		if (controlePrimeiraMusica) {
+			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			playMedia();
 		}else {
 			file = new File(getListaMusicaPlaylist().get(0).getCaminhoArquivo());
@@ -176,6 +180,7 @@ public class TelaPlaylistController implements Initializable {
 			mediaPlayer = new MediaPlayer(media);
 			indexMusicaPlaylist = 0;
 			controlePrimeiraMusica = true;
+			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			playMedia();
 		}
 	}
@@ -188,6 +193,7 @@ public class TelaPlaylistController implements Initializable {
 		media = new Media(file.toURI().toString());
 		mediaPlayer = new MediaPlayer(media);
 		indexMusicaPlaylist = 0;
+		songLabel.setText("");
 	}
 	
 	@FXML
@@ -198,7 +204,6 @@ public class TelaPlaylistController implements Initializable {
 	
 	@FXML
 	public void nextMediaPlaylist() {
-		System.out.println("entrou");
 		if(indexMusicaPlaylist < getListaMusicaPlaylist().size() - 1) {			
 			indexMusicaPlaylist++;
 			mediaPlayer.stop();
@@ -207,6 +212,7 @@ public class TelaPlaylistController implements Initializable {
 			file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
 			media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
+			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			
 			playMedia();
 		}
@@ -217,6 +223,7 @@ public class TelaPlaylistController implements Initializable {
 			file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
 			media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
+			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			
 			playMedia();
 		}
@@ -232,6 +239,7 @@ public class TelaPlaylistController implements Initializable {
 			file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
 			media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
+			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			
 			playMedia();
 		}else {
@@ -242,6 +250,7 @@ public class TelaPlaylistController implements Initializable {
 			file = new File(getListaMusicaPlaylist().get(indexMusicaPlaylist).getCaminhoArquivo());
 			media = new Media(file.toURI().toString());
 			mediaPlayer = new MediaPlayer(media);
+			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			
 			playMedia();
 		}

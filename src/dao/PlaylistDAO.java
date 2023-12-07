@@ -85,12 +85,6 @@ public class PlaylistDAO {
 		
 		boolean teste = playlists.contains(playlist);
 		
-		if (teste) {
-			System.out.println("foi");
-		}else {
-			System.out.println("não foi");
-		}
-		
 		if (!playlists.contains(playlist)) {
 			playlists.add(playlist);
 
