@@ -1,9 +1,0 @@
-oi,wisla12,12,VIP
-wisla,wisla14,12,VIP
-Rubens,rubens,123,VIP
-oi,oi123,123,VIP
-oi,teste,123,VIP
-co,co,12,COMUM
-trdr4,o,1,COMUM
-oi,oi,oi,VIP
-o,oo,o,COMUM

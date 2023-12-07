@@ -1,5 +1,5 @@
 .gradiente {
-    -fx-background-color: linear-gradient(from 30% 30% to 50% 50%, #48597D, #14213D);
+    -fx-background-color: linear-gradient(from 0% 0% to 40% 60%, #48597D, #14213D);
 }
 
 .gradiente-radial {

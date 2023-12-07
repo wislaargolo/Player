@@ -175,13 +175,15 @@ public class TelaPlaylistController implements Initializable {
 			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
 			playMedia();
 		}else {
-			file = new File(getListaMusicaPlaylist().get(0).getCaminhoArquivo());
-			media = new Media(file.toURI().toString());
-			mediaPlayer = new MediaPlayer(media);
-			indexMusicaPlaylist = 0;
-			controlePrimeiraMusica = true;
-			songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
-			playMedia();
+			if(!getListaMusicaPlaylist().isEmpty()) {
+				file = new File(getListaMusicaPlaylist().get(0).getCaminhoArquivo());
+				media = new Media(file.toURI().toString());
+				mediaPlayer = new MediaPlayer(media);
+				indexMusicaPlaylist = 0;
+				controlePrimeiraMusica = true;
+				songLabel.setText(getListaMusicaPlaylist().get(indexMusicaPlaylist).getNome());
+				playMedia();
+			}
 		}
 	}
 	

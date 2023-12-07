@@ -43,14 +43,23 @@
       </VBox>
    </left>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="71.0" prefWidth="871.0" spacing="25.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="songLabel" nodeOrientation="LEFT_TO_RIGHT" prefHeight="72.0" prefWidth="179.0" textFill="WHITE" wrapText="true" />
-            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="10.0">
+      <BorderPane prefHeight="76.0" prefWidth="871.0" styleClass="gradiente" stylesheets="@gradiente.css" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <left>
+            <Label fx:id="songLabel" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="180.0" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER_RIGHT">
+               <BorderPane.margin>
+                  <Insets left="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </left>
+         <center>
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <ButtonBar buttonMinWidth="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="163.0">
                      <buttons>
-                        <Button fx:id="btAnterior" maxHeight="-Infinity" maxWidth="19.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#previousMediaGeral" prefHeight="25.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
+                        <Button fx:id="btAnterior" maxHeight="-Infinity" maxWidth="19.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#previousMediaGeral" prefHeight="19.0" prefWidth="0.0" style="-fx-background-color: #14213D;">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -88,10 +97,12 @@
                         </Button>
                      </buttons>
                   </ButtonBar>
-                  <ProgressBar fx:id="progressoMusica" prefHeight="5.0" prefWidth="500.0" progress="0.0" />
+                  <ProgressBar fx:id="progressoMusica" prefHeight="10.0" prefWidth="500.0" progress="0.0" />
                </children>
             </VBox>
-            <ButtonBar buttonMinWidth="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="80.0">
+         </center>
+         <right>
+            <ButtonBar buttonMinWidth="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="170.0" BorderPane.alignment="CENTER">
               <buttons>
                   <Button fx:id="btParar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#stopMediaGeral" prefHeight="23.0" prefWidth="23.0" style="-fx-background-color: #14213D;">
                      <graphic>
@@ -112,12 +123,12 @@
                      </graphic>
                   </Button>
               </buttons>
+               <BorderPane.margin>
+                  <Insets right="20.0" />
+               </BorderPane.margin>
             </ButtonBar>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </HBox>
+         </right>
+      </BorderPane>
    </bottom>
    <right>
       <Pane prefHeight="421.0" prefWidth="0.0" BorderPane.alignment="CENTER" />

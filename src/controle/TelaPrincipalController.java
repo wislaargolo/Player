@@ -148,7 +148,7 @@ public class TelaPrincipalController implements Initializable {
 		 
 		 instance.listaMusicas = listaMusicas;
 		 
-		 if ( getListaMusicaItems().get(0) != null && !getListaMusicaItems().isEmpty()) {
+		 if ( !getListaMusicaItems().isEmpty() && getListaMusicaItems().get(0) != null) {
 			 file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
 			 media = new Media(file.toURI().toString());
 			 mediaPlayer = new MediaPlayer(media);
