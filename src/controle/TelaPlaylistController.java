@@ -121,6 +121,9 @@ public class TelaPlaylistController implements Initializable {
 		    if (!listaMusicasPlaylist.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
 		    	listaMusicasPlaylist.getSelectionModel().clearSelection();
 		    }
+		    if (!listaMusicas.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+		    	listaMusicas.getSelectionModel().clearSelection();
+		    }
 		});
 		
 	}
