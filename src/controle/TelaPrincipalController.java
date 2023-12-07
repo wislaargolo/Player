@@ -161,7 +161,7 @@ public class TelaPrincipalController implements Initializable {
 		 listaMusicas.setOnMouseClicked(event -> {
 			if (event.getClickCount() == 2 && !listaMusicas.getSelectionModel().isEmpty() ) {
 				indexMusicaGeral = getListaMusicaItems().indexOf(listaMusicas.getSelectionModel().getSelectedItem());
-				mediaPlayer.stop();
+				if (mediaPlayer  != null) mediaPlayer.stop();
 				if(running) cancelTimer();
 				file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
 				media = new Media(file.toURI().toString());
@@ -391,14 +391,16 @@ public class TelaPrincipalController implements Initializable {
 	
 	@FXML
 	public void stopMediaGeral() {
-		mediaPlayer.stop();
-		if(running) cancelTimer();
-		
-		file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
-		media = new Media(file.toURI().toString());
-		mediaPlayer = new MediaPlayer(media);
-		indexMusicaGeral = 0;
-		songLabel.setText("");
+		if (mediaPlayer != null) {
+			mediaPlayer.stop();
+			if(running) cancelTimer();
+			
+			file = new File(getListaMusicaItems().get(0).getCaminhoArquivo());
+			media = new Media(file.toURI().toString());
+			mediaPlayer = new MediaPlayer(media);
+			indexMusicaGeral = 0;
+			songLabel.setText("");
+		}
 	}
 	
 	@FXML
@@ -411,7 +413,7 @@ public class TelaPrincipalController implements Initializable {
 	public void nextMediaGeral() {
 		if(indexMusicaGeral < getListaMusicaItems().size() - 1) {			
 			indexMusicaGeral++;
-			mediaPlayer.stop();
+			if (mediaPlayer  != null) mediaPlayer.stop();
 			if(running) cancelTimer();
 			
 			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
@@ -423,7 +425,7 @@ public class TelaPrincipalController implements Initializable {
 		}
 		else {
 			indexMusicaGeral = 0;
-			mediaPlayer.stop();
+			if (mediaPlayer  != null) mediaPlayer.stop();
 			
 			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
 			media = new Media(file.toURI().toString());
@@ -438,7 +440,7 @@ public class TelaPrincipalController implements Initializable {
 	public void previousMediaGeral() {
 		if (indexMusicaGeral == 0) {
 			indexMusicaGeral = getListaMusicaItems().size() - 1;
-			mediaPlayer.stop();
+			if (mediaPlayer  != null) mediaPlayer.stop();
 			if(running) cancelTimer();
 			
 			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());
@@ -449,7 +451,7 @@ public class TelaPrincipalController implements Initializable {
 			playMedia();
 		}else {
 			indexMusicaGeral--;
-			mediaPlayer.stop();
+			if (mediaPlayer  != null) mediaPlayer.stop();
 			if(running) cancelTimer();
 			
 			file = new File(getListaMusicaItems().get(indexMusicaGeral).getCaminhoArquivo());

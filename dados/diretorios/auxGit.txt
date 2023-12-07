@@ -1,0 +1,1 @@
+Arquivo feito para o github não apagar a pasta por n ter conteudo.
