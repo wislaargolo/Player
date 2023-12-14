@@ -15,6 +15,14 @@ import modelo.UsuarioVIP;
 import util.Alertas;
 import util.GerenciadorCenas;
 
+/**
+ * Controlador para a tela de informações da conta do usuário.
+ * Essa classe gerencia a exibição de detalhes da conta do usuário,
+ * incluindo seu nome, login e status VIP, bem como fornece opções para remover a conta, voltar à tela principal ou sair da conta.
+ * 
+ * @author Rubens e Wisla
+ * 
+ */
 public class TelaContaController implements Initializable{
 
     @FXML
@@ -26,6 +34,14 @@ public class TelaContaController implements Initializable{
     @FXML
     private ImageView iconVip;
     
+    /**
+     * Inicializa o controlador automaticamente
+     * após o carregamento do arquivo FXML associado.
+     * Configura a exibição das informações do usuário e do ícone VIP.
+     * 
+     * @param arg0 URL utilizada para resolver caminhos relativos para o objeto raiz, ou null se desconhecido.
+     * @param arg1 O recurso utilizado para localizar o objeto raiz, ou null se o objeto raiz não foi localizado.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		nomeUsuario.setText(TelaLoginController.getInstance().getUsuarioAtual().getNome());
@@ -37,6 +53,10 @@ public class TelaContaController implements Initializable{
 	}
 
 
+	/**
+     * Ação conectada ao botão para remover a conta do usuário.
+     * Remove o usuário atual do sistema e redireciona para a tela de login.
+     */
     @FXML
     void btRemoverContaAcao() {
 	    try {
@@ -49,11 +69,19 @@ public class TelaContaController implements Initializable{
 	    }
     }
     
+    /**
+     * Ação conectada ao botão para voltar à tela principal.
+     * Muda a cena para a tela principal da aplicação.
+     */
     @FXML
     void btVoltarAcao() { 
     	GerenciadorCenas.mudarCena("../visao/TelaPrincipal.fxml");
     }
     
+    /**
+     * Ação conectada ao botão para sair da conta.
+     * Muda a cena para a tela de login da aplicação.
+     */
     @FXML
     void btSairAcao() { 
     	GerenciadorCenas.mudarCena("../visao/TelaLogin.fxml");

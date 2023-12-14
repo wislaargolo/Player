@@ -38,7 +38,16 @@ import modelo.UsuarioVIP;
 import util.Alertas;
 import util.GerenciadorCenas;
 
+/**
+ * Controlador para a tela principal da aplicação.
+ * Gerencia a interação do usuário com elementos da interface gráfica, 
+ * incluindo a reprodução de músicas, gerenciamento de músicas, playlists (para o usuário VIP) e navegação na aplicação.
+ * 
+ * @author Rubens e Wisla
+ * 
+ */
 public class TelaPrincipalController implements Initializable {
+	 // Campos anotados com @FXML representam os elementos da interface gráfica
 	
 	@FXML
 	private ImageView icone;
@@ -98,7 +107,14 @@ public class TelaPrincipalController implements Initializable {
 	private int indexMusicaGeral;
     private boolean controlePrimeiraMusica;
     
-    
+    /**
+     * Inicializa o controlador automaticamente
+     * após o carregamento do arquivo FXML associado.
+     * Configura a lista de músicas e playlists (para usuário VIP) e prepara o MediaPlayer.
+     * 
+     * @param arg0 URL utilizada para resolver caminhos relativos para o objeto raiz, ou null se desconhecido.
+     * @param arg1 O recurso utilizado para localizar o objeto raiz, ou null se o objeto raiz não foi localizado.
+     */
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	try {
@@ -174,6 +190,10 @@ public class TelaPrincipalController implements Initializable {
 		 });
 	}
     
+    /**
+     * Atualiza a lista de músicas exibida na interface.
+     * Para isso, carrega músicas do usuário atual e atualiza a lista.
+     */
 	private void atualizarMusicas() {
 		ArrayList<Musica> musicasCarregadas;
 		try {
@@ -185,6 +205,10 @@ public class TelaPrincipalController implements Initializable {
 
 	}
 	
+	/**
+     * Atualiza a lista de playlists exibida na interface.
+     * Para isso, carrega playlists do usuário atual, se ele for um usuário VIP, e atualiza os itens da lista.
+     */
 	public void atualizarPlaylists() {
 		ArrayList<Playlist> playlistsCarregadas;
 		try {
@@ -196,6 +220,11 @@ public class TelaPrincipalController implements Initializable {
 		
 	}
 	
+	/**
+     * Define a ação para o clique no ícone.
+     * Abre um menu de contexto com opções em relação a conta para o usuário, incluindo a
+     * opção de ver as informações da conta e sair.
+     */
 	@FXML
 	private void iconeAcao() {
 		ContextMenu menu = menuUsuario();
@@ -203,6 +232,13 @@ public class TelaPrincipalController implements Initializable {
 		
 	}
 	
+	/**
+     * Cria e retorna um menu de contexto para o usuário.
+     * O menu possui as opções 'Conta' para visualizar informações da conta
+     * e 'Sair'.
+     * 
+     * @return ContextMenu O menu de contexto criado para o usuário.
+     */
     protected ContextMenu menuUsuario() {
         ContextMenu menu = new ContextMenu();
 
@@ -221,6 +257,13 @@ public class TelaPrincipalController implements Initializable {
         return menu;
     }
     
+    /**
+     * Cria e retorna um menu de contexto para músicas.
+     * O menu possui a opção 'Remover' para permitir a remoção
+     * de uma música selecionada.
+     * 
+     * @return ContextMenu O menu de contexto criado para músicas.
+     */
     private ContextMenu menuMusica() {
     	ContextMenu menu = new ContextMenu();
     	
@@ -238,6 +281,13 @@ public class TelaPrincipalController implements Initializable {
         return menu;
     }
     
+    /**
+     * Cria e retorna um menu de contexto para playlists.
+     * O menu possui a opção 'Remover' para permitir a remoção
+     * de uma playlist selecionada do usuário VIP.
+     * 
+     * @return ContextMenu O menu de contexto criado para playlists.
+     */
     private ContextMenu menuPlaylist() {
     	ContextMenu menu = new ContextMenu();
     	
@@ -254,7 +304,12 @@ public class TelaPrincipalController implements Initializable {
         return menu;
     }
     
-    
+    /**
+     * Recebe uma música e remove dos arquivos .txt e 
+     * da lista de músicas na interface do usuário.
+     * 
+     * @param musicaSelecionada A música a ser removida.
+     */
     private void removerMusica(Musica musicaSelecionada) {
     	try {
 			MusicaDAO.remover(TelaLoginController.getInstance().getUsuarioAtual(), musicaSelecionada);
@@ -265,6 +320,12 @@ public class TelaPrincipalController implements Initializable {
         
     }
     
+    /**
+     * Recebe uma playlist e remove dos arquivos .txt e 
+     * da lista de playlists na interface do usuário.
+     * 
+     * @param playlistSelecionada A playlist a ser removida.
+     */
     private void removerPlaylist(Playlist playlistSelecionada) {
     	try {
 			PlaylistDAO.remover(playlistSelecionada, (UsuarioVIP) TelaLoginController.getInstance().getUsuarioAtual());
@@ -276,6 +337,12 @@ public class TelaPrincipalController implements Initializable {
     }
    
 
+    /**
+     * Configura uma ação de clique para um objeto da interface do usuário, associando-o a um menu.
+     * 
+     * @param objeto O objeto para o qual a ação de clique será configurada.
+     * @param menu O menu de contexto a ser exibido quando o objeto for clicado.
+     */
     protected void configuraClique(Node objeto, ContextMenu menu) {
        objeto.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.SECONDARY) {
@@ -284,6 +351,12 @@ public class TelaPrincipalController implements Initializable {
         });
     }
 	
+    /**
+     * Ação conectada a um elemento da interface do usuário para adicionar um diretório.
+     * Permite que seja aberta uma janela do dispositivo para o usuário selecionar um diretório que 
+     * é adicionado a lista de músicas desse usuário por meio do DiretorioDAO e a lista de músicas é atualizada.
+     * Em caso de erro, um alerta é exibido.
+     */
 	@FXML
 	private void adicionarDiretorioAcao() {
         File diretorio = escolherDiretorio();
@@ -300,6 +373,13 @@ public class TelaPrincipalController implements Initializable {
         }
 	}
 	
+	 /**
+     * Ação conectada a um botão da interface do usário para remover um diretório.
+     * Permite que seja aberta uma janela do dispositivo para o usuário selecionar um diretório que 
+     * é removido, de forma que as músicas desse diretório são excluídas da lista de músicas desse 
+     * usuário por meio de DiretorioDAO.
+     * Em caso de erro, um alerta é exibido.
+     */
 	@FXML
 	public void removerDiretorioAcao() {
         File diretorio = escolherDiretorio();
@@ -314,12 +394,23 @@ public class TelaPrincipalController implements Initializable {
        }
 	}
 	
+	/**
+     * Permite a escolha de um diretório do dispositivo e retorna o diretório selecionado.
+     * 
+     * @return File O diretório escolhido pelo usuário, ou null se nenhum foi selecionado.
+     */
     private File escolherDiretorio() {
     	DirectoryChooser buscaDiretorio = new DirectoryChooser();
     	buscaDiretorio.setTitle("Selecionar Diretório");
         return buscaDiretorio.showDialog(null);
     }
     
+    /**
+     * Permite a escolha de um arquivo do dispositivo por um FileChooser, que
+     * é configurado para aceitar apenas arquivos MP3.
+     * 
+     * @return File O arquivo escolhido pelo usuário, ou null se nenhum foi selecionado.
+     */
     private File escolherArquivo() {
     	FileChooser buscaArquivo = new FileChooser();
     	buscaArquivo.setTitle("Selecionar Música");
@@ -329,6 +420,11 @@ public class TelaPrincipalController implements Initializable {
     	return buscaArquivo.showOpenDialog(null);
     }
     
+    /**
+     * Ação conectada a um botão da interface gráfica para adicionar uma música.
+     * Permite que seja aberta uma janela do dispositivo para que o usuário selecione
+     * uma música que será adicionada à sua lista de músicas, se ainda não estiver presente.
+     */
     @FXML
     private void adicionarMusicaAcao() {
   
@@ -350,29 +446,56 @@ public class TelaPrincipalController implements Initializable {
         }
     }
     
+    /**
+     * Ação conectada a um elemento da interface do usuário para adicionar uma playlist.
+     * Abre uma nova janela para a criação de uma playlist.
+     */
     @FXML
     private void adicionarPlaylistAcao() {
     	GerenciadorCenas.abrirNovaJanela("/visao/TelaAdicionarPlaylist.fxml");
     }
     
+    /**
+     * Retorna a instância atual do controlador da tela principal.
+     * 
+     * @return TelaPrincipalController A instância atual do controlador.
+     */
 	public static TelaPrincipalController getInstance() {
 		return instance;
 	}
 	
+	/**
+     * Retorna a playlist atualmente selecionada ou em uso.
+     * 
+     * @return Playlist A playlist atual.
+     */
 	public Playlist getPlaylistAtual() {
 		return playlistAtual;
 	}
 	
+	/**
+     * Retorna a lista de itens de música exibidos na interface do usuário.
+     * 
+     * @return ObservableList<Musica> A lista observável de músicas.
+     */
 	public ObservableList<Musica> getListaMusicaItems() {
         return listaMusicas.getItems();
     }
 	
-
+	/**
+     * Inicia a reprodução da música atual.
+     * Ativa um timer para atualizar o progresso da reprodução e inicia o MediaPlayer.
+     */
 	public void playMedia() {
 		beginTimer();
 		mediaPlayer.play();
 	}
 	
+	/**
+     * Controla a ação de reprodução de música com base na seleção atual.
+     * Se for a primeira música, configura e inicia a reprodução.
+     * Caso contrário, configura o MediaPlayer para a primeira música da lista e inicia a reprodução.
+     */
 	@FXML
 	public void playMediaGeral() {
 		if (controlePrimeiraMusica) {
@@ -389,6 +512,9 @@ public class TelaPrincipalController implements Initializable {
 		}
 	}
 	
+	/**
+     * Para a reprodução da música atual e reinicia a configuração do MediaPlayer.
+     */
 	@FXML
 	public void stopMediaGeral() {
 		if (mediaPlayer != null) {
@@ -403,12 +529,20 @@ public class TelaPrincipalController implements Initializable {
 		}
 	}
 	
+	/**
+     * Pausa a reprodução da música atual, cancelando a atualização do
+     * progresso da música.
+     */
 	@FXML
 	public void pauseMedia() {
 		cancelTimer();
 		mediaPlayer.pause();
 	}
 	
+	/**
+     * Avança para a próxima música na lista.
+     * Se estiver na última, volta para a primeira e reinicia inicia a reprodução.
+     */
 	@FXML
 	public void nextMediaGeral() {
 		if(indexMusicaGeral < getListaMusicaItems().size() - 1) {			
@@ -436,6 +570,10 @@ public class TelaPrincipalController implements Initializable {
 		}
 	}
 	
+	/**
+     * Retrocede para a música anterior na lista.
+     * Se estiver na primeira música, vai para a última e inicia a reprodução.
+     */
 	@FXML
 	public void previousMediaGeral() {
 		if (indexMusicaGeral == 0) {
@@ -463,13 +601,19 @@ public class TelaPrincipalController implements Initializable {
 		}
 	}
 	
+	/**
+     * Alterna o estado de mudo (mute) do MediaPlayer.
+     * Se estiver em estado de mudo, desativa o mudo, e vice-versa.
+     */
 	public void muteMedia() {
 	    if (mediaPlayer != null) {
 	        mediaPlayer.setMute(!mediaPlayer.isMute()); // Inverte o estado de mudo (mute)
 	    }
 	}
 
-	
+	/**
+     * Inicia um timer que atualiza a cada segundo o progresso da reprodução da música.
+     */
 	public void beginTimer() {
 		
 		timer = new Timer();
@@ -489,7 +633,10 @@ public class TelaPrincipalController implements Initializable {
 		
 		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
-	
+
+	/**
+	 * Cancela o timer atualmente ativo para o progresso da reprodução de mídia.
+	 */
 	public void cancelTimer() {
 		running = false;
 		timer.cancel();

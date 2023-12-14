@@ -11,11 +11,21 @@ import modelo.Playlist;
 import modelo.UsuarioVIP;
 import util.Alertas;
 
+/**
+ * Controlador para a tela de adicionar playlists.
+ * Essa classe gerencia a criação de novas playlists por usuários VIP,
+ * permitindo que eles nomeiem e adicionem a playlist ao sistema.
+ */
 public class TelaAdicionarPlaylistController {
 	
 	@FXML
 	private TextField nomePlaylist;
 	
+	/**
+	 * Ação conectada ao botão de adicionar playlist.
+	 * Cria uma nova playlist com o nome fornecido e a adiciona ao sistema
+	 * para o usuário VIP atual. Em caso de erro, exibe um alerta.
+	 */
 	@FXML
     private void adicionarPlaylistAcao() {
 		

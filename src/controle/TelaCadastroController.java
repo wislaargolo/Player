@@ -18,6 +18,13 @@ import modelo.Usuario;
 import modelo.UsuarioVIP;
 import util.Alertas;
 
+/**
+ * Controlador para a tela de cadastro de usuários.
+ * Essa classe gerencia o cadastro de novos usuários, permitindo criar contas comuns ou VIP.
+ * 
+ * @author Rubens e Wisla
+ * 
+ */
 public class TelaCadastroController implements Initializable {
 	@FXML
     private TextField fLogin, fNome;
@@ -31,13 +38,24 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private ChoiceBox<String> tipoUsuario;
   
- 
+    /**
+     * Inicializa o controlador automaticamente
+     * após o carregamento do arquivo FXML associado.
+     * Configura a ChoiceBox com as opções de tipo de usuário.
+     * 
+     * @param url URL utilizada para resolver caminhos relativos para o objeto raiz, ou null se desconhecido.
+     * @param resourceBundle O recurso utilizado para localizar o objeto raiz, ou null se o objeto raiz não foi localizado.
+     */
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tipoUsuario.getItems().addAll("Comum", "VIP");
         tipoUsuario.getSelectionModel().selectFirst();
     }
     
-    
+    /**
+     * Ação conectada ao botão de cadastro.
+     * Cria um novo usuário com as informações fornecidas e o adiciona ao sistema.
+     * Exibe um alerta em caso de erro ou confirmação de sucesso.
+     */
     @FXML
     private void btCadastroAcao() {
     	
