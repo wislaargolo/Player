@@ -9,13 +9,26 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * Classe utilitária para gerenciar mudanças de cena e janelas na aplicação JavaFX.
+ */
 public class GerenciadorCenas {
     private static Stage palcoPrincipal;
 
+    /**
+     * Define o palco principal para a aplicação.
+     * 
+     * @param palco O palco principal da aplicação.
+     */
     public static void setPalcoPrincipal(Stage palco) {
         GerenciadorCenas.palcoPrincipal = palco;
     }
 
+    /**
+     * Muda a cena atual no palco principal para a cena especificada.
+     * 
+     * @param arquivoFXML O caminho do arquivo FXML da nova cena.
+     */
     public static void mudarCena(String arquivoFXML) {
         try {
         	
@@ -36,6 +49,11 @@ public class GerenciadorCenas {
         }
     }
     
+    /**
+     * Abre uma nova janela com a cena especificada.
+     * 
+     * @param arquivoFXML O caminho do arquivo FXML da nova janela.
+     */
     public static void abrirNovaJanela(String arquivoFXML) {
         try {
             Parent layout = FXMLLoader.load(GerenciadorCenas.class.getResource(arquivoFXML));
@@ -47,6 +65,11 @@ public class GerenciadorCenas {
         }
     }
 
+    /**
+     * Retorna o palco principal atual da aplicação.
+     * 
+     * @return O palco principal.
+     */
 	public static final Stage getPalcoPrincipal() {
 		return palcoPrincipal;
 	}
