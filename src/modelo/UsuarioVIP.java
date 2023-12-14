@@ -3,7 +3,7 @@ package modelo;
 /**
  * Representa um usuário VIP no sistema, estendendo a classe Usuario com métodos adicionais.
  * 
- * @author (nome dos autores)
+ * @author Rubens e Wisla
  */
 public class UsuarioVIP extends Usuario {
 
