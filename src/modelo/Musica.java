@@ -1,36 +1,77 @@
 package modelo;
 
+
+/**
+ * Representa uma música no sistema.
+ * 
+ * @author Rubens e Wisla
+ */
 public class Musica {
 	
 	private String nome;
 	private String caminhoArquivo;
 
+	/**
+     * Construtor padrão da classe Musica.
+     */
 	public Musica() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
-	public Musica(String nome, String caminhoArquivo) {
-		this.nome = nome;
-		this.caminhoArquivo = caminhoArquivo;
-	}
+	/**
+     * Construtor da classe Musica.
+     *
+     * @param nome           O nome da música.
+     * @param caminhoArquivo O caminho do arquivo da música.
+     */
+    public Musica(String nome, String caminhoArquivo) {
+        this.nome = nome;
+        this.caminhoArquivo = caminhoArquivo;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    /**
+     * Obtém o nome da música.
+     *
+     * @return O nome da música.
+     */
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    /**
+     * Define o nome da música.
+     *
+     * @param nome O novo nome da música.
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getCaminhoArquivo() {
-		return caminhoArquivo;
-	}
+    /**
+     * Obtém o caminho do arquivo da música.
+     *
+     * @return O caminho do arquivo da música.
+     */
+    public String getCaminhoArquivo() {
+        return caminhoArquivo;
+    }
 
-	public void setCaminhoArquivo(String caminhoArquivo) {
-		this.caminhoArquivo = caminhoArquivo;
-	}
+    /**
+     * Define o caminho do arquivo da música.
+     *
+     * @param caminhoArquivo O novo caminho do arquivo da música.
+     */
+    public void setCaminhoArquivo(String caminhoArquivo) {
+        this.caminhoArquivo = caminhoArquivo;
+    }
 
 
+    /**
+     * Verifica se duas músicas são iguais com base no nome e no caminho do arquivo.
+     *
+     * @param obj O objeto a ser comparado.
+     * @return true se as músicas forem iguais, false caso contrário.
+     */
 	@Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -47,6 +88,11 @@ public class Musica {
                caminhoArquivo.equals(musica.caminhoArquivo);
     }
 	
+	/**
+     * Retorna uma representação em string da música (apenas o nome).
+     *
+     * @return O nome da música em formato de string.
+     */
 	@Override
     public String toString() {
         return nome;

@@ -11,10 +11,22 @@ import modelo.Usuario;
 import modelo.UsuarioVIP;
 import util.DAOUtil;
 
+/**
+ * A classe é responsável por acessar e modificar os dados dos .txs's referentes às músicas associadas aos usuários.
+ * 
+ * @author Rubens e Wisla
+ */
 public class MusicaDAO {
 	
 	private static String tipo = "musicas";
 
+	/**
+     * Carrega as músicas associadas a um usuário a partir do arquivo de configuração.
+     *
+     * @param usuario O usuário para o qual carregar as músicas.
+     * @return Uma lista de músicas associadas ao usuário.
+     * @throws IOException Se ocorrer um erro durante a leitura do arquivo.
+     */
 	public static ArrayList<Musica> carregar(Usuario usuario) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<Musica> musicas = new ArrayList<Musica>();
@@ -35,6 +47,14 @@ public class MusicaDAO {
         }
 		return musicas;
 	}
+	
+	/**
+     * Adiciona uma nova música ao usuário e grava no arquivo de configuração.
+     *
+     * @param usuario O usuário para o qual adicionar a música.
+     * @param musica A música a ser adicionada.
+     * @throws IOException Se ocorrer um erro durante a gravação no arquivo.
+     */
 	public static void adicionar(Usuario usuario, Musica musica) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<Musica> musicas = carregar(usuario);
@@ -54,6 +74,13 @@ public class MusicaDAO {
         }
 	}
 	
+	/**
+     * Remove uma música do usuário e atualiza o arquivo de configuração.
+     *
+     * @param usuario O usuário para o qual remover a música.
+     * @param musica A música a ser removida.
+     * @throws IOException Se ocorrer um erro durante a gravação no arquivo.
+     */
 	public static void remover(Usuario usuario, Musica musica) throws IOException {
 		String caminhoArquivo = DAOUtil.getCaminhoUsuario(usuario, tipo);
 		ArrayList<Musica> musicas = carregar(usuario);

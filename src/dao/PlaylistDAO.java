@@ -16,13 +16,25 @@ import modelo.Playlist;
 import modelo.UsuarioVIP;
 import util.DAOUtil;
 
+/**
+ * A classe é responsável por acessar e modificar os dados das playlists associadas aos usuários VIP.
+ * 
+ * @author Rubens e Wisla
+ */
 public class PlaylistDAO {
 	private static String caminhoArquivo = "dados/playlists/playlistsGeral.txt";
 
 	private PlaylistDAO() {
 	}
 	
-
+	
+	/**
+     * Carrega as playlists associadas a um usuário VIP a partir do arquivo de configuração.
+     *
+     * @param usuario O usuário VIP para o qual carregar as playlists.
+     * @return Uma lista de playlists associadas ao usuário VIP.
+     * @throws IOException Se ocorrer um erro durante a leitura do arquivo.
+     */
 	public static ArrayList<Playlist> carregar(UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = new ArrayList<Playlist>();
 		ArrayList<String> nomes = new ArrayList<>();
@@ -79,7 +91,14 @@ public class PlaylistDAO {
 		return playlists;
 
 	}
-
+	
+	/**
+     * Adiciona uma nova playlist para o usuário VIP e atualiza o arquivo de configuração.
+     *
+     * @param playlist A playlist a ser adicionada.
+     * @param usuario O usuário VIP para o qual adicionar a playlist.
+     * @throws IOException Se ocorrer um erro durante a gravação no arquivo.
+     */
 	public static void adicionar(Playlist playlist, UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		
@@ -128,6 +147,13 @@ public class PlaylistDAO {
 
 	}
 
+	/**
+     * Remove uma playlist do usuário VIP e atualiza o arquivo de configuração.
+     *
+     * @param playlist A playlist a ser removida.
+     * @param usuario O usuário VIP para o qual remover a playlist.
+     * @throws IOException Se ocorrer um erro durante a gravação no arquivo.
+     */
 	public static void remover(Playlist playlist, UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 
@@ -178,7 +204,12 @@ public class PlaylistDAO {
 		}
 	}
 
-	
+	/**
+     * Remove todas as playlists associadas ao usuário VIP, tanto dos arquivos individuais quanto do arquivo geral.
+     *
+     * @param usuario O usuário VIP para o qual remover todas as playlists.
+     * @throws IOException Se ocorrer um erro durante a remoção dos arquivos ou a atualização do arquivo geral.
+     */
 	public static void removerTodasPlaylists(UsuarioVIP usuario) throws IOException {
 		ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 		String diretorioAtual = System.getProperty("user.dir");
@@ -237,6 +268,13 @@ public class PlaylistDAO {
 	}
 	
 	
+	/**
+     * Remove uma música de uma playlist específica associada ao usuário VIP e atualiza o arquivo da playlist.
+     *
+     * @param musica A música a ser removida.
+     * @param playlist A playlist da qual remover a música.
+     * @param usuario O usuário VIP associado à playlist.
+     */
 	public static void removerMusica(Musica musica, Playlist playlist, UsuarioVIP usuario) {
 
 		playlist.removerMusica(musica);
@@ -265,6 +303,13 @@ public class PlaylistDAO {
 
 	}
 
+	/**
+     * Remove uma música de todas as playlists associadas ao usuário VIP.
+     *
+     * @param musica A música a ser removida de todas as playlists.
+     * @param usuario O usuário VIP associado às playlists.
+     * @throws IOException Se ocorrer um erro durante a remoção das músicas das playlists.
+     */
 	public static void removerMusica(Musica musica, UsuarioVIP usuario) throws IOException {
 	    ArrayList<Playlist> playlists = PlaylistDAO.carregar(usuario);
 
@@ -284,6 +329,14 @@ public class PlaylistDAO {
 	    });
 	}
 
+	
+	/**
+     * Adiciona uma música a uma playlist específica associada ao usuário VIP e atualiza o arquivo da playlist.
+     *
+     * @param musica A música a ser adicionada à playlist.
+     * @param playlist A playlist à qual adicionar a música.
+     * @param usuario O usuário VIP associado à playlist.
+     */
 	public static void adicionarMusica(Musica musica, Playlist playlist, UsuarioVIP usuario) {
 		playlist.adicionarMusica(musica);
 
