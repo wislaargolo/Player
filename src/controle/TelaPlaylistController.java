@@ -26,6 +26,12 @@ import modelo.UsuarioVIP;
 import util.Alertas;
 import util.GerenciadorCenas;
 
+/**
+ * Controlador para a tela de gerenciamento de playlists.
+ *
+ * @author Rubens e Wisla
+ * 
+ */
 public class TelaPlaylistController implements Initializable {
 	
     @FXML
@@ -83,6 +89,14 @@ public class TelaPlaylistController implements Initializable {
 	private int indexMusicaPlaylist;
     private boolean controlePrimeiraMusica;
 	
+    /**
+     * Inicializa o controlador automaticamente
+     * após o carregamento do arquivo FXML associado.
+     * Configura a lista de músicas e prepara o MediaPlayer.
+     * 
+     * @param arg0 URL utilizada para resolver caminhos relativos para o objeto raiz, ou null se desconhecido.
+     * @param arg1 O recurso utilizado para localizar o objeto raiz, ou null se o objeto raiz não foi localizado.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<Musica> musicas = TelaPrincipalController.getInstance().getListaMusicaItems();
@@ -128,11 +142,18 @@ public class TelaPlaylistController implements Initializable {
 		
 	}
 	
+	 /**
+     * Atualiza a lista de músicas na playlist exibida na interface do usuário.
+     */
 	private void atualizarMusicasPlaylist() {
 		ArrayList<Musica> musicasCarregadas = TelaPrincipalController.getInstance().getPlaylistAtual().getMusicas();
 		listaMusicasPlaylist.getItems().setAll(musicasCarregadas); 
 	}
 	
+	/**
+     * Ação vinculada ao botão para adicionar uma música à playlist.
+     * Adiciona a música selecionada na playlist do usuário VIP atual.
+     */
 	@FXML
 	private void btAdicionarMusicaAcao() {
 		Musica musicaSelecionada = listaMusicas.getSelectionModel().getSelectedItem();
@@ -144,6 +165,11 @@ public class TelaPlaylistController implements Initializable {
         }
 	}
 	
+
+    /**
+     * Ação vinculada ao botão para remover uma música da playlist.
+     * Remove a música selecionada da playlist do usuário VIP atual.
+     */
 	@FXML
 	private void btRemoverMusicaAcao() {
 		Musica musicaSelecionada = listaMusicasPlaylist.getSelectionModel().getSelectedItem();
@@ -157,21 +183,37 @@ public class TelaPlaylistController implements Initializable {
         }
 	}
 	
+	/**
+     * Ação vinculada ao botão para retornar à tela principal.
+     */
 	@FXML
 	private void btVoltarAcao() {
 		GerenciadorCenas.mudarCena("../visao/TelaPrincipal.fxml");
 	}
 	
-	
+	/**
+     * Retorna a lista de itens de música da playlist exibidos na interface do usuário.
+     * 
+     * @return ObservableList<Musica> A lista observável de músicas da playlist.
+     */
 	public ObservableList<Musica> getListaMusicaPlaylist() {
         return listaMusicasPlaylist.getItems();
     }
 	
+	/**
+     * Inicia a reprodução da música selecionada.
+     * Ativa um timer para atualizar o progresso da reprodução.
+     */
 	public void playMedia() {
 		beginTimer();
 		mediaPlayer.play();
 	}
 	
+	/**
+     * Controla a ação de reprodução de músicas da playlist.
+     * Se for a primeira música na playlist, configura e inicia a reprodução.
+     * Caso contrário, configura o MediaPlayer para a primeira música da playlist e inicia a reprodução.
+     */
 	@FXML
 	public void playMediaPlaylist() {
 		if (controlePrimeiraMusica) {
@@ -190,6 +232,9 @@ public class TelaPlaylistController implements Initializable {
 		}
 	}
 	
+	/**
+     * Para a reprodução da música atual e reinicia a configuração do MediaPlayer.
+     */
 	public void stopMediaPlaylist() {
 		if (mediaPlayer != null) {
 			mediaPlayer.stop();
@@ -203,12 +248,20 @@ public class TelaPlaylistController implements Initializable {
 		}
 	}
 	
+	/**
+     * Pausa a reprodução da música atual, cancelando a atualização do
+     * progresso da música.
+     */
 	@FXML
 	public void pauseMedia() {
 		cancelTimer();
 		mediaPlayer.pause();
 	}
 	
+	/**
+     * Avança para a próxima música na lista.
+     * Se estiver na última, volta para a primeira e reinicia inicia a reprodução.
+     */
 	@FXML
 	public void nextMediaPlaylist() {
 		if(indexMusicaPlaylist < getListaMusicaPlaylist().size() - 1) {			
@@ -236,6 +289,10 @@ public class TelaPlaylistController implements Initializable {
 		}
 	}
 	
+	/**
+     * Retrocede para a música anterior na lista.
+     * Se estiver na primeira música, vai para a última e inicia a reprodução.
+     */
 	@FXML
 	public void previousMediaPlaylist() {
 		if (indexMusicaPlaylist == 0) {
@@ -263,6 +320,10 @@ public class TelaPlaylistController implements Initializable {
 		}
 	}
 	
+	/**
+     * Alterna o estado de mudo (mute) do MediaPlayer.
+     * Se estiver em estado de mudo, desativa o mudo, e vice-versa.
+     */
 	public void muteMedia() {
 	    if (mediaPlayer != null) {
 	        mediaPlayer.setMute(!mediaPlayer.isMute());
@@ -270,6 +331,9 @@ public class TelaPlaylistController implements Initializable {
 	}
 
 	
+	/**
+     * Inicia um timer que atualiza a cada segundo o progresso da reprodução da música.
+     */
 	public void beginTimer() {
 		timer = new Timer();
 		task = new TimerTask() {
@@ -288,6 +352,9 @@ public class TelaPlaylistController implements Initializable {
 		timer.scheduleAtFixedRate(task, 0, 1000);
 	}
 	
+	/**
+	 * Cancela o timer atualmente ativo para o progresso da reprodução de mídia.
+	 */
 	public void cancelTimer() {
 		running = false;
 		timer.cancel();
