@@ -12,6 +12,11 @@ import modelo.Usuario;
 import modelo.UsuarioVIP;
 import util.DAOUtil;
 
+/**
+ * A classe é responsável por acessar e modificar os dados dos usuários no sistema.
+ * 
+ * @author Rubens e Wisla
+ */
 public class UsuarioDAO {
 
 	private static String caminhoArquivo = "dados/usuarios.txt";
@@ -21,6 +26,12 @@ public class UsuarioDAO {
 		
 		DAOUtil.verificarCaminho(caminhoArquivo);
 	
+		/**
+	     * Carrega a lista de usuários a partir do arquivo de configuração.
+	     *
+	     * @return Uma lista de usuários.
+	     * @throws IOException Se ocorrer um erro durante a leitura do arquivo.
+	     */
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))){	
             String linha;
             while ((linha = br.readLine()) != null) {
@@ -46,13 +57,19 @@ public class UsuarioDAO {
 		
 	}
 
+	/**
+     * Adiciona um novo usuário ao sistema e atualiza o arquivo de configuração.
+     *
+     * @param usuario O usuário a ser adicionado.
+     * @throws IOException Se ocorrer um erro durante a gravação no arquivo.
+     * @throws ExcecaoPersonalizada Se o usuário já existir no sistema.
+     */
     public static void adicionar(Usuario usuario) throws IOException {
     	ArrayList<Usuario> usuarios = carregar();
     	
     	
         if (!usuarios.contains(usuario)) {
 	        usuarios.add(usuario);
-	        //System.out.println("Dentro: " + usuario.getId());
 	
 	        try (FileWriter fw = new FileWriter(caminhoArquivo, true)){
 	            String conteudo = usuario.getNome() + "," + usuario.getId() + "," 
@@ -77,6 +94,13 @@ public class UsuarioDAO {
         
     }
 	
+    /**
+     * Remove arquivos associados a um usuário, como arquivos de músicas e playlists, ao ser removido do sistema.
+     *
+     * @param usuario O usuário a ser removido.
+     * @throws IOException Se ocorrer um erro durante a gravação no arquivo.
+     * @throws ExcecaoPersonalizada Se o usuário não existir no sistema.
+     */
     private static void removerArquivos(Usuario usuario) throws IOException {
     	try {
     		File arquivoMusicas = new File(DAOUtil.getCaminhoUsuario(usuario, "musicas"));
@@ -94,6 +118,13 @@ public class UsuarioDAO {
     		PlaylistDAO.removerTodasPlaylists((UsuarioVIP) usuario);
     	}
     }
+    
+    /**
+     * Remove um usuário do sistema e atualiza o arquivo de configuração, além de remover arquivos associados.
+     *
+     * @param usuario O usuário para o qual remover os arquivos associados.
+     * @throws IOException Se ocorrer um erro durante a remoção dos arquivos.
+     */
     public static void remover(Usuario usuario) throws IOException {	
     	ArrayList<Usuario> usuarios = carregar();
     	
