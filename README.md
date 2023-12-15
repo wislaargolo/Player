@@ -1,7 +1,7 @@
 # JavaFy: Projeto de Media Player em Java
 
 ## Descrição
-Este projeto é um aplicativo JavaFX que permite aos usuários gerenciar suas músicas e playlists. Ele suporta operações como login, cadastro, adição/remoção de músicas, criação de playlists e gerenciamento de contas de usuário, incluindo contas VIP.
+Este projeto é um aplicativo JavaFX que permite aos usuários gerenciar suas músicas e playlists. Ele suporta operações como login, cadastro, adição/remoção de músicas, de playlists e de diretórios, bem como gerenciamento de contas de usuário, incluindo contas VIP.
 
 ## Pré-requisitos
 - JavaSE 17
